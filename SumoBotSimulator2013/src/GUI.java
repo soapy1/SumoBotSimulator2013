@@ -113,7 +113,7 @@ public class GUI {
 			// Reads robot.xml file to re-initialize all the variables
 			if (btnSelNew.buttonClicked(gc) == true){
 				try {
-					File robot = new File("robot.xml");
+					File robot = new File("files/robot.xml");
 					XMLReadWrite.read(robot);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -234,21 +234,25 @@ public class GUI {
 			// Adds functionality to the buttons
 			// Displays the about file using the default text editor
 			if (btnSelAbout.buttonClicked(gc) == true){
-				File about = new File("about.txt");
+				File about = new File("files/about.txt");
 				try {
 					Desktop.getDesktop().open(about);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}catch (IllegalArgumentException e){
+					e.printStackTrace();
 				}
 			}
 			// Displays the help file using the default text editor
 			if (btnSelHelp.buttonClicked(gc) == true){
-				File help = new File("help.txt");
+				File help = new File("files/help.txt");
 				try {
 					Desktop.getDesktop().open(help);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch (IllegalArgumentException e){
 					e.printStackTrace();
 				}
 			}

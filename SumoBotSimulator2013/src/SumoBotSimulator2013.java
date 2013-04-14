@@ -27,7 +27,7 @@ public class SumoBotSimulator2013 extends BasicGame{
     public void init(GameContainer gc) throws SlickException{	
     	gc.setShowFPS(false);
     	GUI.InitGUI(gc);
-    	File robot = new File("robot.xml");
+    	File robot = new File("files/robot.xml");
     	try {
 			XMLReadWrite.read(robot);
 		} catch (FileNotFoundException e) {
