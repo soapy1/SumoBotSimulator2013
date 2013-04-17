@@ -43,7 +43,7 @@ public class GUI {
 		editButton = new Button(gc, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Edit");
 		helpButton = new Button(gc, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Help");
 		
-		btnSelNew = new Button(gc, 1, fileButton.getY()+fileButton.getHeight()+2, 40, 18, Color.white, Color.black, "New");
+		btnSelNew = new Button(gc, 1, fileButton.getY()+fileButton.getHeight()+2, 40, 18, Color.white, Color.black, "New ");
 		btnSelOpen = new Button(gc, 1, btnSelNew.getY()+btnSelNew.getHeight()+2, 40, 18, Color.white, Color.black, "Open");
 		btnSelSave = new Button(gc, 1, btnSelOpen.getY()+btnSelOpen.getHeight()+2, 40, 18, Color.white, Color.black, "Save");
 		btnSelQuit = new Button(gc, 1, btnSelSave.getY()+btnSelSave.getHeight()+2, 40, 18, Color.white, Color.black, "Quit");
@@ -57,6 +57,9 @@ public class GUI {
 	
 		mech = new Image("files/mech.png");
 		 
+		/*
+		 * Text field info
+		 */
 		// Text field for wheel diameter
 		txtWheelDiam = new TextField(gc, defaultTTF, 480, 365, 55, 20);
 		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
@@ -296,12 +299,26 @@ public class GUI {
 	
 	public static void RenderGUI(GameContainer gc, Graphics g, String element) throws SlickException {
 		
-		if (btnSelMech.isActive() == true){
+		/*
+		 * Text field stuff
+		 */
+	/*	if (btnSelMech.isActive() == true){
 			txtWheelDiam.render(gc, g);
 			txtWheelMu.render(gc, g);
+			txtWheelDiam.setAcceptingInput(true);
+			txtWheelMu.setAcceptingInput(true);
 			mech.draw(100, 100);	
-		}
+		}*/
 		
+		if (element == "MainWindow"){
+			if (btnSelMech.isActive() == true){
+				txtWheelDiam.render(gc, g);
+				txtWheelMu.render(gc, g);
+				txtWheelDiam.setAcceptingInput(true);
+				txtWheelMu.setAcceptingInput(true);
+				mech.draw(100, 100);
+			}
+		}
 		// Draws the menu bar
 		if (element == "MenuBar") {
 			 g.setColor(LightBlue);
@@ -327,15 +344,8 @@ public class GUI {
 				 btnSelHelp.render(gc, g);
 				 btnSelAbout.render(gc, g);
 			 }
-			 
-			 /*
-			 if (btnSelMech.isActive() == true){
-					mech.draw(100, 100);	
-					txtWheelDiam.render(gc, g);
-					txtWheelDiam.setAcceptingInput(true);
-				}
-			*/
-		}
+		
+	}
 	
 	}
 }

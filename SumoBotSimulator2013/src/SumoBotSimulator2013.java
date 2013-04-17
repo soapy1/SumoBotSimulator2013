@@ -55,8 +55,9 @@ public class SumoBotSimulator2013 extends BasicGame{
     public void render(GameContainer gc, Graphics g) throws SlickException{	
     	g.setColor(Background);
     	g.fillRect(0, 0, 1366, 768);
+    	GUI.RenderGUI(gc, g, "MainWindow");
     	GUI.RenderGUI(gc, g, "MenuBar");
-    	//GUI.RenderGUI(gc, g, "comp");
+    	
     }
   
     public static void main(String[] args)throws SlickException{
