@@ -1,3 +1,7 @@
+/*
+ * Driver class for the application.  Basically, if something needs to be done, it will related with this class.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,6 +56,7 @@ public class SumoBotSimulator2013 extends BasicGame{
     	g.setColor(Background);
     	g.fillRect(0, 0, 1366, 768);
     	GUI.RenderGUI(gc, g, "MenuBar");
+    	//GUI.RenderGUI(gc, g, "comp");
     }
   
     public static void main(String[] args)throws SlickException{

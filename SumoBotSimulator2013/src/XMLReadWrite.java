@@ -1,3 +1,8 @@
+/*
+ * A class that reads and writes XML files to the specifications of the program.  To clarify, the class is only good
+ * for making or reading XML files that have the same layout as the robot.xml file found in SumobotSimulator2013/
+ * SumobotSimulator2013/files/robot.xml
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -119,7 +124,8 @@ public class XMLReadWrite {
 			 e.printStackTrace();
 		 }
 		 
-		 System.out.println("saved");
+		// To test
+		System.out.println("saved");
 	 }
 	 
 	 /*
@@ -154,6 +160,7 @@ public class XMLReadWrite {
 		 SumoBotSimulator2013.WhMu = Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent());
 		 SumoBotSimulator2013.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
 		 
+		 // To test
 		 System.out.println("loaded");
 	 }
 	 

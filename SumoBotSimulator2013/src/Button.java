@@ -1,3 +1,8 @@
+/*
+ * A class for buttons using Slick2d.  Instances of this class will allow the user to interact with the program with
+ * ease.  In other words if this class dies so does Sumo Bot Simulator 2013.
+ */
+
 import org.newdawn.slick.*;
 
 import java.awt.Font;

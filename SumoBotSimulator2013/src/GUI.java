@@ -1,4 +1,9 @@
+/*
+ * A class that makes the GUI and handles user interaction with the application
+ */
+
 import java.awt.Desktop;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,23 +13,30 @@ import javax.swing.JFrame;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.gui.*;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
+// Watch the tree of life
 public class GUI {
 	
-	/*
-	 * TODO:
-	 * 		add info bar
-	 * 			- info changes based on which XML file is loaded
-	 * 		add electrical, mechanical, and simulation buttons
-	 */
 	public static int MenuBarFileX = 4;
 	public static int MenuBarFileY = 2;
 	public static Color LightBlue = new Color(0xffaaccff);
 	public static Button fileButton, btnSelNew, btnSelOpen, btnSelSave, btnSelQuit;
 	public static Button editButton, btnSelElec, btnSelMech, btnSelSim;
 	public static Button helpButton, btnSelHelp, btnSelAbout;
+	
+	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
+	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
+	
+	static TextField txtWheelDiam;
+	static TextField txtWheelMu;
+	
+	public static Image mech;	// 
+	public static Image elec;	// The images that will be displayed on each thingy 
+	public static Image sim;	//
+	
 	
 	public static void InitGUI(GameContainer gc) throws SlickException {
 		fileButton = new Button(gc, 1, 1, 40, 18, Color.white, Color.black, "File");
@@ -42,14 +54,29 @@ public class GUI {
 		
 		btnSelHelp = new Button(gc, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+2, 40, 18, Color.white, Color.black, "Help");
 		btnSelAbout = new Button(gc, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight()+2, 40, 18, Color.white, Color.black, "About");
+	
+		mech = new Image("files/mech.png");
+		 
+		// Text field for wheel diameter
+		txtWheelDiam = new TextField(gc, defaultTTF, 480, 365, 55, 20);
+		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWheelDiam.setBorderColor(Color.black);
+		txtWheelDiam.setTextColor(Color.black);
+		txtWheelDiam.setMaxLength(6);
+		txtWheelDiam.setAcceptingInput(false);
+		// Text field for coefficient of friction
+		txtWheelMu = new TextField(gc, defaultTTF, 550, 220, 55, 20);
+		txtWheelMu.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWheelMu.setBorderColor(Color.black);
+		txtWheelMu.setTextColor(Color.black);
+		txtWheelMu.setMaxLength(6);
+		txtWheelMu.setAcceptingInput(false);
 	}
 	
 	// This is some very long method with a ton of if statements to make the GUI look pretty and more fun to use.
 	// ooooooo look, the file just button changed colour.
 	public static void UpdateGUI(GameContainer gc, int delta) throws SlickException {
 		Input input = gc.getInput();
-		
-		// TODO: Add event handlers.
 		
 		// Checks if the mouse is over some buttons.  If it is then the background colour changes to light gray
 		if (fileButton.mouseOverArea(gc) == true){
@@ -263,9 +290,18 @@ public class GUI {
 			editButton.setActivity(false);
 			helpButton.setActivity(false);
 		}
+		
+		//if ()
 	}
 	
 	public static void RenderGUI(GameContainer gc, Graphics g, String element) throws SlickException {
+		
+		if (btnSelMech.isActive() == true){
+			txtWheelDiam.render(gc, g);
+			txtWheelMu.render(gc, g);
+			mech.draw(100, 100);	
+		}
+		
 		// Draws the menu bar
 		if (element == "MenuBar") {
 			 g.setColor(LightBlue);
@@ -291,6 +327,15 @@ public class GUI {
 				 btnSelHelp.render(gc, g);
 				 btnSelAbout.render(gc, g);
 			 }
+			 
+			 /*
+			 if (btnSelMech.isActive() == true){
+					mech.draw(100, 100);	
+					txtWheelDiam.render(gc, g);
+					txtWheelDiam.setAcceptingInput(true);
+				}
+			*/
 		}
+	
 	}
 }
