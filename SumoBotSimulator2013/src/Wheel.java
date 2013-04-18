@@ -8,6 +8,11 @@ public class Wheel {
 
 	private double diam, mu;
 	
+	public Wheel (){
+		diam = 0;
+		mu = 0;
+	}
+	
 	public Wheel(double diameter, double coefficientFriction){
 		diam = diameter;
 		mu = coefficientFriction;

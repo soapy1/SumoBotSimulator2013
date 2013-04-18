@@ -44,6 +44,7 @@ public class XMLReadWrite {
 			 Element rootElement = doc.createElement("robot");
 			 doc.appendChild(rootElement);
 			 
+			 /*
 			 // The next blocks of code are all children to the root element "robot".
 			 Element PSvoltage = doc.createElement("PSvoltage");
 			 PSvoltage.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.PSVolt)));
@@ -104,7 +105,17 @@ public class XMLReadWrite {
 			 Element weight = doc.createElement("weight");
 			 weight .appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.RWeight)));
 			 rootElement.appendChild(weight);
+			 */
 		 
+			 // TODO: to increase the amount of variables stored, just copy and paste and change the appropriate variables
+			 Element Wediameter = doc.createElement("Wediameter");
+			 Wediameter .appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWheel.getDiam())));
+			 rootElement.appendChild(Wediameter);
+		 
+			 Element Wecoefficient = doc.createElement("Wecoefficient");
+			 Wecoefficient.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWheel.getMu())));
+			 rootElement.appendChild(Wecoefficient);
+			 
 			 // Creates an instance of TransformerFactory so that a "real" XML file can be created
 			 TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			 Transformer transformer = transformerFactory.newTransformer();
@@ -144,6 +155,12 @@ public class XMLReadWrite {
 		 Document document = documentBuilder.parse(doc);										// Parses the file
 		
 		 // Gets the info and makes it an double
+
+		 SumoBotSimulator2013.roboWheel.setDiam(Double.parseDouble(document.getElementsByTagName("Wediameter").item(0).getTextContent()));
+		 SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent()));
+		 SumoBotSimulator2013.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
+		 
+		 /*
 		 SumoBotSimulator2013.PSVolt = Double.parseDouble(document.getElementsByTagName("PSvoltage").item(0).getTextContent());	
 		 SumoBotSimulator2013.PSAmp = Double.parseDouble(document.getElementsByTagName("PScurrent").item(0).getTextContent());
 		 SumoBotSimulator2013.MVolt = Double.parseDouble(document.getElementsByTagName("Mvoltage").item(0).getTextContent());
@@ -159,9 +176,10 @@ public class XMLReadWrite {
 		 SumoBotSimulator2013.WhDiam = Double.parseDouble(document.getElementsByTagName("Wediameter").item(0).getTextContent());
 		 SumoBotSimulator2013.WhMu = Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent());
 		 SumoBotSimulator2013.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
-		 
+		 */
 		 // To test
 		 System.out.println("loaded");
+		
 	 }
 	 
 

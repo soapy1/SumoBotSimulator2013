@@ -52,7 +52,7 @@ public class GUI {
 		btnSelMech = new Button(gc, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight()+2, 40, 18, Color.white, Color.black, "Mechanical");
 		btnSelSim = new Button(gc, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight()+2, 40, 18, Color.white, Color.black, "Simulation");
 		
-		btnSelHelp = new Button(gc, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+2, 40, 18, Color.white, Color.black, "Help");
+		btnSelHelp = new Button(gc, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+2, 40, 18, Color.white, Color.black, "Help ");
 		btnSelAbout = new Button(gc, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight()+2, 40, 18, Color.white, Color.black, "About");
 	
 		mech = new Image("files/mech.png");
@@ -294,7 +294,17 @@ public class GUI {
 			helpButton.setActivity(false);
 		}
 		
-		//if ()
+		if (txtWheelDiam.isAcceptingInput() == true && txtWheelMu.isAcceptingInput() == true){
+			// Make sure the text is not null
+			if (txtWheelDiam.getText() != ""){
+				//SumoBotSimulator2013.WhDiam = Double.parseDouble(txtWheelDiam.getText());
+				SumoBotSimulator2013.roboWheel.setDiam( Double.parseDouble(txtWheelDiam.getText()));
+			}
+			if (txtWheelMu.getText() != ""){
+				//SumoBotSimulator2013.WhMu = Double.parseDouble(txtWheelMu.getText());
+				SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+			}
+		}
 	}
 	
 	public static void RenderGUI(GameContainer gc, Graphics g, String element) throws SlickException {
@@ -302,14 +312,6 @@ public class GUI {
 		/*
 		 * Text field stuff
 		 */
-	/*	if (btnSelMech.isActive() == true){
-			txtWheelDiam.render(gc, g);
-			txtWheelMu.render(gc, g);
-			txtWheelDiam.setAcceptingInput(true);
-			txtWheelMu.setAcceptingInput(true);
-			mech.draw(100, 100);	
-		}*/
-		
 		if (element == "MainWindow"){
 			if (btnSelMech.isActive() == true){
 				txtWheelDiam.render(gc, g);

@@ -15,13 +15,16 @@ import org.xml.sax.SAXException;
 public class SumoBotSimulator2013 extends BasicGame{
 
 	Color Background = new Color(0xfff4f4f4);
+	/*
 	static double PSVolt, PSAmp = 0;									// Variables for the power supply
 	static double MVolt, MAmp, MSpeed, MTorque, MDriveShaft = 0;		// Variables for the motor
 	static double WiLen, WiOhm, WiArea, WiRes = 0;						// Variables for the wire
 	static double WhDiam, WhMu = 0;										// Variables for the wheel
-	static double RWeight =  0;											// General variables for the robot
 	static String WiCircuit = " ";										// Type of circuit
-
+	*/
+	
+	static double RWeight =  0;											// General variables for the robot
+	static Wheel roboWheel;
 	
     public SumoBotSimulator2013(){
         super("Sumo Bot Simulator 2013");
@@ -30,6 +33,9 @@ public class SumoBotSimulator2013 extends BasicGame{
     @Override
     public void init(GameContainer gc) throws SlickException{	
     	gc.setShowFPS(false);
+    	
+    	roboWheel = new Wheel();
+    	
     	GUI.InitGUI(gc);
     	File robot = new File("files/robot.xml");
     	try {
