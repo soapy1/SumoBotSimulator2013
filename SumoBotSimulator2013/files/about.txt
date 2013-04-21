@@ -8,6 +8,8 @@ Version: 0.1
 
 Project home:  https://www.github.com/soapy1/SumoBotSimulator2013
 
+Project development blog:  http://sumobots.blogspot.ca/
+
 Email:  codexbusters@gmail.com
 
 Program Description:  An application that allows the user to virtually build a sumo bot!
