@@ -37,6 +37,7 @@ public class XMLReadWrite {
 	  */
 	 public static void write(File name) throws IOException, SAXException, ParserConfigurationException, FileNotFoundException, DOMException{ 
 		 
+		 File n = new File(name.toString()+".xml");
 		 try{
 			 // Creates an instance of document builder so that an xml file can be made
 			 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	
@@ -97,7 +98,7 @@ public class XMLReadWrite {
 			 rootElement.appendChild(Wiarea); 
 		 
 			 Element Wiresistivity = doc.createElement("Wiresistivity");
-			 Wiresistivity.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getRestistivity())));
+			 Wiresistivity.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getResistivity())));
 			 rootElement.appendChild(Wiresistivity);
 		 
 			 Element Wicicuit_type = doc.createElement("Wicicuit_type");
@@ -112,7 +113,7 @@ public class XMLReadWrite {
 			 TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			 Transformer transformer = transformerFactory.newTransformer();
 			 DOMSource source = new DOMSource(doc);
-			 StreamResult result = new StreamResult(name);
+			 StreamResult result = new StreamResult(n);
 			 
 			 // Exports the XML 
 			 // To clarify:  this is when the XML file is made on the local hard drive.  

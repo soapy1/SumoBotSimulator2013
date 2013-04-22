@@ -20,13 +20,6 @@ import org.xml.sax.SAXException;
 public class SumoBotSimulator2013 extends BasicGame{
 	
 	Color Background = new Color(0xfff4f4f4);
-	/*
-	static double PSVolt, PSAmp = 0;									// Variables for the power supply
-	static double MVolt, MAmp, MSpeed, MTorque, MDriveShaft = 0;		// Variables for the motor
-	static double WiLen, WiOhm, WiArea, WiRes = 0;						// Variables for the wire
-	static double WhDiam, WhMu = 0;										// Variables for the wheel
-	static String WiCircuit = " ";										// Type of circuit
-	*/
 
 	public static int WinX = 800;
 	public static int WinY = 600;

@@ -29,7 +29,7 @@ public class Wire {
 		return ohm;
 	}
 	
-	public double getRestistivity(){
+	public double getResistivity(){
 		return resistivity;
 	}
 	

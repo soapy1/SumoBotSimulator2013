@@ -51,10 +51,13 @@ public class GUI {
 	
 	static TextField txtWheelDiam;
 	static TextField txtWheelMu;
+	static TextField txtWeight;
 	
 	public static Image mech;	// 
 	public static Image elec;	// The images that will be displayed on each thingy 
 	public static Image sim;	//
+	
+	public static Button fancyMech, fancyElec, fancySim;
 	
 	public static void CloseMenu() throws SlickException {
 		fileButton.setActivity(false);
@@ -63,6 +66,7 @@ public class GUI {
 	}
 	
 	public static void InitGUI(GameContainer gc) throws SlickException {
+		
 		fileButton = new Button(gc, 1, 1, 40, 18, Color.white, Color.black, "File");
 		editButton = new Button(gc, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Edit");
 		helpButton = new Button(gc, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Help");
@@ -78,8 +82,7 @@ public class GUI {
 		
 		btnSelHelp = new Button(gc, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+2, 40, 18, Color.white, Color.black, "Help ");
 		btnSelAbout = new Button(gc, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight()+2, 40, 18, Color.white, Color.black, "About");
-	
-
+		
 		mech = new Image("files/mech.png");
 		menu = new Image("files/menu.png");
 		
@@ -99,6 +102,13 @@ public class GUI {
 		txtWheelMu.setTextColor(Color.black);
 		txtWheelMu.setMaxLength(6);
 		txtWheelMu.setAcceptingInput(false);
+		// Text field for the weight 
+		txtWeight = new TextField(gc, defaultTTF, InfoPaneWidth + 340, 340, 55, 20);
+		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWeight.setBorderColor(Color.black);
+		txtWeight.setTextColor(Color.black);
+		txtWeight.setMaxLength(6);
+		txtWeight.setAcceptingInput(false);
 		
 		if (AspectRatio > 1.34) {
 			InfoPaneScale = 0.15;
@@ -106,6 +116,10 @@ public class GUI {
 			InfoPaneScale = 0.25;
 		}
 		InfoPaneWidth = (int)(SumoBotSimulator2013.WinX * InfoPaneScale);
+	
+		fancyMech = new Button(gc, InfoPaneWidth + 150, 580, 50, 20, Color.blue, Color.black, "  Mechanical");
+		fancyElec = new Button(gc, fancyMech.getX()+fancyMech.getWidth() + 10, 580, 50, 20, Color.blue, Color.black, "   Electrical");
+		fancySim = new Button(gc, fancyElec.getX()+fancyElec.getWidth() + 10, 580, 50, 20, Color.blue, Color.black, "Simulation");
 	}
 	
 	
@@ -147,6 +161,21 @@ public class GUI {
 			helpButton.setActivity(true);
 			editButton.setActivity(false);
 			fileButton.setActivity(false);
+		}else if(fancyMech.buttonClicked(gc) == true){
+			CloseMenu();
+			btnSelMech.setActivity(true);
+			btnSelElec.setActivity(false);
+			btnSelSim.setActivity(false);
+		}else if(fancyElec.buttonClicked(gc) == true){
+			CloseMenu();
+			btnSelElec.setActivity(true);
+			btnSelSim.setActivity(false);
+			btnSelMech.setActivity(false);
+		}else if(fancySim.buttonClicked(gc) == true){
+			CloseMenu();
+			btnSelSim.setActivity(true);
+			btnSelElec.setActivity(false);
+			btnSelMech.setActivity(false);
 		}
 		
 		// When the file button is active; checks if the mouse is over the buttons that pop up underneath file.  
@@ -345,18 +374,61 @@ public class GUI {
 			helpButton.setActivity(false);
 		}
 	
-		if (txtWheelDiam.isAcceptingInput() == true && txtWheelMu.isAcceptingInput() == true){
-			// Make sure the text is not null
-			if (txtWheelDiam.getText() != ""){
-				//SumoBotSimulator2013.WhDiam = Double.parseDouble(txtWheelDiam.getText());
-				SumoBotSimulator2013.roboWheel.setDiam( Double.parseDouble(txtWheelDiam.getText()));
+		// Gets info from the mechanical text boxes
+		if (btnSelMech.isActive() == true){
+		//if (txtWheelDiam.isAcceptingInput() == true && txtWheelMu.isAcceptingInput() == true && txtWeight.isAcceptingInput() == true){
+			try{
+				// Make sure the text is not null
+				if (txtWheelDiam.getText() != ""){
+					SumoBotSimulator2013.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
+				}
+				if (txtWheelMu.getText() != ""){
+					SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+				}
+				if (txtWeight.getText() != ""){
+					SumoBotSimulator2013.RWeight = (Double.parseDouble(txtWeight.getText()));
+				}
+			}catch(NumberFormatException e){
+				
 			}
-			if (txtWheelMu.getText() != ""){
-				//SumoBotSimulator2013.WhMu = Double.parseDouble(txtWheelMu.getText());
-				SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
-			}
+			
+			
 		}
 	}
+
+	public static void UpdateInfo(Graphics g) throws SlickException {
+		g.setFont(defaultTTF);
+		g.setColor(White);
+		
+		//Motor
+		g.drawString("Motor:", 3, 47);
+		g.drawString("Voltage: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getVoltage()), 3, 59);
+		g.drawString("Current: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getCurrent()), 3, 71);
+		g.drawString("Speed: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getSpeed()), 3, 83);
+		g.drawString("Torque: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getTorque()), 3, 95);
+		g.drawString("Shaft: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getShaft()), 3, 107);
+		
+		//Power Supply
+		g.drawString("Power Supply:", 3, 131);
+		g.drawString("Voltage: " + Double.toString(SumoBotSimulator2013.roboPS.getVoltage()), 3, 143);
+		g.drawString("Current: " + Double.toString(SumoBotSimulator2013.roboPS.getCurrent()), 3, 155);
+
+		//Wheel
+		g.drawString("Wheel:", 3, 179);
+		g.drawString("Diameter: " + Double.toString(SumoBotSimulator2013.roboWheel.getDiam()), 3, 191);
+		g.drawString("Friction Coefficient: " + Double.toString(SumoBotSimulator2013.roboWheel.getMu()), 3, 203);
+
+		//Wire
+		g.drawString("Wire:", 3, 227);
+		g.drawString("Length: " + Double.toString(SumoBotSimulator2013.roboWire.getLen()), 3, 239);
+		g.drawString("Ohm: " + Double.toString(SumoBotSimulator2013.roboWire.getOhm()), 3, 251);
+		g.drawString("Resistivity: " + Double.toString(SumoBotSimulator2013.roboWire.getResistivity()), 3, 263);
+		g.drawString("Area: " + Double.toString(SumoBotSimulator2013.roboWire.getArea()), 3, 275);
+		g.drawString("Circut Type: " + SumoBotSimulator2013.roboWire.getCircuitType(), 3, 287);
+		
+		g.drawString("Weight: " + Double.toString(SumoBotSimulator2013.RWeight), 3, 331);
+	}
+	
 	
 	public static void RenderGUI(GameContainer gc, Graphics g, String element) throws SlickException {
 		
@@ -366,12 +438,17 @@ public class GUI {
 			} else if (btnSelMech.isActive() == true) {
 				txtWheelDiam.render(gc, g);
 				txtWheelMu.render(gc, g);
+				txtWeight.render(gc, g);
 				txtWheelDiam.setAcceptingInput(true);
 				txtWheelMu.setAcceptingInput(true);
+				txtWeight.setAcceptingInput(true);
 				mech.draw(InfoPaneWidth + 10, 100);
 			} else if (btnSelSim.isActive() == true) {
 				//TODO Add simulation
 			}
+			fancyMech.render(gc, g);
+			fancyElec.render(gc, g);
+			fancySim.render(gc, g);
 		}
 		
 		// Draws the menu bar
@@ -407,6 +484,7 @@ public class GUI {
 			g.setFont(defaultTTF);
 			g.setColor(White);
 			g.drawString("Info Pane", 3, 23);
+			UpdateInfo(g);
 		}
 			
 	}
