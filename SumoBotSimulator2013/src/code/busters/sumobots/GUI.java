@@ -1,8 +1,7 @@
+package code.busters.sumobots;
 /*
  * A class that makes the GUI and handles user interaction with the application
  */
-
-package code.busters.sumobots;
 
 import java.awt.Desktop;
 import java.awt.Font;
@@ -17,13 +16,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
 // Watch the tree of life
 public class GUI {
 	
-	public static float AspectRatio = (SumoBotSimulator2013.WinX / SumoBotSimulator2013.WinY);
+	public static int MenuBarFileX = 4;
+	public static int MenuBarFileY = 2;
+	
+	public static float AspectRatio = (MainSim.WinX / MainSim.WinY);
 	public static double InfoPaneScale = 0.25;
 	public static int InfoPaneWidth;
 	
@@ -33,31 +38,27 @@ public class GUI {
 	public static Color HighlightGray = new Color(0x40000000);
 	public static Color HighlightBlue = new Color(0xff768DB0);
 	
-	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
-	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
-	
-	public static Image menu;
-	public static Image menuscaled;
-	
-	public static Color MenuBarColorMain = Color.transparent;
-	public static Color MenuBarColorSecond = LightBlue;
-	
-	public static int MenuBarFileX = 4;
-	public static int MenuBarFileY = 2;
 	public static Button fileButton, btnSelNew, btnSelOpen, btnSelSave, btnSelQuit;
 	public static Button editButton, btnSelElec, btnSelMech, btnSelSim;
 	public static Button helpButton, btnSelHelp, btnSelAbout;
+	public static Button fancyMech, fancyElec, fancySim;
 	
+	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
+	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
 	
 	static TextField txtWheelDiam;
 	static TextField txtWheelMu;
 	static TextField txtWeight;
 	
-	public static Image mech;	// 
-	public static Image elec;	// The images that will be displayed on each thingy 
-	public static Image sim;	//
+	public static Image menu;
+	public static Image menuscaled;
 	
-	public static Button fancyMech, fancyElec, fancySim;
+	public static Image mech;		// 
+	public static Image elecPar;	// The images that will be displayed on each thingy 
+	public static Image sim;		//
+	
+	public static Color MenuBarColorMain = Color.transparent;
+	public static Color MenuBarColorSecond = LightBlue;
 	
 	public static void CloseMenu() throws SlickException {
 		fileButton.setActivity(false);
@@ -65,28 +66,28 @@ public class GUI {
 		helpButton.setActivity(false);
 	}
 	
-	public static void InitGUI(GameContainer gc) throws SlickException {
+	public static void InitGUI(GameContainer gc, StateBasedGame sg) throws SlickException {
+		fileButton = new Button(gc, sg, 0, 1, 40, 18, MenuBarColorMain, Color.black, "File");
+		editButton = new Button(gc, sg, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Edit");
+		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
 		
-		fileButton = new Button(gc, 1, 1, 40, 18, Color.white, Color.black, "File");
-		editButton = new Button(gc, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Edit");
-		helpButton = new Button(gc, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, Color.white, Color.black, "Help");
+		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New ");
+		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open");
+		btnSelSave = new Button(gc, sg, fileButton.getX(), btnSelOpen.getY()+btnSelOpen.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Save");
+		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit");
 		
-		btnSelNew = new Button(gc, 1, fileButton.getY()+fileButton.getHeight()+2, 40, 18, Color.white, Color.black, "New ");
-		btnSelOpen = new Button(gc, 1, btnSelNew.getY()+btnSelNew.getHeight()+2, 40, 18, Color.white, Color.black, "Open");
-		btnSelSave = new Button(gc, 1, btnSelOpen.getY()+btnSelOpen.getHeight()+2, 40, 18, Color.white, Color.black, "Save");
-		btnSelQuit = new Button(gc, 1, btnSelSave.getY()+btnSelSave.getHeight()+2, 40, 18, Color.white, Color.black, "Quit");
+		btnSelElec = new Button(gc, sg, editButton.getX(), editButton.getY()+editButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Electrical");
+		btnSelMech = new Button(gc, sg, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Mechanical");
+		btnSelSim = new Button(gc, sg, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Smulation ");
 		
-		btnSelElec = new Button(gc, editButton.getX(), editButton.getY()+editButton.getHeight()+2, 40, 18, Color.white, Color.black, "Electrical");
-		btnSelMech = new Button(gc, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight()+2, 40, 18, Color.white, Color.black, "Mechanical");
-		btnSelSim = new Button(gc, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight()+2, 40, 18, Color.white, Color.black, "Simulation");
+		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
+		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
+	
+		mech = new Image("res/mech.png");
+		elecPar = new Image("res/parallel.gif");
+		menu = new Image("res/menu.png");
 		
-		btnSelHelp = new Button(gc, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+2, 40, 18, Color.white, Color.black, "Help ");
-		btnSelAbout = new Button(gc, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight()+2, 40, 18, Color.white, Color.black, "About");
-		
-		mech = new Image("files/mech.png");
-		menu = new Image("files/menu.png");
-		
-		menuscaled = menu.getScaledCopy(SumoBotSimulator2013.WinX, 20);
+		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
 		 
 		// Text field for wheel diameter
 		txtWheelDiam = new TextField(gc, defaultTTF, InfoPaneWidth + 590, 365, 55, 20);
@@ -102,7 +103,7 @@ public class GUI {
 		txtWheelMu.setTextColor(Color.black);
 		txtWheelMu.setMaxLength(6);
 		txtWheelMu.setAcceptingInput(false);
-		// Text field for the weight 
+		//txtweight
 		txtWeight = new TextField(gc, defaultTTF, InfoPaneWidth + 340, 340, 55, 20);
 		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWeight.setBorderColor(Color.black);
@@ -115,17 +116,53 @@ public class GUI {
 		} else {
 			InfoPaneScale = 0.25;
 		}
-		InfoPaneWidth = (int)(SumoBotSimulator2013.WinX * InfoPaneScale);
-	
-		fancyMech = new Button(gc, InfoPaneWidth + 150, 580, 50, 20, Color.blue, Color.black, "  Mechanical");
-		fancyElec = new Button(gc, fancyMech.getX()+fancyMech.getWidth() + 10, 580, 50, 20, Color.blue, Color.black, "   Electrical");
-		fancySim = new Button(gc, fancyElec.getX()+fancyElec.getWidth() + 10, 580, 50, 20, Color.blue, Color.black, "Simulation");
+		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);
+		
+		fancyMech = new Button(gc, sg, InfoPaneWidth + 150, 580, 50, 20, Color.blue, Color.black, "  Mechanical");
+		fancyElec = new Button(gc, sg, fancyMech.getX()+fancyMech.getWidth() + 10, 580, 50, 20, Color.yellow, Color.black, "   Electrical");
+		fancySim = new Button(gc, sg, fancyElec.getX()+fancyElec.getWidth() + 10, 580, 50, 20, Color.red, Color.black, "Simulation");
+
 	}
 	
+	public static void UpdateInfo(Graphics g) throws SlickException {
+		g.setFont(defaultTTF);
+		g.setColor(White);
+		
+		//Motor
+		g.drawString("Motor:", 3, 47);
+		g.drawString("Voltage: " + Double.toString(BuildState.roboMotorOne.getVoltage()), 12, 59);
+		g.drawString("Current: " + Double.toString(BuildState.roboMotorOne.getCurrent()), 12, 71);
+		g.drawString("Speed: " + Double.toString(BuildState.roboMotorOne.getSpeed()), 12, 83);
+		g.drawString("Torque: " + Double.toString(BuildState.roboMotorOne.getTorque()), 12, 95);
+		g.drawString("Shaft: " + Double.toString(BuildState.roboMotorOne.getShaft()), 12, 107);
+		
+		//Power Supply
+		g.drawString("Power Supply:", 3, 131);
+		g.drawString("Voltage: " + Double.toString(BuildState.roboPS.getVoltage()), 12, 143);
+		g.drawString("Current: " + Double.toString(BuildState.roboPS.getCurrent()), 12, 155);
+
+		//Wheel
+		g.drawString("Wheel:", 3, 179);
+		g.drawString("Diameter: " + Double.toString(BuildState.roboWheel.getDiam()), 12, 191);
+		g.drawString("Friction Coefficient: " + Double.toString(BuildState.roboWheel.getMu()), 12, 203);
+
+		//Wire
+		g.drawString("Wire:", 3, 227);
+		g.drawString("Length: " + Double.toString(BuildState.roboWire.getLen()), 12, 239);
+		g.drawString("Ohm: " + Double.toString(BuildState.roboWire.getOhm()), 12, 251);
+		g.drawString("Resistivity: " + Double.toString(BuildState.roboWire.getResistivity()), 12, 263);
+		g.drawString("Area: " + Double.toString(BuildState.roboWire.getArea()), 12, 275);
+		g.drawString("Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 287);
+		
+		// NEW
+		g.drawString("Robot:", 3, 308);
+		g.drawString("Weight: " + Double.toString(BuildState.RWeight), 12, 320);
+	
+	}
 	
 	// This is some very long method with a ton of if statements to make the GUI look pretty and more fun to use.
 	// ooooooo look, the file just button changed colour.
-	public static void UpdateGUI(GameContainer gc, int delta) throws SlickException {
+	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
 		Input input = gc.getInput();
 		
 		// Checks if the mouse is over some buttons.  If it is then the background colour changes to light gray
@@ -208,6 +245,9 @@ public class GUI {
 			// Reads robot.xml file to re-initialize all the variables
 			if (btnSelNew.buttonClicked(gc) == true){
 				CloseMenu();
+				txtWheelMu.setText("");
+				txtWheelDiam.setText("");
+				txtWeight.setText("");
 				try {
 					File robot = new File("files/robot.xml");
 					XMLReadWrite.read(robot);
@@ -247,12 +287,11 @@ public class GUI {
 					} catch (ParserConfigurationException e) {
 						e.printStackTrace();
 					}
-				}
+				} 
 				
 			}
 			if (btnSelOpen.buttonClicked(gc) == true){
 				CloseMenu();
-				//Create a file chooser
 				JFrame guiFrame = new JFrame();						// Uses the fileChooser class to open up projects
 				JFileChooser fileDialog = new JFileChooser();		//    in style ;)
 				FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
@@ -260,7 +299,7 @@ public class GUI {
 				fileDialog.setFileFilter(xmlfilter);
 				int open = fileDialog.showOpenDialog(guiFrame);		
 				if (open == JFileChooser.APPROVE_OPTION){			// Makes sure the file is good
-				    File file = fileDialog.getSelectedFile();
+				  File file = fileDialog.getSelectedFile();
 				    try {
 						XMLReadWrite.read(file);					// Reads the file contents
 					} catch (FileNotFoundException e) {
@@ -317,9 +356,9 @@ public class GUI {
 				btnSelSim.setActivity(false);
 			}else if(btnSelSim.buttonClicked(gc) == true){
 				CloseMenu();
-				btnSelSim.setActivity(true);
 				btnSelMech.setActivity(false);
 				btnSelElec.setActivity(false);
+				btnSelSim.setActivity(true);
 			}
 		}
 		
@@ -343,7 +382,7 @@ public class GUI {
 			// Displays the about file using the default text editor
 			if (btnSelAbout.buttonClicked(gc) == true){
 				CloseMenu();
-				File about = new File("files/about.txt");
+				File about = new File("res/about.txt");
 				try {
 					Desktop.getDesktop().open(about);
 				} catch (IOException e) {
@@ -356,7 +395,7 @@ public class GUI {
 			// Displays the help file using the default text editor
 			if (btnSelHelp.buttonClicked(gc) == true){
 				CloseMenu();
-				File help = new File("files/help.txt");
+				File help = new File("res/help.txt");
 				try {
 					Desktop.getDesktop().open(help);
 				} catch (IOException e) {
@@ -366,75 +405,42 @@ public class GUI {
 					e.printStackTrace();
 				}
 			}
+	
+		}
+		
+		if (btnSelMech.isActive() == true){
+			try{
+				// Make sure the text is not null
+				if (txtWheelDiam.getText() != ""){
+					BuildState.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
+				}
+				if (txtWheelMu.getText() != ""){
+					BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+				}
+				if (txtWeight.getText() != ""){
+					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));
+				}
+			}catch(NumberFormatException e){
+					
+			}
+						
 		}
 		// When something other than the menu strip buttons are clicked the menu strip buttons are set to inactive.
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)){
 			fileButton.setActivity(false);
 			editButton.setActivity(false);
 			helpButton.setActivity(false);
+		
 		}
-	
-		// Gets info from the mechanical text boxes
-		if (btnSelMech.isActive() == true){
-		//if (txtWheelDiam.isAcceptingInput() == true && txtWheelMu.isAcceptingInput() == true && txtWeight.isAcceptingInput() == true){
-			try{
-				// Make sure the text is not null
-				if (txtWheelDiam.getText() != ""){
-					SumoBotSimulator2013.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
-				}
-				if (txtWheelMu.getText() != ""){
-					SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
-				}
-				if (txtWeight.getText() != ""){
-					SumoBotSimulator2013.RWeight = (Double.parseDouble(txtWeight.getText()));
-				}
-			}catch(NumberFormatException e){
+		}
+		
+		//if ()
+	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
 				
-			}
-			
-			
-		}
-	}
-
-	public static void UpdateInfo(Graphics g) throws SlickException {
-		g.setFont(defaultTTF);
-		g.setColor(White);
-		
-		//Motor
-		g.drawString("Motor:", 3, 47);
-		g.drawString("Voltage: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getVoltage()), 3, 59);
-		g.drawString("Current: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getCurrent()), 3, 71);
-		g.drawString("Speed: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getSpeed()), 3, 83);
-		g.drawString("Torque: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getTorque()), 3, 95);
-		g.drawString("Shaft: " + Double.toString(SumoBotSimulator2013.roboMotorOne.getShaft()), 3, 107);
-		
-		//Power Supply
-		g.drawString("Power Supply:", 3, 131);
-		g.drawString("Voltage: " + Double.toString(SumoBotSimulator2013.roboPS.getVoltage()), 3, 143);
-		g.drawString("Current: " + Double.toString(SumoBotSimulator2013.roboPS.getCurrent()), 3, 155);
-
-		//Wheel
-		g.drawString("Wheel:", 3, 179);
-		g.drawString("Diameter: " + Double.toString(SumoBotSimulator2013.roboWheel.getDiam()), 3, 191);
-		g.drawString("Friction Coefficient: " + Double.toString(SumoBotSimulator2013.roboWheel.getMu()), 3, 203);
-
-		//Wire
-		g.drawString("Wire:", 3, 227);
-		g.drawString("Length: " + Double.toString(SumoBotSimulator2013.roboWire.getLen()), 3, 239);
-		g.drawString("Ohm: " + Double.toString(SumoBotSimulator2013.roboWire.getOhm()), 3, 251);
-		g.drawString("Resistivity: " + Double.toString(SumoBotSimulator2013.roboWire.getResistivity()), 3, 263);
-		g.drawString("Area: " + Double.toString(SumoBotSimulator2013.roboWire.getArea()), 3, 275);
-		g.drawString("Circut Type: " + SumoBotSimulator2013.roboWire.getCircuitType(), 3, 287);
-		
-		g.drawString("Weight: " + Double.toString(SumoBotSimulator2013.RWeight), 3, 331);
-	}
-	
-	
-	public static void RenderGUI(GameContainer gc, Graphics g, String element) throws SlickException {
-		
 		if (element == "MainWindow"){ 
 			if (btnSelElec.isActive() == true) {
 				//TODO Add electrical
+				elecPar.draw(InfoPaneWidth+10, 100);
 			} else if (btnSelMech.isActive() == true) {
 				txtWheelDiam.render(gc, g);
 				txtWheelMu.render(gc, g);
@@ -450,11 +456,13 @@ public class GUI {
 			fancyElec.render(gc, g);
 			fancySim.render(gc, g);
 		}
+
+
 		
 		// Draws the menu bar
 		if (element == "MenuBar") {
 			 g.setColor(MenuBarColorSecond);
-			 g.fillRect(0, 0, SumoBotSimulator2013.WinX, 20);
+			 g.fillRect(0, 0, MainSim.WinX, 20);
 			 menuscaled.draw(0,0);
 			 fileButton.render(gc, g);
 			 editButton.render(gc, g);
@@ -480,12 +488,11 @@ public class GUI {
 			 
 		} else if (element == "InfoPane") {
 			g.setColor(DarkBlue);
-			g.fillRect(0, 20, InfoPaneWidth, SumoBotSimulator2013.WinY);
+			g.fillRect(0, 20, InfoPaneWidth, MainSim.WinY);
 			g.setFont(defaultTTF);
 			g.setColor(White);
 			g.drawString("Info Pane", 3, 23);
-			UpdateInfo(g);
 		}
-			
+	
 	}
 }

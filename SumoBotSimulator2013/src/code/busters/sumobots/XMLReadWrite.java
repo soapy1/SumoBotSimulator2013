@@ -1,7 +1,7 @@
 /*
  * A class that reads and writes XML files to the specifications of the program.  To clarify, the class is only good
- * for making or reading XML files that have the same layout as the robot.xml file found in SumobotSimulator2013/
- * SumobotSimulator2013/files/robot.xml
+ * for making or reading XML files that have the same layout as the robot.xml file found in BuildState/
+ * BuildState/files/robot.xml
  */
 
 package code.busters.sumobots;
@@ -50,63 +50,63 @@ public class XMLReadWrite {
 		 
 			 // TODO: to increase the amount of variables stored, just copy and paste and change the appropriate variables
 			 Element PSvoltage = doc.createElement("PSvoltage");
-			 PSvoltage.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboPS.getVoltage())));
+			 PSvoltage.appendChild(doc.createTextNode(Double.toString(BuildState.roboPS.getVoltage())));
 			 rootElement.appendChild(PSvoltage);
 			 
 			 Element PScurrent = doc.createElement("PScurrent");
-			 PScurrent.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboPS.getCurrent())));
+			 PScurrent.appendChild(doc.createTextNode(Double.toString(BuildState.roboPS.getCurrent())));
 			 rootElement.appendChild(PScurrent);
 			 
 			 Element Mvoltage = doc.createElement("Mvoltage");
-			 Mvoltage.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboMotorOne.getVoltage())));
+			 Mvoltage.appendChild(doc.createTextNode(Double.toString(BuildState.roboMotorOne.getVoltage())));
 			 rootElement.appendChild(Mvoltage);
 			 
 			 Element Mcurrent = doc.createElement("Mcurrent");
-			 Mcurrent.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboMotorOne.getCurrent())));
+			 Mcurrent.appendChild(doc.createTextNode(Double.toString(BuildState.roboMotorOne.getCurrent())));
 			 rootElement.appendChild(Mcurrent);
 		 
 			 Element Mspeed = doc.createElement("Mspeed");
-			 Mspeed.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboMotorOne.getSpeed())));
+			 Mspeed.appendChild(doc.createTextNode(Double.toString(BuildState.roboMotorOne.getSpeed())));
 			 rootElement.appendChild(Mspeed);
 		 
 			 Element Mtorque = doc.createElement("Mtorque");
-			 Mtorque.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboMotorOne.getTorque())));
+			 Mtorque.appendChild(doc.createTextNode(Double.toString(BuildState.roboMotorOne.getTorque())));
 			 rootElement.appendChild(Mtorque);
 			 
 			 Element Mdrive_shaft = doc.createElement("Mdrive_shaft");
-			 Mdrive_shaft.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboMotorOne.getShaft())));
+			 Mdrive_shaft.appendChild(doc.createTextNode(Double.toString(BuildState.roboMotorOne.getShaft())));
 			 rootElement.appendChild(Mdrive_shaft);
 			 
 			 Element Wediameter = doc.createElement("Wediameter");
-			 Wediameter .appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWheel.getDiam())));
+			 Wediameter .appendChild(doc.createTextNode(Double.toString(BuildState.roboWheel.getDiam())));
 			 rootElement.appendChild(Wediameter);
 		 
 			 Element Wecoefficient = doc.createElement("Wecoefficient");
-			 Wecoefficient.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWheel.getMu())));
+			 Wecoefficient.appendChild(doc.createTextNode(Double.toString(BuildState.roboWheel.getMu())));
 			 rootElement.appendChild(Wecoefficient);
 			
 			 Element Wilength = doc.createElement("Wilength");
-			 Wilength.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getLen())));
+			 Wilength.appendChild(doc.createTextNode(Double.toString(BuildState.roboWire.getLen())));
 			 rootElement.appendChild(Wilength);
 		 
 			 Element Wiresistance = doc.createElement("Wiresistance");
-			 Wiresistance.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getOhm())));
+			 Wiresistance.appendChild(doc.createTextNode(Double.toString(BuildState.roboWire.getOhm())));
 			 rootElement.appendChild(Wiresistance); 
 			
 			 Element Wiarea = doc.createElement("Wiarea");
-			 Wiarea.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getArea())));
+			 Wiarea.appendChild(doc.createTextNode(Double.toString(BuildState.roboWire.getArea())));
 			 rootElement.appendChild(Wiarea); 
 		 
 			 Element Wiresistivity = doc.createElement("Wiresistivity");
-			 Wiresistivity.appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.roboWire.getResistivity())));
+			 Wiresistivity.appendChild(doc.createTextNode(Double.toString(BuildState.roboWire.getResistivity())));
 			 rootElement.appendChild(Wiresistivity);
 		 
 			 Element Wicicuit_type = doc.createElement("Wicicuit_type");
-			 Wicicuit_type.appendChild(doc.createTextNode(SumoBotSimulator2013.roboWire.getCircuitType()));
+			 Wicicuit_type.appendChild(doc.createTextNode(BuildState.roboWire.getCircuitType()));
 			 rootElement.appendChild(Wicicuit_type);
 			 
 			 Element weight = doc.createElement("weight");
-			 weight .appendChild(doc.createTextNode(Double.toString(SumoBotSimulator2013.RWeight)));
+			 weight .appendChild(doc.createTextNode(Double.toString(BuildState.RWeight)));
 			 rootElement.appendChild(weight);
 			 
 			 // Creates an instance of TransformerFactory so that a "real" XML file can be created
@@ -149,21 +149,21 @@ public class XMLReadWrite {
 		
 		 // Gets the info and makes it an double
 
-		 SumoBotSimulator2013.roboPS.setVoltage(Double.parseDouble(document.getElementsByTagName("PSvoltage").item(0).getTextContent()));	
-		 SumoBotSimulator2013.roboPS.setCurrent(Double.parseDouble(document.getElementsByTagName("PScurrent").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboMotorOne.setVoltage(Double.parseDouble(document.getElementsByTagName("Mvoltage").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboMotorOne.setCurrent(Double.parseDouble(document.getElementsByTagName("Mcurrent").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboMotorOne.setSpeed(Double.parseDouble(document.getElementsByTagName("Mspeed").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboMotorOne.setTorque(Double.parseDouble(document.getElementsByTagName("Mtorque").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboMotorOne.setShaft(Double.parseDouble(document.getElementsByTagName("Mdrive_shaft").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWheel.setDiam(Double.parseDouble(document.getElementsByTagName("Wediameter").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWheel.setMu(Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent()));
-		 SumoBotSimulator2013.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
-		 SumoBotSimulator2013.roboWire.setLen(Double.parseDouble(document.getElementsByTagName("Wilength").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWire.setOhm(Double.parseDouble(document.getElementsByTagName("Wiresistance").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWire.setArea(Double.parseDouble(document.getElementsByTagName("Wiarea").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWire.setResistivity(Double.parseDouble(document.getElementsByTagName("Wiresistivity").item(0).getTextContent()));
-		 SumoBotSimulator2013.roboWire.setCircuitType(document.getElementsByTagName("Wicicuit_type").item(0).getTextContent());
+		 BuildState.roboPS.setVoltage(Double.parseDouble(document.getElementsByTagName("PSvoltage").item(0).getTextContent()));	
+		 BuildState.roboPS.setCurrent(Double.parseDouble(document.getElementsByTagName("PScurrent").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setVoltage(Double.parseDouble(document.getElementsByTagName("Mvoltage").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setCurrent(Double.parseDouble(document.getElementsByTagName("Mcurrent").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setSpeed(Double.parseDouble(document.getElementsByTagName("Mspeed").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setTorque(Double.parseDouble(document.getElementsByTagName("Mtorque").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setShaft(Double.parseDouble(document.getElementsByTagName("Mdrive_shaft").item(0).getTextContent()));
+		 BuildState.roboWheel.setDiam(Double.parseDouble(document.getElementsByTagName("Wediameter").item(0).getTextContent()));
+		 BuildState.roboWheel.setMu(Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent()));
+		 BuildState.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
+		 BuildState.roboWire.setLen(Double.parseDouble(document.getElementsByTagName("Wilength").item(0).getTextContent()));
+		 BuildState.roboWire.setOhm(Double.parseDouble(document.getElementsByTagName("Wiresistance").item(0).getTextContent()));
+		 BuildState.roboWire.setArea(Double.parseDouble(document.getElementsByTagName("Wiarea").item(0).getTextContent()));
+		 BuildState.roboWire.setResistivity(Double.parseDouble(document.getElementsByTagName("Wiresistivity").item(0).getTextContent()));
+		 BuildState.roboWire.setCircuitType(document.getElementsByTagName("Wicicuit_type").item(0).getTextContent());
 		 
 		 // To test
 		 System.out.println("loaded");

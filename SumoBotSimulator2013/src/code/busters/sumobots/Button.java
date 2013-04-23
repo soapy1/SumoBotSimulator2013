@@ -1,9 +1,8 @@
+package code.busters.sumobots;
 /*
  * A class for buttons using Slick2d.  Instances of this class will allow the user to interact with the program with
  * ease.  In other words if this class dies so does Sumo Bot Simulator 2013.
  */
-
-package code.busters.sumobots;
 
 import org.newdawn.slick.*;
 
@@ -11,6 +10,7 @@ import java.awt.Font;
 
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.GUIContext;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class Button extends AbstractComponent {
 	
@@ -27,12 +27,12 @@ public class Button extends AbstractComponent {
 	TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
 	
 	// Default constructor
-	public Button(GUIContext container) {
-		super(container);
+	public Button(GUIContext gc, StateBasedGame sg) {
+		super(gc);
 	}
 
 	// Better constructor that defines all the properties of the button
-	public Button(GUIContext gc, float x, float y, int width, int height, Color colour, Color textColour, String text) throws SlickException {
+	public Button(GUIContext gc, StateBasedGame sg, float x, float y, int width, int height, Color colour, Color textColour, String text) throws SlickException {
 		super(gc);
 		buttonX = x;
 		buttonY = y;
@@ -123,5 +123,5 @@ public class Button extends AbstractComponent {
 				return false;
 		}else
 			return false;
-		}
-}
+		}		
+	}

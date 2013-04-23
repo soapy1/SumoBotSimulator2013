@@ -54,7 +54,7 @@ public class Wire {
 	}
 	
 	public void setOhm(double o){
-		ohm = 0;
+		ohm = o;
 	}
 	
 	public void setOhm(){
