@@ -1,7 +1,6 @@
 package code.busters.sumobots;
 
 import code.busters.sumobots.Splash;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -24,13 +23,13 @@ public class MainSim extends StateBasedGame {
         
         public static void main(String[] argv) {
         		try {
-        				try {
+        			try {
         				Splash.drawSplash();
-        				} catch (NullPointerException e) {
-        				}
-        				AppGameContainer container = new AppGameContainer(new MainSim());
-                		container.setDisplayMode(WinX,WinY,false);
-                        container.start();
+        			} catch (NullPointerException e) {
+        			}
+        			AppGameContainer container = new AppGameContainer(new MainSim());
+               		container.setDisplayMode(WinX,WinY,false);
+                    container.start();
 
                 } catch (SlickException e) {
                         e.printStackTrace();

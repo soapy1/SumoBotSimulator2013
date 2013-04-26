@@ -57,6 +57,10 @@ public class GUI {
 	public static Image elecPar;	// The images that will be displayed on each thingy 
 	public static Image sim;		//
 	
+	public static Image tabElec;	//
+	public static Image tabMech;	// The tab images that will be shown at the bottom of the page
+	public static Image tabSim;		//
+	
 	public static Color MenuBarColorMain = Color.transparent;
 	public static Color MenuBarColorSecond = LightBlue;
 	
@@ -67,6 +71,8 @@ public class GUI {
 	}
 	
 	public static void InitGUI(GameContainer gc, StateBasedGame sg) throws SlickException {
+		
+		// Buttons for the menu bar
 		fileButton = new Button(gc, sg, 0, 1, 40, 18, MenuBarColorMain, Color.black, "File");
 		editButton = new Button(gc, sg, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Edit");
 		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
@@ -83,6 +89,7 @@ public class GUI {
 		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
 		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
 	
+		// Images that ar displayed for each window
 		mech = new Image("res/mech.png");
 		elecPar = new Image("res/parallel.gif");
 		menu = new Image("res/menu.png");
@@ -118,9 +125,14 @@ public class GUI {
 		}
 		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);
 		
-		fancyMech = new Button(gc, sg, InfoPaneWidth + 150, 580, 50, 20, Color.blue, Color.black, "  Mechanical");
-		fancyElec = new Button(gc, sg, fancyMech.getX()+fancyMech.getWidth() + 10, 580, 50, 20, Color.yellow, Color.black, "   Electrical");
-		fancySim = new Button(gc, sg, fancyElec.getX()+fancyElec.getWidth() + 10, 580, 50, 20, Color.red, Color.black, "Simulation");
+		// Images for the tabs at the bottom of the screen
+		tabElec = new Image("res/TabElectric.png");
+		tabMech = new Image("res/TabMech.png");
+		tabSim = new Image("res/TabSim.png");
+		// Text for the tabs
+		fancyMech = new Button(gc, sg, 307, 572, 50, 40, Color.transparent, Color.black, "  Mechanical");
+		fancyElec = new Button(gc, sg, 525, 572, 50, 40, Color.transparent, Color.black, "Electrical");
+		fancySim = new Button(gc, sg, 717, 572, 50, 40, Color.transparent, Color.black, "Simulation");
 
 	}
 	
@@ -434,13 +446,12 @@ public class GUI {
 		}
 		}
 		
-		//if ()
 	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
 				
 		if (element == "MainWindow"){ 
 			if (btnSelElec.isActive() == true) {
 				//TODO Add electrical
-				elecPar.draw(InfoPaneWidth+10, 100);
+				elecPar.draw(InfoPaneWidth + 10, 100);
 			} else if (btnSelMech.isActive() == true) {
 				txtWheelDiam.render(gc, g);
 				txtWheelMu.render(gc, g);
@@ -450,14 +461,15 @@ public class GUI {
 				txtWeight.setAcceptingInput(true);
 				mech.draw(InfoPaneWidth + 10, 100);
 			} else if (btnSelSim.isActive() == true) {
-				//TODO Add simulation
+				// TODO: add stuff
 			}
+			tabSim.draw(800-tabSim.getWidth()-3, 570);
+			tabElec.draw(400, 570);
+			tabMech.draw(200, 570);
 			fancyMech.render(gc, g);
 			fancyElec.render(gc, g);
 			fancySim.render(gc, g);
 		}
-
-
 		
 		// Draws the menu bar
 		if (element == "MenuBar") {
@@ -495,4 +507,5 @@ public class GUI {
 		}
 	
 	}
+
 }

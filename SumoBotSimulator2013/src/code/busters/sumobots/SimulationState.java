@@ -16,7 +16,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class SimulationState extends BasicGameState {
 	
 	
-	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
 		return GameStates.Simulation.ordinal();
@@ -37,8 +36,8 @@ public class SimulationState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {
 		Input input = gc.getInput();
-		if (input.isKeyPressed(input.KEY_ESCAPE)) {
+		//if (input.isKeyPressed(input.KEY_ESCAPE)) {
 		// sg.enterState(GameStates.Build.ordinal(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-		}
+		//}
 	}
 }
