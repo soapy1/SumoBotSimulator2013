@@ -1,0 +1,4 @@
+Sumo Bot Simulator 2013
+
+HOW TO USE THE PROGRAM
+The sumo bot simulator 2013 application is a program designed for people who want to build a simple sumo bot but do not really know where to start.  First thing is first:  this applicaiton is designed for VERY SIMPLE sumo bots.  If you do not have much experience with electronics this will be good for you. 
