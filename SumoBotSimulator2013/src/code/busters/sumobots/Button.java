@@ -21,7 +21,8 @@ public class Button extends AbstractComponent {
 	private boolean active = false;		// Button's status
 	private Color buttonColour;			// Button's colour (because we are Canadian)
 	private Color buttonTextColour;		// Button's text colour
-	private String buttonTextOld;		
+	private String buttonTextOld;
+	private Image image;
 	
 	private Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
@@ -42,6 +43,16 @@ public class Button extends AbstractComponent {
 		buttonTextColour = textColour;
 		buttonTextOld = text;
 		buttonW = (int)(buttonTextOld.length() * 7 + 6);		
+	}
+	
+	public Button(GUIContext gc, StateBasedGame sg, float x, float y, int width, int height, Image img) throws SlickException{
+		super(gc);
+		buttonX = x;
+		buttonY = y;
+		buttonW = width;
+		buttonH = height;
+		image = img;
+		
 	}
 	
 	public int getX() {
@@ -69,6 +80,11 @@ public class Button extends AbstractComponent {
 		g.drawString(buttonTextOld, buttonX + 3, buttonY + 3);
 		g.setColor(Color.transparent);
 		g.fillRect(buttonX, buttonY, buttonW, buttonH);
+	}
+	
+	// Draws the button if it was constructed with an image
+	public void renderImg() throws SlickException, NullPointerException{
+		image.draw(buttonX, buttonY);
 	}
 
 	// Sets the x and y location of the button measured from the top left corner

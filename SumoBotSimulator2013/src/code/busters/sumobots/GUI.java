@@ -129,11 +129,10 @@ public class GUI {
 		tabElec = new Image("res/TabElectric.png");
 		tabMech = new Image("res/TabMech.png");
 		tabSim = new Image("res/TabSim.png");
-		// Text for the tabs
-		fancyMech = new Button(gc, sg, 307, 572, 50, 40, Color.transparent, Color.black, "  Mechanical");
-		fancyElec = new Button(gc, sg, 525, 572, 50, 40, Color.transparent, Color.black, "Electrical");
-		fancySim = new Button(gc, sg, 717, 572, 50, 40, Color.transparent, Color.black, "Simulation");
-
+		// Actual tabs
+		fancyMech = new Button(gc, sg, 200,572, tabMech.getWidth(),tabMech.getHeight(), tabMech);
+		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
+		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
 	}
 	
 	public static void UpdateInfo(Graphics g) throws SlickException {
@@ -225,6 +224,7 @@ public class GUI {
 			btnSelSim.setActivity(true);
 			btnSelElec.setActivity(false);
 			btnSelMech.setActivity(false);
+		
 		}
 		
 		// When the file button is active; checks if the mouse is over the buttons that pop up underneath file.  
@@ -463,12 +463,9 @@ public class GUI {
 			} else if (btnSelSim.isActive() == true) {
 				// TODO: add stuff
 			}
-			tabSim.draw(800-tabSim.getWidth()-3, 570);
-			tabElec.draw(400, 570);
-			tabMech.draw(200, 570);
-			fancyMech.render(gc, g);
-			fancyElec.render(gc, g);
-			fancySim.render(gc, g);
+			fancyMech.renderImg();
+			fancyElec.renderImg();
+			fancySim.renderImg();
 		}
 		
 		// Draws the menu bar
