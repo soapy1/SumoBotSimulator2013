@@ -24,6 +24,7 @@ import org.xml.sax.SAXException;
 // Watch the tree of life
 public class GUI {
 	
+	Graphics gr;
 	public static int MenuBarFileX = 4;
 	public static int MenuBarFileY = 2;
 	
@@ -63,6 +64,8 @@ public class GUI {
 	static TextField txtWireLen;
 	static TextField txtWireResistivity;
 	static TextField txtWireArea;
+	
+	//static TextField txtOut;
 	
 	public static Image menu;
 	public static Image menuscaled;
@@ -197,7 +200,16 @@ public class GUI {
 		txtWireArea.setTextColor(Color.black);
 		txtWireArea.setMaxLength(6);
 		txtWireArea.setAcceptingInput(false);
-				
+		
+		/*
+		 * could be use if we need to communicate with the user
+		txtOut = new TextField(gc, defaultTTF, 200, 20, 600, 20 );
+		txtOut.setBackgroundColor(new Color(0xfff4f4f4));
+		txtOut.setAcceptingInput(false);
+		txtOut.setBorderColor(Color.transparent);
+		txtOut.setTextColor(Color.black);
+		*/
+		
 		if (AspectRatio > 1.34) {
 			InfoPaneScale = 0.15;
 		} else {
@@ -224,7 +236,7 @@ public class GUI {
 		g.drawString("Voltage: " + Double.toString(BuildState.roboMotorOne.getVoltage()), 12, 59);
 		g.drawString("Current: " + Double.toString(BuildState.roboMotorOne.getCurrent()), 12, 71);
 		g.drawString("Speed: " + Double.toString(BuildState.roboMotorOne.getSpeed()), 12, 83);
-		g.drawString("Torque: " + Double.toString(BuildState.roboMotorOne.getTorque()), 12, 95);
+		g.drawString("Torque: " + (BuildState.roboMotorOne.getTorqueString()), 12, 95);
 		g.drawString("Shaft: " + Double.toString(BuildState.roboMotorOne.getShaft()), 12, 107);
 		
 		//Power Supply
@@ -255,6 +267,8 @@ public class GUI {
 	// ooooooo look, the file just button changed colour.
 	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
 		Input input = gc.getInput();
+	
+		//txtOut.setText("");		// Resets the output text box
 		
 		// Checks if the mouse is over some buttons.  If it is then the background colour changes to light gray
 		if (fileButton.mouseOverArea(gc) == true){
@@ -340,8 +354,17 @@ public class GUI {
 				txtWheelMu.setText("");
 				txtWheelDiam.setText("");
 				txtWeight.setText("");
+				txtPSVolt.setText("");
+				txtPSCurrent.setText("");
+				txtMotorVolt.setText("");
+				txtMotorCurrent.setText("");
+				txtMotorShaft.setText("");
+				txtMotorSpeed.setText("");
+				txtWireLen.setText("");
+				txtWireResistivity.setText("");
+				txtWireArea.setText("");
 				try {
-					File robot = new File("files/robot.xml");
+					File robot = new File("res/robot.xml");
 					XMLReadWrite.read(robot);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -384,6 +407,18 @@ public class GUI {
 			}
 			if (btnSelOpen.buttonClicked(gc) == true){
 				CloseMenu();
+				txtWheelMu.setText("");
+				txtWheelDiam.setText("");
+				txtWeight.setText("");
+				txtPSVolt.setText("");
+				txtPSCurrent.setText("");
+				txtMotorVolt.setText("");
+				txtMotorCurrent.setText("");
+				txtMotorShaft.setText("");
+				txtMotorSpeed.setText("");
+				txtWireLen.setText("");
+				txtWireResistivity.setText("");
+				txtWireArea.setText("");
 				JFrame guiFrame = new JFrame();						// Uses the fileChooser class to open up projects
 				JFileChooser fileDialog = new JFileChooser();		//    in style ;)
 				FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
@@ -524,7 +559,12 @@ public class GUI {
 			try{
 				// Make sure the text is not null
 				if (txtPSVolt.getText() != ""){
-					BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText()));
+					if (BuildState.roboPS.validVoltage() == true){
+						BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText()));
+					}else{
+						txtPSVolt.setText("");
+						BuildState.roboPS.setVoltage(12);
+					}
 				}
 				if (txtPSCurrent.getText() != ""){
 					BuildState.roboPS.setCurrent(Double.parseDouble(txtPSCurrent.getText()));
@@ -572,10 +612,11 @@ public class GUI {
 		
 		}
 	}
-		
+	
 	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
 				
 		if (element == "MainWindow"){ 
+			//txtOut.render(gc, g);
 			if (btnSelElec.isActive() == true) {
 				txtPSVolt.render(gc, g);
 				txtPSCurrent.render(gc, g);

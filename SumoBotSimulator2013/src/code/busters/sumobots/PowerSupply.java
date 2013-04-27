@@ -8,7 +8,6 @@
 //TODO: set the restrictions
 
 package code.busters.sumobots;
-
 public class PowerSupply {
 	
 	private double voltage, current;
@@ -33,13 +32,22 @@ public class PowerSupply {
 		return current;
 	}
 	
-	// Sets the voltage
+	// Sets the voltage if the input is less than 12
 	public void setVoltage(double v){
-		if (v > 12){		// Makes sure the voltage input is less than 12 because bigger than 12 is against the rules
-			System.err.println("invalid voltage for the power supply");
+		//if (voltage <= 12){
+		voltage = v;
+		//}else{
+		//	voltage = 12;
+		//}
+	}
+	
+	// Makes sure the user inputs a valid voltage
+	public boolean validVoltage(){
+		if (voltage <= 12){
+			return true;
 		}else{
-			voltage = v;	
-		}
+			return false;
+		}	
 	}
 	
 	public void setCurrent(double c){
