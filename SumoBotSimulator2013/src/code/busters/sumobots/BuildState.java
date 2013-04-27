@@ -1,5 +1,9 @@
 package code.busters.sumobots;
 
+/*
+ * Class that defines the build state for the application
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

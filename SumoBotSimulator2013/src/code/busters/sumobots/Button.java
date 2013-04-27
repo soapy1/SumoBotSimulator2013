@@ -22,7 +22,7 @@ public class Button extends AbstractComponent {
 	private Color buttonColour;			// Button's colour (because we are Canadian)
 	private Color buttonTextColour;		// Button's text colour
 	private String buttonTextOld;
-	private Image image;
+	private Image image;				// For if you are building a button using an image
 	
 	private Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
@@ -45,6 +45,7 @@ public class Button extends AbstractComponent {
 		buttonW = (int)(buttonTextOld.length() * 7 + 6);		
 	}
 	
+	// Another constructor that defines the properties of a button if you are using an image
 	public Button(GUIContext gc, StateBasedGame sg, float x, float y, int width, int height, Image img) throws SlickException{
 		super(gc);
 		buttonX = x;
@@ -55,18 +56,22 @@ public class Button extends AbstractComponent {
 		
 	}
 	
+	// Gets the x position of the button
 	public int getX() {
 		return (int)(buttonX);
 	}
 	
+	// Gets the y position of the button
 	public int getY() {
 		return (int)(buttonY);
 	}
 
+	// Gets the height of the button
 	public int getHeight() {
 		return (int)(buttonH);
 	}
 
+	// Gets the width of the button
 	public int getWidth() {
 		return (int)(buttonW);
 	}

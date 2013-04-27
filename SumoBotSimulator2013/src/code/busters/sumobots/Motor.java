@@ -10,6 +10,7 @@ public class Motor {
 
 	private double volt, current, speed, torque, shaft;
 	
+	// Default constructor
 	public Motor(){
 		volt = 0;
 		current = 0;
@@ -18,6 +19,7 @@ public class Motor {
 		shaft = 0;
 	}
 	
+	// Better constructor
 	public Motor(double v, double c, double s, double t, double ds){
 		volt = v;
 		current = c;
@@ -52,8 +54,9 @@ public class Motor {
 	}
 	
 	// The torque of the motor is calculated in NM
+	// This method is made to adjust the torque when all the other variables are inputed
 	public void setTorque(){
-		torque = (volt*current*9.554/speed);
+		torque = (volt*current*9.554/speed);	
 	}
 	
 	public double getVoltage(){

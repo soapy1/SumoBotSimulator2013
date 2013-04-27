@@ -1,5 +1,9 @@
 package code.busters.sumobots;
 
+/*
+ * The main driver class for the program.  Anything that goes happens in the program happens here. 
+ */
+
 import code.busters.sumobots.Splash;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;

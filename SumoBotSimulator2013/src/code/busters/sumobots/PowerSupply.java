@@ -13,11 +13,13 @@ public class PowerSupply {
 	
 	private double voltage, current;
 	
+	// Default constructor
 	public PowerSupply(){
 		voltage = 0;
 		current = 0;
 	}
 	
+	// Better constructor
 	public PowerSupply(double v, double c){
 		voltage = v;
 		current = c;
@@ -31,8 +33,9 @@ public class PowerSupply {
 		return current;
 	}
 	
+	// Sets the voltage
 	public void setVoltage(double v){
-		if (v > 12){
+		if (v > 12){		// Makes sure the voltage input is less than 12 because bigger than 12 is against the rules
 			System.err.println("invalid voltage for the power supply");
 		}else{
 			voltage = v;	

@@ -1,6 +1,7 @@
 package code.busters.sumobots;
 /*
  * A class that makes the GUI and handles user interaction with the application
+ * It's name is George U. Inhaussulvhat and he is beautiful! 
  */
 
 import java.awt.Desktop;
@@ -17,8 +18,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
@@ -32,12 +31,14 @@ public class GUI {
 	public static double InfoPaneScale = 0.25;
 	public static int InfoPaneWidth;
 	
+	// Assorted colours
 	public static Color LightBlue = new Color(0xffaaccff);
 	public static Color DarkBlue = new Color(0xff252830);
 	public static Color White = new Color(0xffffffff);
 	public static Color HighlightGray = new Color(0x40000000);
 	public static Color HighlightBlue = new Color(0xff768DB0);
 	
+	// Assorted buttons
 	public static Button fileButton, btnSelNew, btnSelOpen, btnSelSave, btnSelQuit;
 	public static Button editButton, btnSelElec, btnSelMech, btnSelSim;
 	public static Button helpButton, btnSelHelp, btnSelAbout;
@@ -46,9 +47,22 @@ public class GUI {
 	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
 	
+	// Assorted text fields
+	// For mechanical info
 	static TextField txtWheelDiam;
 	static TextField txtWheelMu;
 	static TextField txtWeight;
+	// For electrical info
+	static TextField txtPSVolt;
+	static TextField txtPSCurrent;
+	static TextField txtMotorVolt;
+	static TextField txtMotorCurrent;
+	static TextField txtMotorSpeed;
+	//static TextField txtMotorTorque;
+	static TextField txtMotorShaft;
+	static TextField txtWireLen;
+	static TextField txtWireResistivity;
+	static TextField txtWireArea;
 	
 	public static Image menu;
 	public static Image menuscaled;
@@ -96,6 +110,7 @@ public class GUI {
 		
 		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
 		 
+		// Text fields for mechanical components
 		// Text field for wheel diameter
 		txtWheelDiam = new TextField(gc, defaultTTF, InfoPaneWidth + 590, 365, 55, 20);
 		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
@@ -110,7 +125,7 @@ public class GUI {
 		txtWheelMu.setTextColor(Color.black);
 		txtWheelMu.setMaxLength(6);
 		txtWheelMu.setAcceptingInput(false);
-		//txtweight
+		// Text field for the weight of the robot
 		txtWeight = new TextField(gc, defaultTTF, InfoPaneWidth + 340, 340, 55, 20);
 		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWeight.setBorderColor(Color.black);
@@ -118,6 +133,71 @@ public class GUI {
 		txtWeight.setMaxLength(6);
 		txtWeight.setAcceptingInput(false);
 		
+		// Text fields for electrical components
+		// For the powers supply voltage
+		txtPSVolt = new TextField(gc, defaultTTF, InfoPaneWidth + 327, 125, 55, 20);
+		txtPSVolt.setBackgroundColor(new Color(0xfff4f4f4));
+		txtPSVolt.setBorderColor(Color.black);
+		txtPSVolt.setTextColor(Color.black);
+		txtPSVolt.setMaxLength(6);
+		txtPSVolt.setAcceptingInput(false);
+		// For the power supply current
+		txtPSCurrent = new TextField(gc, defaultTTF, InfoPaneWidth + 513, 125, 55, 20);
+		txtPSCurrent.setBackgroundColor(new Color(0xfff4f4f4));
+		txtPSCurrent.setBorderColor(Color.black);
+		txtPSCurrent.setTextColor(Color.black);
+		txtPSCurrent.setMaxLength(6);
+		txtPSCurrent.setAcceptingInput(false);
+		// For the motor voltage
+		txtMotorVolt = new TextField(gc, defaultTTF, InfoPaneWidth + 286, 221, 55, 20);
+		txtMotorVolt.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorVolt.setBorderColor(Color.black);
+		txtMotorVolt.setTextColor(Color.black);
+		txtMotorVolt.setMaxLength(6);
+		txtMotorVolt.setAcceptingInput(false);
+		// For the motor current
+		txtMotorCurrent = new TextField(gc, defaultTTF, InfoPaneWidth + 286, 280, 55, 20);
+		txtMotorCurrent.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorCurrent.setBorderColor(Color.black);
+		txtMotorCurrent.setTextColor(Color.black);
+		txtMotorCurrent.setMaxLength(6);
+		txtMotorCurrent.setAcceptingInput(false);
+		// For the motor speed
+		txtMotorSpeed = new TextField(gc, defaultTTF, InfoPaneWidth + 286, 338, 55, 20);
+		txtMotorSpeed.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorSpeed.setBorderColor(Color.black);
+		txtMotorSpeed.setTextColor(Color.black);
+		txtMotorSpeed.setMaxLength(6);
+		txtMotorSpeed.setAcceptingInput(false);
+		// For the motor shaft
+		txtMotorShaft = new TextField(gc, defaultTTF, InfoPaneWidth + 286, 410, 55, 20);
+		txtMotorShaft.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorShaft.setBorderColor(Color.black);
+		txtMotorShaft.setTextColor(Color.black);
+		txtMotorShaft.setMaxLength(6);
+		txtMotorShaft.setAcceptingInput(false);
+		// For the wire length
+		txtWireLen = new TextField(gc, defaultTTF, InfoPaneWidth + 637, 175, 55, 20);
+		txtWireLen.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireLen.setBorderColor(Color.black);
+		txtWireLen.setTextColor(Color.black);
+		txtWireLen.setMaxLength(6);
+		txtWireLen.setAcceptingInput(false);
+		// For the wire resistivity
+		txtWireResistivity = new TextField(gc, defaultTTF, InfoPaneWidth + 637, 231, 55, 20);
+		txtWireResistivity.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireResistivity.setBorderColor(Color.black);
+		txtWireResistivity.setTextColor(Color.black);
+		txtWireResistivity.setMaxLength(6);
+		txtWireResistivity.setAcceptingInput(false);
+		// For the wire cross sectional area
+		txtWireArea = new TextField(gc, defaultTTF, InfoPaneWidth + 637, 290, 55, 20);
+		txtWireArea.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireArea.setBorderColor(Color.black);
+		txtWireArea.setTextColor(Color.black);
+		txtWireArea.setMaxLength(6);
+		txtWireArea.setAcceptingInput(false);
+				
 		if (AspectRatio > 1.34) {
 			InfoPaneScale = 0.15;
 		} else {
@@ -420,6 +500,7 @@ public class GUI {
 	
 		}
 		
+		// Gets the info from the mechanical text boxes
 		if (btnSelMech.isActive() == true){
 			try{
 				// Make sure the text is not null
@@ -433,10 +514,56 @@ public class GUI {
 					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));
 				}
 			}catch(NumberFormatException e){
-					
+				e.printStackTrace();
 			}
 						
 		}
+		
+		// Gets the info from the electrical text boxes
+		if (btnSelElec.isActive() == true){
+			try{
+				// Make sure the text is not null
+				if (txtPSVolt.getText() != ""){
+					BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText()));
+				}
+				if (txtPSCurrent.getText() != ""){
+					BuildState.roboPS.setCurrent(Double.parseDouble(txtPSCurrent.getText()));
+				}
+				if (txtMotorVolt.getText() != ""){
+					BuildState.roboMotorOne.setVoltage(Double.parseDouble(txtMotorVolt.getText()));
+				}
+				if (txtMotorCurrent.getText() != ""){
+					BuildState.roboMotorOne.setCurrent(Double.parseDouble(txtMotorCurrent.getText()));
+				}
+				if (txtMotorShaft.getText() != ""){
+					BuildState.roboMotorOne.setShaft(Double.parseDouble(txtMotorShaft.getText()));
+				}
+				if (txtMotorSpeed.getText() != ""){
+					BuildState.roboMotorOne.setSpeed(Double.parseDouble(txtMotorSpeed.getText()));
+				}
+				if (txtWireLen.getText() != ""){
+					BuildState.roboWire.setLen(Double.parseDouble(txtWireLen.getText()));
+				}
+				if (txtWireResistivity.getText() != ""){
+					BuildState.roboWire.setResistivity(Double.parseDouble(txtWireResistivity.getText()));
+				}
+				if (txtWireArea.getText() != ""){
+					BuildState.roboWire.setArea(Double.parseDouble(txtWireArea.getText()));
+				}
+				
+				if (txtMotorVolt.getText() != "" && txtMotorCurrent.getText() != "" && txtMotorSpeed.getText() != ""){
+					BuildState.roboMotorOne.setTorque();
+				}
+				// Sets the wire resistance based on inputed info
+				if (txtWireArea.getText() != "" && txtWireResistivity.getText() != "" && txtWireLen.getText() != ""){
+					BuildState.roboWire.setOhm();
+				}
+			}catch(NumberFormatException e){
+				e.printStackTrace();	
+			}
+						
+		}
+		
 		// When something other than the menu strip buttons are clicked the menu strip buttons are set to inactive.
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)){
 			fileButton.setActivity(false);
@@ -444,13 +571,30 @@ public class GUI {
 			helpButton.setActivity(false);
 		
 		}
-		}
+	}
 		
 	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
 				
 		if (element == "MainWindow"){ 
 			if (btnSelElec.isActive() == true) {
-				//TODO Add electrical
+				txtPSVolt.render(gc, g);
+				txtPSCurrent.render(gc, g);
+				txtMotorVolt.render(gc, g);
+				txtMotorCurrent.render(gc, g);
+				txtMotorShaft.render(gc, g);
+				txtMotorSpeed.render(gc, g);
+				txtWireLen.render(gc, g);
+				txtWireResistivity.render(gc, g);
+				txtWireArea.render(gc, g);
+				txtPSVolt.setAcceptingInput(true);
+				txtPSCurrent.setAcceptingInput(true);
+				txtMotorVolt.setAcceptingInput(true);
+				txtMotorCurrent.setAcceptingInput(true);
+				txtMotorShaft.setAcceptingInput(true);
+				txtMotorSpeed.setAcceptingInput(true);
+				txtWireLen.setAcceptingInput(true);
+				txtWireResistivity.setAcceptingInput(true);
+				txtWireArea.setAcceptingInput(true);
 				elecPar.draw(InfoPaneWidth + 10, 100);
 			} else if (btnSelMech.isActive() == true) {
 				txtWheelDiam.render(gc, g);
