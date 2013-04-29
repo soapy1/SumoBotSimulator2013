@@ -38,6 +38,7 @@ public class GUI {
 	public static Color White = new Color(0xffffffff);
 	public static Color HighlightGray = new Color(0x40000000);
 	public static Color HighlightBlue = new Color(0xff768DB0);
+	private static Color Shadow = new Color(0x50000000);
 	
 	// Assorted buttons
 	public static Button fileButton, btnSelNew, btnSelOpen, btnSelSave, btnSelQuit;
@@ -236,35 +237,47 @@ public class GUI {
 		g.setColor(White);
 		
 		//Motor
+		g.setColor(Color.black);
+		g.drawString("Motor:", 5, 49);
+		g.setColor(White);
 		g.drawString("Motor:", 3, 47);
 		g.drawString("Voltage: " + Double.toString(BuildState.roboMotorOne.getVoltage()), 12, 59);
 		g.drawString("Current: " + Double.toString(BuildState.roboMotorOne.getCurrent()), 12, 71);
 		g.drawString("Speed: " + Double.toString(BuildState.roboMotorOne.getSpeed()), 12, 83);
-		g.drawString("Torque: " + (BuildState.roboMotorOne.getTorqueString()), 12, 95);
+		g.drawString("Torque: " + Double.toString(BuildState.roboMotorOne.getTorque()), 12, 95);
 		g.drawString("Shaft: " + Double.toString(BuildState.roboMotorOne.getShaft()), 12, 107);
-		
+				
 		//Power Supply
+		g.setColor(Color.black);
+		g.drawString("Power Supply:", 5, 133);
+		g.setColor(White);
 		g.drawString("Power Supply:", 3, 131);
 		g.drawString("Voltage: " + Double.toString(BuildState.roboPS.getVoltage()), 12, 143);
 		g.drawString("Current: " + Double.toString(BuildState.roboPS.getCurrent()), 12, 155);
-
 		//Wheel
+		g.setColor(Color.black);
+		g.drawString("Wheel:", 5, 181);
+		g.setColor(White);
 		g.drawString("Wheel:", 3, 179);
 		g.drawString("Diameter: " + Double.toString(BuildState.roboWheel.getDiam()), 12, 191);
-		g.drawString("Friction Coefficient: " + Double.toString(BuildState.roboWheel.getMu()), 12, 203);
-
+		g.drawString("Friction", 12, 203);
+		g.drawString(" Coefficient: " + Double.toString(BuildState.roboWheel.getMu()), 12, 215);
 		//Wire
-		g.drawString("Wire:", 3, 227);
-		g.drawString("Length: " + Double.toString(BuildState.roboWire.getLen()), 12, 239);
-		g.drawString("Ohm: " + Double.toString(BuildState.roboWire.getOhm()), 12, 251);
-		g.drawString("Resistivity: " + Double.toString(BuildState.roboWire.getResistivity()), 12, 263);
-		g.drawString("Area: " + Double.toString(BuildState.roboWire.getArea()), 12, 275);
-		g.drawString("Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 287);
-		
-		// NEW
-		g.drawString("Robot:", 3, 308);
-		g.drawString("Weight: " + Double.toString(BuildState.RWeight), 12, 320);
-	
+		g.setColor(Color.black);
+		g.drawString("Wire:", 5, 241);
+		g.setColor(White);
+		g.drawString("Wire:", 3, 239);
+		g.drawString("Length: " + Double.toString(BuildState.roboWire.getLen()), 12, 251);
+		g.drawString("Ohm: " + Double.toString(BuildState.roboWire.getOhm()), 12, 263);
+		g.drawString("Resistivity: " + Double.toString(BuildState.roboWire.getResistivity()), 12, 275);
+     	g.drawString("Area: " + Double.toString(BuildState.roboWire.getArea()), 12, 287);
+		g.drawString("Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 299);
+			
+		g.setColor(Color.black);
+		g.drawString("Robot:", 5, 325);
+		g.setColor(White);
+		g.drawString("Robot:", 3, 323);
+		g.drawString("Weight: " + Double.toString(BuildState.RWeight), 12, 335);
 	}
 	
 	// This is some very long method with a ton of if statements to make the GUI look pretty and more fun to use.
@@ -319,6 +332,7 @@ public class GUI {
 			btnSelMech.setActivity(false);
 		}else if(fancySim.buttonClicked(gc) == true){
 			CloseMenu();
+			sg.enterState(GameStates.Simulation.ordinal());
 			btnSelSim.setActivity(true);
 			btnSelElec.setActivity(false);
 			btnSelMech.setActivity(false);
@@ -663,9 +677,22 @@ public class GUI {
 			} else if (btnSelSim.isActive() == true) {
 				// TODO: add stuff
 			}
+			g.setFont(defaultTTF);
 			fancyMech.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Mechanical", (float) (fancyMech.getX() + (0.60*fancyMech.getWidth())) + 2, fancyMech.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Mechanical", (float) (fancyMech.getX() + (0.60*fancyMech.getWidth())), fancyMech.getY() + 10);
 			fancyElec.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Electrical", (float) (fancyElec.getX() + (0.60*fancyElec.getWidth())) + 2, fancyElec.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Electrical", (float) (fancyElec.getX() + (0.60*fancyElec.getWidth())), fancyElec.getY() + 10);
 			fancySim.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Simulation", (float) (fancySim.getX() + (0.60*fancySim.getWidth())) + 2, fancySim.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Simulation", (float) (fancySim.getX() + (0.60*fancySim.getWidth())), fancySim.getY() + 10);
 		}
 		
 		// Draws the menu bar
@@ -699,8 +726,13 @@ public class GUI {
 			g.setColor(DarkBlue);
 			g.fillRect(0, 20, InfoPaneWidth, MainSim.WinY);
 			g.setFont(defaultTTF);
+			g.setColor(Color.black);
+			g.drawString("Information", 5, 25);
+			g.drawString("Information", 6, 26);
+			g.setColor(Color.lightGray);
+			g.drawString("Information", 4, 23);
 			g.setColor(White);
-			g.drawString("Info Pane", 3, 23);
+			g.drawString("Information", 3, 23);
 		}
 	
 	}

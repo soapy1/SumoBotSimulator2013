@@ -27,6 +27,8 @@ public class BuildState extends BasicGameState {
 	
 	Color Background = new Color(0xfff4f4f4);
 	
+	private StateBasedGame game;
+	
 	public static int WinX = 800;
 	public static int WinY = 600;
 	public static boolean WinF = false;
@@ -49,6 +51,8 @@ public class BuildState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
+		
+		game = sg;
 		
 		initFlag = false;
 		simFlag = false;
@@ -97,5 +101,7 @@ public class BuildState extends BasicGameState {
     		init(gc, sg);
     		initFlag = false;
     	}
+		
+		
 	}
 }

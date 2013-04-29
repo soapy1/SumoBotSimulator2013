@@ -15,6 +15,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class SimulationState extends BasicGameState {
 	
+	private StateBasedGame game;
 	
 	public int getID() {
 		// TODO Auto-generated method stub
@@ -23,6 +24,7 @@ public class SimulationState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
+		game = sg;
 		BuildState.simFlag = true;
 		BuildState.buildFlag = false;
 		
