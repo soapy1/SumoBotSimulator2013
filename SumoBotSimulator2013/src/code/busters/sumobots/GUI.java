@@ -44,6 +44,7 @@ public class GUI {
 	public static Button editButton, btnSelElec, btnSelMech, btnSelSim;
 	public static Button helpButton, btnSelHelp, btnSelAbout;
 	public static Button fancyMech, fancyElec, fancySim;
+	public static Button toggCircuit;
 	
 	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
@@ -59,7 +60,6 @@ public class GUI {
 	static TextField txtMotorVolt;
 	static TextField txtMotorCurrent;
 	static TextField txtMotorSpeed;
-	//static TextField txtMotorTorque;
 	static TextField txtMotorShaft;
 	static TextField txtWireLen;
 	static TextField txtWireResistivity;
@@ -72,6 +72,7 @@ public class GUI {
 	
 	public static Image mech;		// 
 	public static Image elecPar;	// The images that will be displayed on each thingy 
+	public static Image elecSer;	//
 	public static Image sim;		//
 	
 	public static Image tabElec;	//
@@ -106,9 +107,12 @@ public class GUI {
 		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
 		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
 	
+		toggCircuit = new Button(gc, sg, 740, 40, 40, 18, Color.darkGray, Color.white, "CIRCUIT");
+		
 		// Images that ar displayed for each window
 		mech = new Image("res/mech.png");
 		elecPar = new Image("res/parallel.gif");
+		elecSer = new Image("res/series.png");
 		menu = new Image("res/menu.png");
 		
 		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
@@ -535,6 +539,11 @@ public class GUI {
 	
 		}
 		
+		// Changes the activity of the button toggCircuit when it is pressed 
+		if (toggCircuit.buttonClicked(gc) == true){
+			toggCircuit.setActivity(!toggCircuit.isActive());
+		}
+		
 		// Gets the info from the mechanical text boxes
 		if (btnSelMech.isActive() == true){
 			try{
@@ -636,7 +645,13 @@ public class GUI {
 				txtWireLen.setAcceptingInput(true);
 				txtWireResistivity.setAcceptingInput(true);
 				txtWireArea.setAcceptingInput(true);
-				elecPar.draw(InfoPaneWidth + 10, 100);
+				toggCircuit.render(gc, g);
+				if (toggCircuit.isActive() == true){
+					elecSer.draw(InfoPaneWidth + 10, 100);
+				}else{
+					elecPar.draw(InfoPaneWidth + 10, 100);
+				}
+				
 			} else if (btnSelMech.isActive() == true) {
 				txtWheelDiam.render(gc, g);
 				txtWheelMu.render(gc, g);
