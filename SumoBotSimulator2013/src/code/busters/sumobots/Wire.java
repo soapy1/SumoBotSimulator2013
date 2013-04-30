@@ -1,10 +1,13 @@
 package code.busters.sumobots;
 
+import java.text.DecimalFormat;
+
 public class Wire {
 
 	private double len, ohm, resistivity, area;
 	private String circuitType;
 	
+	DecimalFormat f = new DecimalFormat("#.0000");
 	public Wire(){
 		len = 0;
 		ohm = 0;
@@ -27,6 +30,10 @@ public class Wire {
 	
 	public double getOhm(){
 		return ohm;
+	}
+	
+	public String getOhmString(){
+		return f.format(ohm);
 	}
 	
 	public double getResistivity(){

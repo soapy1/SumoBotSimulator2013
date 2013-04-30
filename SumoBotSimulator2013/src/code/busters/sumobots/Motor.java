@@ -12,7 +12,7 @@ public class Motor {
 
 	private double volt, current, speed, torque, shaft;
 	
-	DecimalFormat f = new DecimalFormat("#.00000");
+	DecimalFormat f = new DecimalFormat("#.0000");
 	
 	// Default constructor
 	public Motor(){

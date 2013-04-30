@@ -264,7 +264,7 @@ public class GUI {
 		g.drawString("Voltage: " + Double.toString(BuildState.roboMotorOne.getVoltage()), 12, 59);
 		g.drawString("Current: " + Double.toString(BuildState.roboMotorOne.getCurrent()), 12, 71);
 		g.drawString("Speed: " + Double.toString(BuildState.roboMotorOne.getSpeed()), 12, 83);
-		g.drawString("Torque: " + Double.toString(BuildState.roboMotorOne.getTorque()), 12, 95);
+		g.drawString("Torque: " + BuildState.roboMotorOne.getTorqueString(), 12, 95);
 		g.drawString("Shaft: " + Double.toString(BuildState.roboMotorOne.getShaft()), 12, 107);
 				
 		//Power Supply
@@ -288,7 +288,7 @@ public class GUI {
 		g.setColor(White);
 		g.drawString("Wire:", 3, 239);
 		g.drawString("Length: " + Double.toString(BuildState.roboWire.getLen()), 12, 251);
-		g.drawString("Ohm: " + Double.toString(BuildState.roboWire.getOhm()), 12, 263);
+		g.drawString("Ohm: " + BuildState.roboWire.getOhmString(), 12, 263);
 		g.drawString("Resistivity: " + Double.toString(BuildState.roboWire.getResistivity()), 12, 275);
      	g.drawString("Area: " + Double.toString(BuildState.roboWire.getArea()), 12, 287);
 		g.drawString("Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 299);

@@ -92,7 +92,6 @@ public class BuildState extends BasicGameState {
     	GUI.RenderGUI(gc, sg, g, "Tabs");
     	GUI.UpdateInfo(g);
     	GUI.RenderGUI(gc, sg, g, "MenuBar");
-    	//GUI.RenderGUI(gc, g, "comp");
 	}
 
 	@Override
