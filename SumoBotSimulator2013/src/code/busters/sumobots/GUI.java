@@ -89,6 +89,26 @@ public class GUI {
 		helpButton.setActivity(false);
 	}
 	
+	public static void InitGUISim(GameContainer gc, StateBasedGame sg) throws SlickException{
+		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
+		
+		if (AspectRatio > 1.34) {
+			InfoPaneScale = 0.15;
+		} else {
+			InfoPaneScale = 0.25;
+		}
+		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);
+		
+		// Images for the tabs at the bottom of the screen
+		tabElec = new Image("res/TabElectric.png");
+		tabMech = new Image("res/TabMech.png");
+		tabSim = new Image("res/TabSim.png");
+		// Actual tabs
+		fancyMech = new Button(gc, sg, 200,572, tabMech.getWidth(),tabMech.getHeight(), tabMech);
+		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
+		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
+	}
+	
 	public static void InitGUI(GameContainer gc, StateBasedGame sg) throws SlickException {
 		
 		// Buttons for the menu bar
@@ -120,21 +140,21 @@ public class GUI {
 		 
 		// Text fields for mechanical components
 		// Text field for wheel diameter
-		txtWheelDiam = new TextField(gc, defaultTTF, InfoPaneWidth + 590, 365, 55, 20);
+		txtWheelDiam = new TextField(gc, defaultTTF, InfoPaneWidth + 617, 391, 55, 20);
 		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWheelDiam.setBorderColor(Color.black);
 		txtWheelDiam.setTextColor(Color.black);
 		txtWheelDiam.setMaxLength(6);
 		txtWheelDiam.setAcceptingInput(false);
 		// Text field for coefficient of friction
-		txtWheelMu = new TextField(gc, defaultTTF, InfoPaneWidth + 660, 220, 55, 20);
+		txtWheelMu = new TextField(gc, defaultTTF, InfoPaneWidth + 640, 236, 55, 20);
 		txtWheelMu.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWheelMu.setBorderColor(Color.black);
 		txtWheelMu.setTextColor(Color.black);
 		txtWheelMu.setMaxLength(6);
 		txtWheelMu.setAcceptingInput(false);
 		// Text field for the weight of the robot
-		txtWeight = new TextField(gc, defaultTTF, InfoPaneWidth + 340, 340, 55, 20);
+		txtWeight = new TextField(gc, defaultTTF, InfoPaneWidth + 360, 303, 55, 20);
 		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWeight.setBorderColor(Color.black);
 		txtWeight.setTextColor(Color.black);
@@ -501,6 +521,7 @@ public class GUI {
 				btnSelSim.setActivity(false);
 			}else if(btnSelSim.buttonClicked(gc) == true){
 				CloseMenu();
+				sg.enterState(GameStates.Simulation.ordinal());
 				btnSelMech.setActivity(false);
 				btnSelElec.setActivity(false);
 				btnSelSim.setActivity(true);
@@ -673,10 +694,12 @@ public class GUI {
 				txtWheelDiam.setAcceptingInput(true);
 				txtWheelMu.setAcceptingInput(true);
 				txtWeight.setAcceptingInput(true);
-				mech.draw(InfoPaneWidth + 10, 100);
-			} else if (btnSelSim.isActive() == true) {
-				// TODO: add stuff
+				mech.draw(InfoPaneWidth-15, 100);
 			}
+			
+		}
+		
+		if (element == "Tabs"){
 			g.setFont(defaultTTF);
 			fancyMech.renderImg();
 			g.setColor(Shadow);
@@ -724,7 +747,7 @@ public class GUI {
 			 
 		} else if (element == "InfoPane") {
 			g.setColor(DarkBlue);
-			g.fillRect(0, 20, InfoPaneWidth, MainSim.WinY);
+			g.fillRect(0, 0, InfoPaneWidth, MainSim.WinY);
 			g.setFont(defaultTTF);
 			g.setColor(Color.black);
 			g.drawString("Information", 5, 25);

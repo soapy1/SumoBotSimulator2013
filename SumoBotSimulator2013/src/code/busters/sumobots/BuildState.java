@@ -89,6 +89,7 @@ public class BuildState extends BasicGameState {
     	g.fillRect(0, 0, 1366, 768);
     	GUI.RenderGUI(gc, sg, g, "MainWindow");
     	GUI.RenderGUI(gc, sg, g, "InfoPane");
+    	GUI.RenderGUI(gc, sg, g, "Tabs");
     	GUI.UpdateInfo(g);
     	GUI.RenderGUI(gc, sg, g, "MenuBar");
     	//GUI.RenderGUI(gc, g, "comp");
