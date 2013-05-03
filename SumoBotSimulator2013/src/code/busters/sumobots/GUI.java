@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -83,6 +84,8 @@ public class GUI {
 	public static Color MenuBarColorMain = Color.transparent;
 	public static Color MenuBarColorSecond = LightBlue;
 	
+	//static ArrayList<Button> buttons = new ArrayList<Button>();
+	
 	public static void CloseMenu() throws SlickException {
 		fileButton.setActivity(false);
 		editButton.setActivity(false);
@@ -113,26 +116,39 @@ public class GUI {
 		
 		// Buttons for the menu bar
 		fileButton = new Button(gc, sg, 0, 1, 40, 18, MenuBarColorMain, Color.black, "File");
+		//buttons.add(fileButton);
 		editButton = new Button(gc, sg, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Edit");
+		//buttons.add(editButton);
 		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
+		//buttons.add(helpButton);
 		
 		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New ");
+		//buttons.add(btnSelNew);
 		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open");
+		//buttons.add(btnSelOpen);
 		btnSelSave = new Button(gc, sg, fileButton.getX(), btnSelOpen.getY()+btnSelOpen.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Save");
+		//buttons.add(btnSelSave);
 		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit");
+		//buttons.add(btnSelQuit);
 		
 		btnSelElec = new Button(gc, sg, editButton.getX(), editButton.getY()+editButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Electrical");
+		//buttons.add(btnSelElec);
 		btnSelMech = new Button(gc, sg, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Mechanical");
+		//buttons.add(btnSelMech);
 		btnSelSim = new Button(gc, sg, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Smulation ");
+		//buttons.add(btnSelSim);
 		
 		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
+		//buttons.add(btnSelHelp);
 		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
-	
-		toggCircuit = new Button(gc, sg, 740, 40, 40, 18, Color.darkGray, Color.white, "CIRCUIT");
+		//buttons.add(btnSelAbout);
 		
-		// Images that ar displayed for each window
+		toggCircuit = new Button(gc, sg, 740, 40, 40, 18, Color.darkGray, Color.white, "CIRCUIT");
+		//buttons.add(toggCircuit);
+		
+		// Images that are displayed for each window
 		mech = new Image("res/mech.png");
-		elecPar = new Image("res/parallel.gif");
+		elecPar = new Image("res/parallel.png");
 		elecSer = new Image("res/series.png");
 		menu = new Image("res/menu.png");
 		
@@ -226,15 +242,6 @@ public class GUI {
 		txtWireArea.setMaxLength(6);
 		txtWireArea.setAcceptingInput(false);
 		
-		/*
-		 * could be use if we need to communicate with the user
-		txtOut = new TextField(gc, defaultTTF, 200, 20, 600, 20 );
-		txtOut.setBackgroundColor(new Color(0xfff4f4f4));
-		txtOut.setAcceptingInput(false);
-		txtOut.setBorderColor(Color.transparent);
-		txtOut.setTextColor(Color.black);
-		*/
-		
 		if (AspectRatio > 1.34) {
 			InfoPaneScale = 0.15;
 		} else {
@@ -248,11 +255,15 @@ public class GUI {
 		tabSim = new Image("res/TabSim.png");
 		// Actual tabs
 		fancyMech = new Button(gc, sg, 200,572, tabMech.getWidth(),tabMech.getHeight(), tabMech);
+		//buttons.add(fancyMech);
 		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
+		//buttons.add(fancyElec);
 		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
+		//buttons.add(fancySim);
+		
 	}
 	
-	public static void UpdateInfo(Graphics g) throws SlickException {
+	public static void RenderInfo(Graphics g) throws SlickException {
 		g.setFont(defaultTTF);
 		g.setColor(White);
 		
@@ -300,30 +311,47 @@ public class GUI {
 		g.drawString("Weight: " + Double.toString(BuildState.RWeight), 12, 335);
 	}
 	
+	// Method to change states
+	public static void changeState(StateBasedGame sg, int ordinal) {
+		sg.enterState(ordinal);
+	}
+
+	// Method to show default data in text boxes 
+	public static void setTextBox(){
+		txtWheelMu.setText(Double.toString(BuildState.roboWheel.getMu()));
+		txtWheelDiam.setText(Double.toString(BuildState.roboWheel.getDiam()));
+		txtWeight.setText(Double.toString(BuildState.RWeight));
+		txtPSVolt.setText(Double.toString(BuildState.roboPS.getVoltage()));
+		txtPSCurrent.setText(Double.toString(BuildState.roboPS.getCurrent()));
+		txtMotorVolt.setText(Double.toString(BuildState.roboMotorOne.getVoltage()));
+		txtMotorCurrent.setText(Double.toString(BuildState.roboMotorOne.getCurrent()));
+		txtMotorShaft.setText(Double.toString(BuildState.roboMotorOne.getShaft()));
+		txtMotorSpeed.setText(Double.toString(BuildState.roboMotorOne.getSpeed()));
+		txtWireLen.setText(Double.toString(BuildState.roboWire.getLen()));
+		txtWireResistivity.setText(Double.toString(BuildState.roboWire.getResistivity()));
+		txtWireArea.setText(Double.toString(BuildState.roboWire.getArea()));
+	}
+	
+	/*
+	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
+		
+		// TODO: change all of update to be like this
+		// A loop that check if the mouse is over any of the buttons
+		for (Button a : buttons){
+			if (a.mouseOverArea(gc) == true){
+				a.changeColour(HighlightGray);
+			}else{
+				a.changeColour(MenuBarColorMain);
+			}
+		}
+	
+	}*/
+	
 	// This is some very long method with a ton of if statements to make the GUI look pretty and more fun to use.
 	// ooooooo look, the file just button changed colour.
 	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
 		Input input = gc.getInput();
 	
-		//txtOut.setText("");		// Resets the output text box
-		
-		// Checks if the mouse is over some buttons.  If it is then the background colour changes to light gray
-		if (fileButton.mouseOverArea(gc) == true){
-			fileButton.changeColour(HighlightGray);
-		}else{
-			fileButton.changeColour(MenuBarColorMain);
-		}
-		if (editButton.mouseOverArea(gc) == true){
-			editButton.changeColour(HighlightGray);
-		}else{
-			editButton.changeColour(MenuBarColorMain);
-		}
-		if (helpButton.mouseOverArea(gc) == true){
-			helpButton.changeColour(HighlightGray);
-		}else{
-			helpButton.changeColour(MenuBarColorMain);
-		}
-		
 		// When the button is clicked then is becomes active.  The other buttons become inactive.
 		if (fileButton.buttonClicked(gc) == true){
 			CloseMenu();
@@ -340,6 +368,8 @@ public class GUI {
 			helpButton.setActivity(true);
 			editButton.setActivity(false);
 			fileButton.setActivity(false);
+			
+		// For the tabs
 		}else if(fancyMech.buttonClicked(gc) == true){
 			CloseMenu();
 			btnSelMech.setActivity(true);
@@ -352,55 +382,59 @@ public class GUI {
 			btnSelMech.setActivity(false);
 		}else if(fancySim.buttonClicked(gc) == true){
 			CloseMenu();
-			sg.enterState(GameStates.Simulation.ordinal());
+			changeState(sg, GameStates.Simulation.ordinal());
 			btnSelSim.setActivity(true);
 			btnSelElec.setActivity(false);
 			btnSelMech.setActivity(false);
+			
+		}
 		
+		// Checks if the mouse is over some buttons.  If it is then the background colour changes to light gray
+		if (fileButton.mouseOverArea(gc) == true){
+			fileButton.changeColour(HighlightGray);
+		}else{
+			fileButton.changeColour(MenuBarColorMain);
+		}
+		if (editButton.mouseOverArea(gc) == true){
+			editButton.changeColour(HighlightGray);
+		}else{
+			editButton.changeColour(MenuBarColorMain);
+		}
+		if (helpButton.mouseOverArea(gc) == true){
+			helpButton.changeColour(HighlightGray);
+		}else{
+			helpButton.changeColour(MenuBarColorMain);
+		}	
+		if (btnSelNew.mouseOverArea(gc) == true){
+			btnSelNew.changeColour(HighlightBlue);
+		}else{
+			btnSelNew.changeColour(MenuBarColorSecond);
+		}
+		if (btnSelSave.mouseOverArea(gc) == true){
+			btnSelSave.changeColour(HighlightBlue);
+		}else{
+			btnSelSave.changeColour(MenuBarColorSecond);
+		}
+		if (btnSelOpen.mouseOverArea(gc) == true){
+			btnSelOpen.changeColour(HighlightBlue);
+		}else{
+			btnSelOpen.changeColour(MenuBarColorSecond);
+		}
+		if (btnSelQuit.mouseOverArea(gc) == true){
+			btnSelQuit.changeColour(HighlightBlue);
+		}else{
+			btnSelQuit.changeColour(MenuBarColorSecond);
 		}
 		
 		// When the file button is active; checks if the mouse is over the buttons that pop up underneath file.  
 		// If it is then the background colour changes to light gray.
 		// Also, allows for interaction with the new, save, open and quit buttons.
 		if (fileButton.isActive() == true){
-			// Makes the buttons change colour
-			if (btnSelNew.mouseOverArea(gc) == true){
-				btnSelNew.changeColour(HighlightBlue);
-			}else{
-				btnSelNew.changeColour(MenuBarColorSecond);
-			}
-			if (btnSelSave.mouseOverArea(gc) == true){
-				btnSelSave.changeColour(HighlightBlue);
-			}else{
-				btnSelSave.changeColour(MenuBarColorSecond);
-			}
-			if (btnSelOpen.mouseOverArea(gc) == true){
-				btnSelOpen.changeColour(HighlightBlue);
-			}else{
-				btnSelOpen.changeColour(MenuBarColorSecond);
-			}
-			if (btnSelQuit.mouseOverArea(gc) == true){
-				btnSelQuit.changeColour(HighlightBlue);
-			}else{
-				btnSelQuit.changeColour(MenuBarColorSecond);
-			}
-			
 			// Adds function to the buttons
 			// Reads robot.xml file to re-initialize all the variables
 			if (btnSelNew.buttonClicked(gc) == true){
 				CloseMenu();
-				txtWheelMu.setText("");
-				txtWheelDiam.setText("");
-				txtWeight.setText("");
-				txtPSVolt.setText("");
-				txtPSCurrent.setText("");
-				txtMotorVolt.setText("");
-				txtMotorCurrent.setText("");
-				txtMotorShaft.setText("");
-				txtMotorSpeed.setText("");
-				txtWireLen.setText("");
-				txtWireResistivity.setText("");
-				txtWireArea.setText("");
+				setTextBox();
 				try {
 					File robot = new File("res/robot.xml");
 					XMLReadWrite.read(robot);
@@ -445,18 +479,7 @@ public class GUI {
 			}
 			if (btnSelOpen.buttonClicked(gc) == true){
 				CloseMenu();
-				txtWheelMu.setText("");
-				txtWheelDiam.setText("");
-				txtWeight.setText("");
-				txtPSVolt.setText("");
-				txtPSCurrent.setText("");
-				txtMotorVolt.setText("");
-				txtMotorCurrent.setText("");
-				txtMotorShaft.setText("");
-				txtMotorSpeed.setText("");
-				txtWireLen.setText("");
-				txtWireResistivity.setText("");
-				txtWireArea.setText("");
+				setTextBox();
 				JFrame guiFrame = new JFrame();						// Uses the fileChooser class to open up projects
 				JFileChooser fileDialog = new JFileChooser();		//    in style ;)
 				FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
@@ -655,12 +678,12 @@ public class GUI {
 			helpButton.setActivity(false);
 		
 		}
-	}
+	} 
 	
+
 	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
 				
 		if (element == "MainWindow"){ 
-			//txtOut.render(gc, g);
 			if (btnSelElec.isActive() == true) {
 				txtPSVolt.render(gc, g);
 				txtPSCurrent.render(gc, g);
@@ -682,9 +705,11 @@ public class GUI {
 				txtWireArea.setAcceptingInput(true);
 				toggCircuit.render(gc, g);
 				if (toggCircuit.isActive() == true){
-					elecSer.draw(InfoPaneWidth + 10, 100);
+					BuildState.roboWire.setCircuitType("series");
+					g.drawImage(elecSer, InfoPaneWidth + 10, 100);
 				}else{
-					elecPar.draw(InfoPaneWidth + 10, 100);
+					BuildState.roboWire.setCircuitType("parallel");
+					g.drawImage(elecPar, InfoPaneWidth + 10, 100);
 				}
 				
 			} else if (btnSelMech.isActive() == true) {
@@ -694,7 +719,7 @@ public class GUI {
 				txtWheelDiam.setAcceptingInput(true);
 				txtWheelMu.setAcceptingInput(true);
 				txtWeight.setAcceptingInput(true);
-				mech.draw(InfoPaneWidth-15, 100);
+				g.drawImage(mech, InfoPaneWidth - 15, 100);
 			}
 			
 		}

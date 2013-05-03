@@ -11,12 +11,10 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import code.busters.sumobots.GameStates;
-import code.busters.sumobots.MainSim;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -81,6 +79,7 @@ public class BuildState extends BasicGameState {
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		}
+    	GUI.setTextBox();
     }	
 
 	@Override
@@ -90,7 +89,7 @@ public class BuildState extends BasicGameState {
     	GUI.RenderGUI(gc, sg, g, "MainWindow");
     	GUI.RenderGUI(gc, sg, g, "InfoPane");
     	GUI.RenderGUI(gc, sg, g, "Tabs");
-    	GUI.UpdateInfo(g);
+    	GUI.RenderInfo(g);
     	GUI.RenderGUI(gc, sg, g, "MenuBar");
 	}
 

@@ -6,13 +6,9 @@
 
 package code.busters.sumobots;
 
-import java.text.DecimalFormat;
-
 public class Motor {
 
 	private double volt, current, speed, torque, shaft;
-	
-	DecimalFormat f = new DecimalFormat("#.0000");
 	
 	// Default constructor
 	public Motor(){
@@ -84,7 +80,7 @@ public class Motor {
 	}
 	
 	public String getTorqueString(){
-		return f.format(torque);
+		return Double.toString(torque);
 	}
 	
 }

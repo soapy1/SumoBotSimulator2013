@@ -1,20 +1,14 @@
 package code.busters.sumobots;
 
 import code.busters.sumobots.GameStates;
-import code.busters.sumobots.MainSim;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
-
-//TODO: go back from simulation state
 
 public class SimulationState extends BasicGameState {
 	
@@ -48,7 +42,7 @@ public class SimulationState extends BasicGameState {
     	g.fillRect(0, 0, 1366, 768);
     	GUI.RenderGUI(gc, sg, g, "InfoPane");
     	GUI.RenderGUI(gc, sg, g, "Tabs");
-    	GUI.UpdateInfo(g);
+    	GUI.RenderInfo(g);
 	}
 
 	@Override

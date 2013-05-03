@@ -4,11 +4,15 @@ package code.busters.sumobots;
  * The main driver class for the program.  Anything that goes happens in the program happens here. 
  */
 
+//http://www.javacodegeeks.com/2012/12/escaping-the-jvm-heap-for-memory-intensive-applications.html
+//http://cnx.org/content/m45733/latest/?collection=col11489/latest
+//http://cnx.org/content/m45737/latest/?collection=col11489/latest
+
+
 import code.busters.sumobots.Splash;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MainSim extends StateBasedGame {
