@@ -1,0 +1,23 @@
+/*
+ * Class that controls all the physics we need
+ */
+
+package code.busters.sumobots;
+
+public class SimulationPhysics {
+	
+	public static double getForce(){
+		double f;
+		// The force exerted by the motor
+		f = BuildState.roboMotorOne.getTorque()/((BuildState.roboWheel.getDiam()/BuildState.roboMotorOne.getShaft())/2);	
+		// Since the force exerted by the motor is the same as the force exerted by the wheel
+		//t = (BuildState.roboWheel.getDiam()/2)*f;
+		System.out.println(f);
+		return f;
+	}
+	
+	public static double getAccel(){
+		return getForce()/BuildState.RWeight;
+	}
+
+}

@@ -22,11 +22,11 @@ public class SimulationState extends BasicGameState {
 	public static Image robot;				// Image for animation
 	public Button go;						// Button to start animation
 	
-	private static final int DELAY = 500;	//| Makes sure robot is moved in such a way that you can
-	private static int timeElapsed = 0;			//|		see it move.
+	private static final int DELAY = 90;	//| Makes sure robot is moved in such a way that you can
+	private int timeElapsed = 0;			//|		see it move.
 	
-	static float x = 200;		// The x and y position of the robot
-	static float y = 400;		// 	on the screen
+	float x = 200;		// The x and y position of the robot
+	float y = 400;		// 	on the screen
 	
 	public int getID() {
 		return GameStates.Simulation.ordinal();
@@ -71,9 +71,11 @@ public class SimulationState extends BasicGameState {
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancySim.buttonClicked(gc) == true){
 			sg.enterState(GameStates.Build.ordinal());
+		}else if (go.buttonClicked(gc) == true){
+			go.setActivity(!go.isActive());
 		}
-		// TODO: update automatically so that you gets a smooth animation
-		if (go.buttonClicked(gc) == true){
+		
+		if (go.isActive() == true){
 			if (timeElapsed >= DELAY){
 				timeElapsed = 0;
 				goSim(dt);	
@@ -81,9 +83,12 @@ public class SimulationState extends BasicGameState {
 		}
 	}
 
-	public static void goSim(int dt){ 
+	public void goSim(int dt){ 
 		if (x < WinX- (robot.getWidth()*0.5)){
 			x += SimulationPhysics.getSpeed();
+		}else{
+			go.setActivity(false);
 		}
 	}
 }
+
