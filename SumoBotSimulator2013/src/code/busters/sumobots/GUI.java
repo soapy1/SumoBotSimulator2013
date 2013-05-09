@@ -308,7 +308,11 @@ public class GUI {
 		g.drawString("Robot:", 5, 325);
 		g.setColor(White);
 		g.drawString("Robot:", 3, 323);
-		g.drawString("Weight: " + Double.toString(BuildState.RWeight), 12, 335);
+		g.drawString("Mass: " + Double.toString(BuildState.RWeight), 12, 335);
+		g.drawString("Force Applied: " + Double.toString(SimulationPhysics.getForceApp()), 12, 347);
+		g.drawString("Force of Friction: " + Double.toString(SimulationPhysics.getForceFriction()), 12, 359);
+		g.drawString("Net Force: " + Double.toString(SimulationPhysics.getNetForce()), 12, 371);
+		g.drawString("Max Speed: " + Double.toString(SimulationPhysics.getSpeed()), 12, 383);
 	}
 	
 	// Method to change states
