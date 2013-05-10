@@ -20,13 +20,16 @@ public class SimulationState extends BasicGameState {
 	public static int WinY = 600;
 	public static boolean WinF = false;
 	public static Image robot;				// Image for animation
+	public static Image wood;
 	public Button go;						// Button to start animation
 	
-	private static final int DELAY = 90;	//| Makes sure robot is moved in such a way that you can
+	private static final int DELAY = 100;	//| Makes sure robot is moved in such a way that you can
 	private int timeElapsed = 0;			//|		see it move.
 	
 	float x = 200;		// The x and y position of the robot
 	float y = 400;		// 	on the screen
+	
+	double s;
 	
 	public int getID() {
 		return GameStates.Simulation.ordinal();
@@ -39,9 +42,11 @@ public class SimulationState extends BasicGameState {
 		gc.setVSync(true);
 		BuildState.simFlag = true;
 		BuildState.buildFlag = false;
-		robot = new Image("res/robotImg.png");	
-		go = new Button(gc, sg, 740, 540, 40, 18, Color.darkGray, Color.white, "START ");
+		robot = new Image("res/robotImg.png");
+		wood = new Image("res/woodFloor.png");
+		go = new Button(gc, sg, 720, 540, 40, 18, Color.darkGray, Color.white, "SIMULATION");
 		
+		gc.setMinimumLogicUpdateInterval(10);
 		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 	}
 
@@ -52,19 +57,21 @@ public class SimulationState extends BasicGameState {
     	GUI.RenderGUI(gc, sg, g, "InfoPane");		//|
     	GUI.RenderGUI(gc, sg, g, "Tabs");			//| Draws the necessary GUI parts
     	GUI.RenderInfo(g);							//|
-    	go.render(gc, g);							//|
-    	
+   
+    	wood.draw(200, 425);
     	robot.draw(x, y, (float)0.55);		// Draws robot at specified x and y position	
+    	go.render(gc, g);					// Button to start simulation					
     	
     	g.setColor(Color.black);
     	// TODO: make an ruler image to allow user to see the displacement of the robot
-    	g.fillRect(200, (float)(400+robot.getHeight()*0.5), 600, 4);	//
+    	//g.fillRect(200, (float)(400+robot.getHeight()*0.5), 600, 4);	
+    	
 	}
 	
 	@Override
-	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {
-		timeElapsed += dt;
-		
+	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {							
+		timeElapsed += dt;	
+
 		if (GUI.fancyMech.buttonClicked(gc) == true){
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancyElec.buttonClicked(gc) == true){
@@ -75,19 +82,21 @@ public class SimulationState extends BasicGameState {
 			go.setActivity(!go.isActive());
 		}
 		
-		if (go.isActive() == true){
+		if (go.isActive() == true){	
 			if (timeElapsed >= DELAY){
 				timeElapsed = 0;
 				goSim(dt);	
 			}
 		}
+		
 	}
 
 	public void goSim(int dt){ 
-		if (x < WinX- (robot.getWidth()*0.5)){
-			x += SimulationPhysics.getSpeed();
+		if (x < WinX){
+			s = SimulationPhysics.getSpeed()*0.25;
+			x += (s*dt);
 		}else{
-			go.setActivity(false);
+			x = 200;
 		}
 	}
 }

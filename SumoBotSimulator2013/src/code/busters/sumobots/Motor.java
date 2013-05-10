@@ -79,8 +79,4 @@ public class Motor {
 		return torque;
 	}
 	
-	public String getTorqueString(){
-		return Double.toString(torque);
-	}
-	
 }

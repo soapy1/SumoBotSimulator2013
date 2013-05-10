@@ -29,10 +29,6 @@ public class Wire {
 		return ohm;
 	}
 	
-	public String getOhmString(){
-		return Double.toString(ohm);
-	}
-	
 	public double getResistivity(){
 		return resistivity;
 	}

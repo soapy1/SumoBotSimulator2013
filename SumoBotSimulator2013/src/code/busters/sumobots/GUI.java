@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -24,6 +25,8 @@ import org.xml.sax.SAXException;
 
 // Watch the tree of life
 public class GUI {
+	
+	static DecimalFormat df = new DecimalFormat("0.########");
 	
 	Graphics gr;
 	public static int MenuBarFileX = 4;
@@ -272,47 +275,48 @@ public class GUI {
 		g.drawString("Motor:", 5, 49);
 		g.setColor(White);
 		g.drawString("Motor:", 3, 47);
-		g.drawString("Voltage: " + Double.toString(BuildState.roboMotorOne.getVoltage()), 12, 59);
-		g.drawString("Current: " + Double.toString(BuildState.roboMotorOne.getCurrent()), 12, 71);
-		g.drawString("Speed: " + Double.toString(BuildState.roboMotorOne.getSpeed()), 12, 83);
-		g.drawString("Torque: " + BuildState.roboMotorOne.getTorqueString(), 12, 95);
-		g.drawString("Shaft: " + Double.toString(BuildState.roboMotorOne.getShaft()), 12, 107);
+		g.drawString("Voltage: " + df.format(BuildState.roboMotorOne.getVoltage()), 12, 59);
+		g.drawString("Current: " + df.format(BuildState.roboMotorOne.getCurrent()), 12, 71);
+		g.drawString("Speed: " + df.format(BuildState.roboMotorOne.getSpeed()), 12, 83);
+		g.drawString("Torque: " + df.format(BuildState.roboMotorOne.getTorque()), 12, 95);
+		g.drawString("Shaft: " + df.format(BuildState.roboMotorOne.getShaft()), 12, 107);
 				
 		//Power Supply
 		g.setColor(Color.black);
 		g.drawString("Power Supply:", 5, 133);
 		g.setColor(White);
 		g.drawString("Power Supply:", 3, 131);
-		g.drawString("Voltage: " + Double.toString(BuildState.roboPS.getVoltage()), 12, 143);
-		g.drawString("Current: " + Double.toString(BuildState.roboPS.getCurrent()), 12, 155);
+		g.drawString("Voltage: " + df.format(BuildState.roboPS.getVoltage()), 12, 143);
+		g.drawString("Current: " + df.format(BuildState.roboPS.getCurrent()), 12, 155);
 		//Wheel
 		g.setColor(Color.black);
 		g.drawString("Wheel:", 5, 181);
 		g.setColor(White);
 		g.drawString("Wheel:", 3, 179);
-		g.drawString("Diameter: " + Double.toString(BuildState.roboWheel.getDiam()), 12, 191);
+		g.drawString("Diameter: " + df.format(BuildState.roboWheel.getDiam()), 12, 191);
 		g.drawString("Friction", 12, 203);
-		g.drawString(" Coefficient: " + Double.toString(BuildState.roboWheel.getMu()), 12, 215);
+		g.drawString(" Coefficient: " + df.format(BuildState.roboWheel.getMu()), 12, 215);
 		//Wire
 		g.setColor(Color.black);
 		g.drawString("Wire:", 5, 241);
 		g.setColor(White);
 		g.drawString("Wire:", 3, 239);
-		g.drawString("Length: " + Double.toString(BuildState.roboWire.getLen()), 12, 251);
-		g.drawString("Ohm: " + BuildState.roboWire.getOhmString(), 12, 263);
-		g.drawString("Resistivity: " + Double.toString(BuildState.roboWire.getResistivity()), 12, 275);
-     	g.drawString("Area: " + Double.toString(BuildState.roboWire.getArea()), 12, 287);
+		g.drawString("Length: " + df.format(BuildState.roboWire.getLen()), 12, 251);
+		g.drawString("Ohm: " + df.format(BuildState.roboWire.getOhm()), 12, 263);
+		g.drawString("Resistivity: " + df.format(BuildState.roboWire.getResistivity()), 12, 275);
+     	g.drawString("Area: " + df.format(BuildState.roboWire.getArea()), 12, 287);
 		g.drawString("Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 299);
 			
 		g.setColor(Color.black);
 		g.drawString("Robot:", 5, 325);
 		g.setColor(White);
 		g.drawString("Robot:", 3, 323);
-		g.drawString("Mass: " + Double.toString(BuildState.RWeight), 12, 335);
-		g.drawString("Force Applied: " + Double.toString(SimulationPhysics.getForceApp()), 12, 347);
-		g.drawString("Force of Friction: " + Double.toString(SimulationPhysics.getForceFriction()), 12, 359);
-		g.drawString("Net Force: " + Double.toString(SimulationPhysics.getNetForce()), 12, 371);
-		g.drawString("Max Speed: " + Double.toString(SimulationPhysics.getSpeed()), 12, 383);
+		g.drawString("Mass: " + df.format(BuildState.RWeight), 12, 335);
+		g.drawString("Force Applied: " + df.format(SimulationPhysics.getForceApp()), 12, 347);
+		g.drawString("Force of Friction: " + df.format(SimulationPhysics.getForceFriction()), 12, 359);
+		g.drawString("Net Force: " + df.format(SimulationPhysics.getNetForce()), 12, 371);
+		g.drawString("Max Speed: " + df.format(SimulationPhysics.getSpeed()), 12, 383);
+		//g.drawString("Max Speed: " + Double.toString(SimulationPhysics.getSpeed()), 12, 383);
 	}
 	
 	// Method to change states

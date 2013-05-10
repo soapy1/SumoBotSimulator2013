@@ -13,7 +13,7 @@
 	<Mspeed>6990.0</Mspeed>
 	<?Mtorque given in Nm?>
 	<Mtorque>0.00135</Mtorque>
-	<?Mdrive_shaft given in mm?>
+	<?Mdrive_shaft given in cm?>
 	<Mdrive_shaft>2.0</Mdrive_shaft>
 	
 	<?Wilength given in m?>
