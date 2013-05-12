@@ -39,6 +39,7 @@
 		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
 		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/home/sophia/Desktop/sumo0.0.2.0.jar"/>
 			<item value="/home/sophia/Desktop/sumo0.0.1.jar"/>
 			<item value="/home/sophia/Desktop/sumo.jar"/>
 		</list>

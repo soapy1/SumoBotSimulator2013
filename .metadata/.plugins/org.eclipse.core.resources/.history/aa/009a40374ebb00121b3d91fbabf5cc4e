@@ -38,7 +38,7 @@ public class SimulationPhysics {
 		return s;
 	}
 	
-	public static double getDisplacement(int time){
+	public static double getDisplacement(double time){
 		double d = getSpeed()*time;
 		return d;
 	}

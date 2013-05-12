@@ -316,6 +316,7 @@ public class GUI {
 		g.drawString("Force of Static Friction: " + df.format(SimulationPhysics.getForceStaticFriction()), 12, 359);
 		g.drawString("Accelaration: " + df.format(SimulationPhysics.getAccel()), 12, 371);
 		g.drawString("Max Speed: " + df.format(SimulationPhysics.getSpeed()), 12, 383);
+		//g.drawString("Max Speed: " + Double.toString(SimulationPhysics.getSpeed()), 12, 383);
 	}
 	
 	// Method to change states

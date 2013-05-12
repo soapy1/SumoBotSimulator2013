@@ -17,7 +17,7 @@ public class SimulationPhysics {
 		return BuildState.roboMotorOne.getTorque()/(BuildState.roboWheel.getDiam()/(1*10E2));	
 	}
 	
-	// Force of static friction
+	// Force of kinetic friction
 	public static double getForceStaticFriction(){
 		double f;
 		f = getWeight()*BuildState.roboWheel.getMu();
@@ -36,11 +36,6 @@ public class SimulationPhysics {
 	public static double getSpeed(){
 		double s = BuildState.roboMotorOne.getSpeed()*(Math.PI*BuildState.roboWheel.getDiam()/((1*10E2)*60));
 		return s;
-	}
-	
-	public static double getDisplacement(int time){
-		double d = getSpeed()*time;
-		return d;
 	}
 	
 	public static void setMoving(boolean move){

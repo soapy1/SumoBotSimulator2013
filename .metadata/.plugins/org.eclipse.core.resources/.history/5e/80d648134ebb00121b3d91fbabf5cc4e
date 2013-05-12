@@ -38,11 +38,6 @@ public class SimulationPhysics {
 		return s;
 	}
 	
-	public static double getDisplacement(int time){
-		double d = getSpeed()*time;
-		return d;
-	}
-	
 	public static void setMoving(boolean move){
 		moving = move; 
 	}

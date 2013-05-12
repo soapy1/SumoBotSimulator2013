@@ -313,9 +313,10 @@ public class GUI {
 		g.drawString("Robot:", 3, 323);
 		g.drawString("Mass: " + df.format(BuildState.RWeight), 12, 335);
 		g.drawString("Force Applied: " + df.format(SimulationPhysics.getForceApp()), 12, 347);
-		g.drawString("Force of Static Friction: " + df.format(SimulationPhysics.getForceStaticFriction()), 12, 359);
-		g.drawString("Accelaration: " + df.format(SimulationPhysics.getAccel()), 12, 371);
+		g.drawString("Force of Friction: " + df.format(SimulationPhysics.getForceStaticFriction()), 12, 359);
+		g.drawString("Net Force: " + df.format(SimulationPhysics.getForceApp()), 12, 371);
 		g.drawString("Max Speed: " + df.format(SimulationPhysics.getSpeed()), 12, 383);
+		//g.drawString("Max Speed: " + Double.toString(SimulationPhysics.getSpeed()), 12, 383);
 	}
 	
 	// Method to change states
