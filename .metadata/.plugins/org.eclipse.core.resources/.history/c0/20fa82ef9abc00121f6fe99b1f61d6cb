@@ -1,0 +1,48 @@
+package code.busters.sumobots;
+
+/*
+import java.io.File;
+import java.io.IOException;
+import java.lang.*;
+import java.net.URL;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.SplashScreen;
+import java.awt.SplashScreen.*;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
+*/
+
+//http://stackoverflow.com/questions/16252319/i-cannot-solve-this-with-slick2d-java-code
+
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.StateBasedGame;
+
+public class Splash {
+	
+	Image splash; 
+	private final int DELAY = 5000;
+	
+	public int getID() {
+		return GameStates.Splash.ordinal();
+	}
+	
+
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		splash = new Image("res/sumobotsimsplash.png");
+	}
+
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		g.drawImage(splash, 0, 0);
+	}
+
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		elapsedTime += delta;
+		if(elapsedTime >= DELAY) {
+			sbg.enterState(1);
+		}
+	}
+
+}

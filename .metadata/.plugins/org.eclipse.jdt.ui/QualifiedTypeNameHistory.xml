@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.newdawn.slick.SlickException"/>
+<fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="java.awt.Frame"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.state.StateBasedGame"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.state.BasicGameState"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.loading.LoadingList"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.awt.SplashScreen"/>
+</qualifiedTypeNameHistroy>

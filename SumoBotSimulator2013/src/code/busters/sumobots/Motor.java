@@ -6,9 +6,12 @@
 
 package code.busters.sumobots;
 
+import org.newdawn.slick.Graphics;
+
 public class Motor {
 
 	private double volt, current, speed, torque, shaft;
+	private Graphics g = new Graphics();
 	
 	// Default constructor
 	public Motor(){
@@ -56,7 +59,17 @@ public class Motor {
 	// The torque of the motor is calculated in NM
 	// This method is made to adjust the torque when all the other variables are inputed
 	public void setTorque(){
-		torque = (volt*current*9.554/speed);	
+		//NOTE: assuming there is the same motor and both motors have enough voltage supplied to them
+		if (BuildState.roboWire.isParallel() == true) {
+			torque = (volt*(current/2)*9.554/speed);
+		}else if (BuildState.roboWire.isParallel() == false){
+			if ((volt*2) < BuildState.roboPS.getVoltage()){ 
+				torque = ((volt/2)*(current)*9.554/speed);
+			}else {
+				//GUI.printMessage("Friendly Reminder: this robot will fail");
+			}
+		}
+	
 	}
 	
 	public double getVoltage(){

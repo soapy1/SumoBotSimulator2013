@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -21,16 +22,16 @@ public class SimulationState extends BasicGameState {
 	public static boolean WinF = false;
 	public static Image robot;				// Image for animation
 	public static Image wood;
-	public Button go;						// Button to start animation
-	public Button goTrans;
+	public static Button go;						// Button to start animation
+	public static Button goTrans;
 	
 	private static final int DELAY = 100;	//| Makes sure robot is moved in such a way that you can
 	private int timeElapsed = 0;			//|		see it move.
 	
+	private int t = 0;			// To keep track of time.
+	
 	float x = 200;		// The x and y position of the robot
 	float y = 400;		// 	on the screen
-	
-	double maxSpeed;
 	
 	public int getID() {
 		return GameStates.Simulation.ordinal();
@@ -38,12 +39,18 @@ public class SimulationState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
-		game = sg;
+		
+		System.out.println("Simulation state");
+	}
+	
+	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException{
+		//game = sg;
 		gc.setShowFPS(false);
 		gc.setVSync(true);
 		BuildState.simFlag = true;
 		BuildState.buildFlag = false;
 		gc.setMinimumLogicUpdateInterval(50);
+		
 		robot = new Image("res/robotImg.png");
 		wood = new Image("res/woodFloor.png");
 		go = new Button(gc, sg, 720, 540, 40, 18, Color.darkGray, Color.white, "SIMULATION");
@@ -52,7 +59,6 @@ public class SimulationState extends BasicGameState {
 		gc.setMinimumLogicUpdateInterval(10);
 		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 		
-		maxSpeed =  SimulationPhysics.getSpeed()*6;
 	}
 
 	@Override
@@ -87,20 +93,26 @@ public class SimulationState extends BasicGameState {
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (goTrans.buttonClicked(gc) == true){
 			goTrans.setActivity(!goTrans.isActive());
+			t = 0;
 		}
 		
-		if (goTrans.isActive() == true){	
+		if (goTrans.isActive() == true){
+			t += 1;
 			if (timeElapsed >= DELAY){
 				timeElapsed = 0;
-				goSim(dt);	
+				goSim(dt, t);	
 			}
 		}
 		
 	}
 
-	public void goSim(int dt){ 
+	public void goSim(int dt, int t){ 
 		if (x < WinX){
-			x += (maxSpeed);
+			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed()){
+				x += (SimulationPhysics.getAccelSpeed(t));
+			}else {
+				x += (SimulationPhysics.getSpeed());
+			}
 		}else{
 			x = 200-robot.getWidth();
 		}

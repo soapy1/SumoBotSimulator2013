@@ -29,13 +29,24 @@ public class SimulationPhysics {
 		return BuildState.RWeight*9.8;
 	}
 	
-	public static double getAccel(){
-		return (getForceApp()/BuildState.RWeight);
+	public static double getMaxAccel(){
+		double accel;
+		if (BuildState.RWeight == 0){
+			accel = 0;
+		}else{
+			accel = (getForceApp()/BuildState.RWeight);
+		}
+		return accel;
 	}
 	
 	public static double getSpeed(){
 		double s = BuildState.roboMotorOne.getSpeed()*(Math.PI*BuildState.roboWheel.getDiam()/((1*10E2)*60));
 		return s;
+	}
+	
+	public static double getAccelSpeed(int time){
+		double a = getMaxAccel()*time;
+		return a;
 	}
 	
 	public static double getDisplacement(int time){

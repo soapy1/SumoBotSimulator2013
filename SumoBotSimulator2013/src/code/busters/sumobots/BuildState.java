@@ -7,6 +7,8 @@ package code.busters.sumobots;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -16,6 +18,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.w3c.dom.DOMException;
@@ -41,7 +44,6 @@ public class BuildState extends BasicGameState {
 	static PowerSupply roboPS;
 	static Wire roboWire;
 	
-	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
 		return GameStates.Build.ordinal();
@@ -50,7 +52,12 @@ public class BuildState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
 		
-		game = sg;
+		System.out.println("Build state");
+    }	
+
+	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException {
+		
+		//game = sg;
 		
 		initFlag = false;
 		simFlag = false;
@@ -65,6 +72,7 @@ public class BuildState extends BasicGameState {
 		gc.setVSync(true);
 		
     	GUI.InitGUI(gc, sg);
+    
     	File robot = new File("res/robot.xml");
     	try {
 			XMLReadWrite.read(robot);
@@ -79,9 +87,10 @@ public class BuildState extends BasicGameState {
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		}
+	
     	GUI.setTextBox();
     }	
-
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sg, Graphics g) throws SlickException {
     	g.setColor(Background);
@@ -100,7 +109,6 @@ public class BuildState extends BasicGameState {
     		init(gc, sg);
     		initFlag = false;
     	}
-		
 		
 	}
 }
