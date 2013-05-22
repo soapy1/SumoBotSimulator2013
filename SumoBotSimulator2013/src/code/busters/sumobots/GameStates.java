@@ -6,6 +6,7 @@ package code.busters.sumobots;
 public enum GameStates {
 	Load,
 	Build,
-	Simulation,
+	Simulation, 
+	Settings
 }
 

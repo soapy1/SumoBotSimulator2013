@@ -2,6 +2,8 @@ package code.busters.sumobots;
 
 /*
  * The main driver class for the program.  Anything that goes happens in the program happens here. 
+ * 
+ * DUE: June 3
  */
 
 import org.newdawn.slick.AppGameContainer;
@@ -36,6 +38,7 @@ public class MainSim extends StateBasedGame {
         	this.addState(new ResourceLoader());
         	this.addState(new BuildState());
         	this.addState(new SimulationState());
+        	this.addState(new SettingsState());
        } 
         
 }

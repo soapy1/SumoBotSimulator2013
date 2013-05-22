@@ -34,11 +34,7 @@ public class PowerSupply {
 	
 	// Sets the voltage if the input is less than 12
 	public void setVoltage(double v){
-		//if (voltage <= 12){
 		voltage = v;
-		//}else{
-		//	voltage = 12;
-		//}
 	}
 	
 	// Makes sure the user inputs a valid voltage

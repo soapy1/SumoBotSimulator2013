@@ -6,7 +6,7 @@
 	<PScurrent>5.0</PScurrent>
 	
 	<?Mvoltage given in V?>
-	<Mvoltage>1.5</Mvoltage>
+	<Mvoltage>12</Mvoltage>
 	<?Mcurrent given in amps?>
 	<Mcurrent>0.66</Mcurrent>
 	<?Mspeed given in rpm?>

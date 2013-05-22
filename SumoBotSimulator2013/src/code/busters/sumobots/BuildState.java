@@ -7,8 +7,6 @@ package code.busters.sumobots;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -18,7 +16,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.w3c.dom.DOMException;
@@ -45,7 +42,6 @@ public class BuildState extends BasicGameState {
 	static Wire roboWire;
 	
 	public int getID() {
-		// TODO Auto-generated method stub
 		return GameStates.Build.ordinal();
 	}
 	

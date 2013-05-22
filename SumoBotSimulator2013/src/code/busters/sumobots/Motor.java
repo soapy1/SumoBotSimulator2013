@@ -36,6 +36,16 @@ public class Motor {
 		volt = v;
 	}
 	
+	//TODO: check with mr.song
+	// Makes sure the user inputs a valid voltage
+	public boolean validVoltage(){
+		if (volt <= 24){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
 	// User inputs current
 	public void setCurrent(double c){
 		current = c;

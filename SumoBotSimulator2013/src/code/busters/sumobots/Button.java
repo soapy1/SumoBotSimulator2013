@@ -23,6 +23,7 @@ public class Button extends AbstractComponent {
 	private Color buttonTextColour;		// Button's text colour
 	private String buttonTextOld;
 	private Image image;				// For if you are building a button using an image
+	private Color buttonColourOld;
 	
 	private Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
@@ -40,6 +41,7 @@ public class Button extends AbstractComponent {
 		buttonW = width;
 		buttonH = height;
 		buttonColour = colour;
+		buttonColourOld = colour;
 		buttonTextColour = textColour;
 		buttonTextOld = text;
 		buttonW = (int)(buttonTextOld.length() * 7 + 6);		
@@ -54,6 +56,10 @@ public class Button extends AbstractComponent {
 		buttonH = height;
 		image = img;
 		
+	}
+	
+	public Color getOldColor(){
+		return buttonColourOld;
 	}
 	
 	// Gets the x position of the button

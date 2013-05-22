@@ -30,8 +30,13 @@ public class SimulationState extends BasicGameState {
 	
 	private int t = 0;			// To keep track of time.
 	
-	float x = 200;		// The x and y position of the robot
-	float y = 400;		// 	on the screen
+	public static float x = 200;		// The x and y position of the robot
+	public static float y = 400;		// 	on the screen
+	
+	// Check with Dan
+	//
+	//
+	static GraphSpace vtGraph, atGraph, dtGraph;
 	
 	public int getID() {
 		return GameStates.Simulation.ordinal();
@@ -59,6 +64,9 @@ public class SimulationState extends BasicGameState {
 		gc.setMinimumLogicUpdateInterval(10);
 		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 		
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1);
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2);
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3);
 	}
 
 	@Override
@@ -78,6 +86,10 @@ public class SimulationState extends BasicGameState {
     	
     	g.setColor(Color.black);
     	// TODO: make an ruler image to allow user to see the displacement of the robot	
+    	
+    	dtGraph.render(gc, g);
+    	vtGraph.render(gc, g);
+    	atGraph.render(gc, g);
     	
 	}
 	

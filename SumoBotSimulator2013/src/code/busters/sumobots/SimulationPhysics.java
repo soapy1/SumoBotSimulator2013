@@ -14,7 +14,7 @@ public class SimulationPhysics {
 	
 	// Applied force
 	public static double getForceApp(){
-		return BuildState.roboMotorOne.getTorque()/(BuildState.roboWheel.getDiam()/(1*10E2));	
+		return BuildState.roboMotorOne.getTorque()/(BuildState.roboWheel.getDiam()/(2*10E2));	
 	}
 	
 	// Force of static friction
