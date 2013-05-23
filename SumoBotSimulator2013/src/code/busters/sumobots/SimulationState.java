@@ -21,21 +21,18 @@ public class SimulationState extends BasicGameState {
 	public static boolean WinF = false;
 	public static Image robot;				// Image for animation
 	public static Image wood;
-	public static Button go;						// Button to start animation
-	public static Button goTrans;
+	public static Button go;				// Button to start animation
+	public static Button goTrans;			// 	Transparent button over the go buttons
 	
 	private static final int DELAY = 100;	//| Makes sure robot is moved in such a way that you can
 	private int timeElapsed = 0;			//|		see it move.
 	
-	private int t = 0;			// To keep track of time.
+	private int t = 0;					// To keep track of time.
 	
 	public static float x = 200;		// The x and y position of the robot
 	public static float y = 400;		// 	on the screen
 	
-	// Check with Dan
-	//
-	//
-	static GraphSpace vtGraph, atGraph, dtGraph;
+	static GraphSpace vtGraph, atGraph, dtGraph;	// The three graphs that we will be showing
 	
 	public int getID() {
 		return GameStates.Simulation.ordinal();
@@ -43,12 +40,10 @@ public class SimulationState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
-		
 		System.out.println("Simulation state");
 	}
 	
 	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException{
-		//game = sg;
 		gc.setShowFPS(false);
 		gc.setVSync(true);
 		BuildState.simFlag = true;
@@ -63,9 +58,9 @@ public class SimulationState extends BasicGameState {
 		gc.setMinimumLogicUpdateInterval(10);
 		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 		
-		dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
-		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
-		atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 1);
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 6);
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 30);
 	}
 
 	@Override
@@ -84,38 +79,35 @@ public class SimulationState extends BasicGameState {
     	goTrans.render(gc, g);				// Button to start simulation (Does stuff)			
     	
     	g.setColor(Color.black);
+    	
     	// TODO: make an ruler image to allow user to see the displacement of the robot	
     	
-    	dtGraph.render(gc, g);
-    	vtGraph.render(gc, g);
-    	atGraph.render(gc, g);
+    	dtGraph.render(gc, g);		//|
+    	vtGraph.render(gc, g);		//| Renders the graphs
+    	atGraph.render(gc, g);		//|
     	
 	}
 	
-	@Override
+	// Resets the simulation state to the default values
+	public void reset(GameContainer gc){
+		x = 200;
+		y = 400;
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 4);
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 4);
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 10);
+	}
+	
 	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {							
 		timeElapsed += dt;	
 
 		if (GUI.fancyMech.buttonClicked(gc) == true){
-			x = 200;
-			y = 400;
-			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
-			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
-			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
+			reset(gc);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancyElec.buttonClicked(gc) == true){
-			x = 200;
-			y = 400;
-			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
-			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
-			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
+			reset(gc);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancySim.buttonClicked(gc) == true){
-			x = 200;
-			y = 400;
-			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
-			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
-			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
+			reset(gc);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (goTrans.buttonClicked(gc) == true){
 			goTrans.setActivity(!goTrans.isActive());
@@ -134,12 +126,13 @@ public class SimulationState extends BasicGameState {
 		}
 	}
 
+	// Calculates the position of the robot when the simulation is running
 	public void goSim(int dt, int t){ 
 		if (x < WinX){
 			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed(t)){
-				x += (SimulationPhysics.getAccelSpeed(t)*40);
+				x += (SimulationPhysics.getAccelSpeed(t)*6);
 			}else {
-				x += (SimulationPhysics.getSpeed(t)*40);
+				x += (SimulationPhysics.getSpeed(t)*6);
 			}
 		}else{
 			x = 200-robot.getWidth();

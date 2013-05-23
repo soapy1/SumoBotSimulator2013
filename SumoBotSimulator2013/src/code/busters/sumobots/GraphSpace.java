@@ -24,7 +24,7 @@ public class GraphSpace extends AbstractComponent {
 	boolean gbo;
 	int dt = 0;
 	
-	double xscale = 4;
+	double xscale = 1;
 	double yscale;
 	
 	double xoffs = 0;
@@ -39,7 +39,6 @@ public class GraphSpace extends AbstractComponent {
 
 	Color Background = new Color(0xfff4f4f4);
 	
-	//Polygon line = new Polygon();
 	ArrayList<Point> line = new ArrayList<Point>();
 	
 	public GraphSpace(GUIContext gc, int x, int y, int width, int height, boolean bottomOrigin, int equtype, String gr, double ys) {
@@ -124,9 +123,9 @@ public class GraphSpace extends AbstractComponent {
 		return yout;
 	}
 	
-	
 	public void function(int t){
 		if (graphID.equalsIgnoreCase("vt")){
+			
 			line.add(new Point((float)(t*xscale + getOriginX()), (float) (getOriginY()-(SimulationPhysics.getSpeed(t)*yscale))));
 		}else if (graphID.equalsIgnoreCase("dt")){
 			line.add(new Point((float)(t*xscale + getOriginX()), (float) (getOriginY()-(SimulationPhysics.getDisplacement(t)*yscale))));
@@ -159,6 +158,8 @@ public class GraphSpace extends AbstractComponent {
 		g.setColor(Color.black);
 		g.drawString(graphType + ": " + readOut, gx, gy + gh + 6);
 			
+		g.setColor(Color.red);
+		
 		for (int i = 0; i<line.size()-1; i ++){
 			ol = line.get(i);
 			ne = line.get(i+1);
@@ -166,35 +167,6 @@ public class GraphSpace extends AbstractComponent {
 				g.drawLine(ol.getX(), ol.getY(), ne.getX(), ne.getY());
 			}
 		}
-			
-			/*
-			double lx = i;
-			double ly = equate(lx, xoffs, yoffs, xscale, yscale, equt);
-			double x =  i + 1;
-			double y = equate(x, xoffs, yoffs, xscale, yscale, equt);
-			
-			float dlx = (float)(getOriginX() + lx);
-			float dly = (float)(getOriginY() + ly);
-			float dx = (float)(getOriginX() + x);
-			float dy = (float)(getOriginY() + y);
-			
-						
-			if (dlx < getOriginX() || dx > getOriginX() + gw) {	
-				
-			} else if (dly > gy + gh || dy < gy) {
-								
-			} else {
-				g.setColor(Color.red);
-				g.drawLine(dlx, dly, dx, dy);
-			}
-			
-			//g.draw(line);
-			g.setColor(Background);
-			g.fillRect(gx, gy + gh + 5, gw, 15);
-			g.setColor(Color.black);
-			g.drawString(graphType + ": " + readOut, gx, gy + gh + 6);
-			*/
-	//	}
 	}
 
 	@Override

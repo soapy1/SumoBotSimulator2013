@@ -70,7 +70,12 @@ public class SimulationPhysics {
 	}
 	
 	public static double getDisplacement(int time){
-		double d = getSpeed(time)*time;
+		double d;
+		if (SimulationState.x == 0){
+			d = 0;
+		}else{
+			d = getSpeed(time)*time;
+		}
 		return d;
 	}
 	
