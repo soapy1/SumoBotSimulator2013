@@ -25,8 +25,6 @@ public class BuildState extends BasicGameState {
 	
 	Color Background = new Color(0xfff4f4f4);
 	
-	private StateBasedGame game;
-	
 	public static int WinX = 800;
 	public static int WinY = 600;
 	public static boolean WinF = false;

@@ -39,8 +39,28 @@ public class SimulationPhysics {
 		return accel;
 	}
 	
-	public static double getSpeed(){
-		double s = BuildState.roboMotorOne.getSpeed()*(Math.PI*BuildState.roboWheel.getDiam()/((1*10E2)*60));
+	public static double getAccel(int t){
+		double accel;
+		if (getAccelSpeed(t) <  getMaxSpeed()){
+			accel = getMaxAccel();
+		}else {
+			accel = 0;
+		}
+		return accel;
+	}
+	
+	public static double getMaxSpeed(){
+		double s = BuildState.roboMotorOne.getSpeed()*(Math.PI*BuildState.roboWheel.getDiam()/((2*10E2)*60));
+		return s;
+	}
+	
+	public static double getSpeed(int t){
+		double s;
+		if (getAccelSpeed(t) <  getMaxSpeed()){
+				s = getAccelSpeed(t);
+		} else {
+			s = BuildState.roboMotorOne.getSpeed()*(Math.PI*BuildState.roboWheel.getDiam()/((2*10E2)*60));
+		}
 		return s;
 	}
 	
@@ -50,7 +70,7 @@ public class SimulationPhysics {
 	}
 	
 	public static double getDisplacement(int time){
-		double d = getSpeed()*time;
+		double d = getSpeed(time)*time;
 		return d;
 	}
 	

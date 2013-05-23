@@ -166,21 +166,24 @@ public class GUI {
 		 
 		// Text fields for mechanical components
 		// Text field for wheel diameter
-		txtWheelDiam = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 617, 391, 55, 20, "Wheel Diameter//Used to determine//the distance that//the robot travels//over time.");
+		txtWheelDiam = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 617, 391, 55, 20, 
+				"Wheel Diameter//Used to determine//the distance that//the robot travels//over time.//Measured in m");
 		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWheelDiam.setBorderColor(Color.black);
 		txtWheelDiam.setTextColor(Color.black);
 		txtWheelDiam.setMaxLength(6);
 		txtWheelDiam.setAcceptingInput(false);
 		// Text field for coefficient of friction
-		txtWheelMu = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 640, 236, 55, 20, "Wheel Coefficient of Friction//Testing!");
+		txtWheelMu = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 640, 236, 55, 20, 
+				"Wheel Coefficient of Friction//This value is dependent on//the two surfaces the wheel //and the surface. The higher//the coefficient of friction//the less slippage and the//greater the force of friction.");
 		txtWheelMu.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWheelMu.setBorderColor(Color.black);
 		txtWheelMu.setTextColor(Color.black);
 		txtWheelMu.setMaxLength(6);
 		txtWheelMu.setAcceptingInput(false);
 		// Text field for the weight of the robot
-		txtWeight = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 360, 303, 55, 20, "Weight//Testing!");
+		txtWeight = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 360, 303, 55, 20, 
+				"Mass//The amount of//stuff that makes//up the robot.//This is in kg units.");
 		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWeight.setBorderColor(Color.black);
 		txtWeight.setTextColor(Color.black);
@@ -189,63 +192,72 @@ public class GUI {
 		
 		// Text fields for electrical components
 		// For the powers supply voltage
-		txtPSVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 327, 125, 55, 20, "Power Supply Voltage//Testing!");
+		txtPSVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 327, 125, 55, 20, 
+				"Power Supply Voltage//This is the input value//for the total voltage//or energy supplied by//the power supply.//Measured in V");
 		txtPSVolt.setBackgroundColor(new Color(0xfff4f4f4));
 		txtPSVolt.setBorderColor(Color.black);
 		txtPSVolt.setTextColor(Color.black);
 		txtPSVolt.setMaxLength(6);
 		txtPSVolt.setAcceptingInput(false);
 		// For the power supply current
-		txtPSCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 513, 125, 55, 20, "Power Supply Current//Testing!");
+		txtPSCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 513, 125, 55, 20, 
+				"Power Supply Current//The current supplied by//the power supply.//Measured in Amps");
 		txtPSCurrent.setBackgroundColor(new Color(0xfff4f4f4));
 		txtPSCurrent.setBorderColor(Color.black);
 		txtPSCurrent.setTextColor(Color.black);
 		txtPSCurrent.setMaxLength(6);
 		txtPSCurrent.setAcceptingInput(false);
 		// For the motor voltage
-		txtMotorVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 221, 55, 20, "Motor Voltage//Testing!");
+		txtMotorVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 221, 55, 20, 
+				"Motor Voltage//The voltage or //energy needed//by the motor//so that it can//work properly.//Measured in V");
 		txtMotorVolt.setBackgroundColor(new Color(0xfff4f4f4));
 		txtMotorVolt.setBorderColor(Color.black);
 		txtMotorVolt.setTextColor(Color.black);
 		txtMotorVolt.setMaxLength(6);
 		txtMotorVolt.setAcceptingInput(false);
 		// For the motor current
-		txtMotorCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 280, 55, 20, "Motor Current//Testing!");
+		txtMotorCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 280, 55, 20, 
+				"Motor Current//The current that//the motor will//draw from your//power supply.//Measured in Amps");
 		txtMotorCurrent.setBackgroundColor(new Color(0xfff4f4f4));
 		txtMotorCurrent.setBorderColor(Color.black);
 		txtMotorCurrent.setTextColor(Color.black);
 		txtMotorCurrent.setMaxLength(6);
 		txtMotorCurrent.setAcceptingInput(false);
 		// For the motor speed
-		txtMotorSpeed = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 338, 55, 20, "Motor Speed//Testing!");
+		txtMotorSpeed = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 338, 55, 20, 
+				"Motor Speed//The number of//times the//motor turns in//one minute.//Measured in rpm");
 		txtMotorSpeed.setBackgroundColor(new Color(0xfff4f4f4));
 		txtMotorSpeed.setBorderColor(Color.black);
 		txtMotorSpeed.setTextColor(Color.black);
 		txtMotorSpeed.setMaxLength(6);
 		txtMotorSpeed.setAcceptingInput(false);
 		// For the motor shaft
-		txtMotorShaft = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 410, 55, 20, "Motor Shaft//Testing!");
+		txtMotorShaft = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 410, 55, 20, 
+				"Motor Shaft//Diameter of the//shaft of the//motor.  That//is, the spoke on//the motor//that turns.//Measured in cm");
 		txtMotorShaft.setBackgroundColor(new Color(0xfff4f4f4));
 		txtMotorShaft.setBorderColor(Color.black);
 		txtMotorShaft.setTextColor(Color.black);
 		txtMotorShaft.setMaxLength(6);
 		txtMotorShaft.setAcceptingInput(false);
 		// For the wire length
-		txtWireLen = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 175, 55, 20, "Wire Length//Testing!");
+		txtWireLen = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 175, 55, 20, 
+				"Wire Length//The length of//wire you will be//using for your//bot.  Measured//in m");
 		txtWireLen.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWireLen.setBorderColor(Color.black);
 		txtWireLen.setTextColor(Color.black);
 		txtWireLen.setMaxLength(6);
 		txtWireLen.setAcceptingInput(false);
 		// For the wire resistivity
-		txtWireResistivity = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 231, 55, 20, "Wire Resistivity//Testing!");
+		txtWireResistivity = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 231, 55, 20, 
+				"Wire Resistivity//This is the degree//of resistiveness//of the wire//material in Fs (Farads)");
 		txtWireResistivity.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWireResistivity.setBorderColor(Color.black);
 		txtWireResistivity.setTextColor(Color.black);
 		txtWireResistivity.setMaxLength(6);
 		txtWireResistivity.setAcceptingInput(false);
 		// For the wire cross sectional area
-		txtWireArea = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 290, 55, 20, "Wire Area//Testing!");
+		txtWireArea = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 290, 55, 20, 
+				"Wire Area//The area of//the cross//section//of the wire.//Measured in//m^2");
 		txtWireArea.setBackgroundColor(new Color(0xfff4f4f4));
 		txtWireArea.setBorderColor(Color.black);
 		txtWireArea.setTextColor(Color.black);
@@ -328,7 +340,7 @@ public class GUI {
 		g.drawString("- Force Applied: " + df.format(SimulationPhysics.getForceApp()), 12, 347);
 		g.drawString("- Force of Static Friction: " + df.format(SimulationPhysics.getForceStaticFriction()), 12, 359);
 		g.drawString("- Max Acceleration: " + df.format(SimulationPhysics.getMaxAccel()), 12, 371);
-		g.drawString("- Max Speed: " + df.format(SimulationPhysics.getSpeed()), 12, 383);
+		g.drawString("- Max Speed: " + df.format(SimulationPhysics.getMaxSpeed()), 12, 383);
 	}
 	
 	// Method to change states

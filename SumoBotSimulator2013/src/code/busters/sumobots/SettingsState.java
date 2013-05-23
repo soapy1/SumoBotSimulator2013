@@ -14,7 +14,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class SettingsState extends BasicGameState {
 	
-	private StateBasedGame game;
+	//private StateBasedGame game;
 	
 	Color Background = new Color(0xfff4f4f4);
 	

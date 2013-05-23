@@ -6,12 +6,9 @@
 
 package code.busters.sumobots;
 
-import org.newdawn.slick.Graphics;
-
 public class Motor {
 
 	private double volt, current, speed, torque, shaft;
-	private Graphics g = new Graphics();
 	
 	// Default constructor
 	public Motor(){

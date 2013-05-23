@@ -7,13 +7,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class SimulationState extends BasicGameState {
 	
-	private StateBasedGame game;
+	//private StateBasedGame game;
 	
 	Color Background = new Color(0xfff4f4f4);
 	
@@ -64,9 +63,9 @@ public class SimulationState extends BasicGameState {
 		gc.setMinimumLogicUpdateInterval(10);
 		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 		
-		dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1);
-		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2);
-		atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3);
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
 	}
 
 	@Override
@@ -98,10 +97,25 @@ public class SimulationState extends BasicGameState {
 		timeElapsed += dt;	
 
 		if (GUI.fancyMech.buttonClicked(gc) == true){
+			x = 200;
+			y = 400;
+			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
+			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
+			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancyElec.buttonClicked(gc) == true){
+			x = 200;
+			y = 400;
+			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
+			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
+			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (GUI.fancySim.buttonClicked(gc) == true){
+			x = 200;
+			y = 400;
+			dtGraph = new GraphSpace(gc, MainSim.WinX - 150 - 16, 16, 150, 150, true, 1, "dt", 4);
+			vtGraph = new GraphSpace(gc, dtGraph.getX() - 150 - 16, 16, 150, 150, false, 2, "vt", 4);
+			atGraph = new GraphSpace(gc, vtGraph.getX() - 150 - 16, 16, 150, 150, true, 3, "at", 10);
 			sg.enterState(GameStates.Build.ordinal());
 		}else if (goTrans.buttonClicked(gc) == true){
 			goTrans.setActivity(!goTrans.isActive());
@@ -109,21 +123,23 @@ public class SimulationState extends BasicGameState {
 		}
 		
 		if (goTrans.isActive() == true){
+			dtGraph.update();
+			vtGraph.update();
+			atGraph.update();
 			t += 1;
 			if (timeElapsed >= DELAY){
 				timeElapsed = 0;
 				goSim(dt, t);	
 			}
 		}
-		
 	}
 
 	public void goSim(int dt, int t){ 
 		if (x < WinX){
-			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed()){
-				x += (SimulationPhysics.getAccelSpeed(t));
+			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed(t)){
+				x += (SimulationPhysics.getAccelSpeed(t)*40);
 			}else {
-				x += (SimulationPhysics.getSpeed());
+				x += (SimulationPhysics.getSpeed(t)*40);
 			}
 		}else{
 			x = 200-robot.getWidth();

@@ -10,13 +10,12 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import java.awt.SplashScreen;
 
 public class MainSim extends StateBasedGame {
 		
 		public static int WinX = 800;
 		public static int WinY = 600;
-		public static String version = "0.0.2.2";
+		public static String version = "0.0.3.2";
 		
         public MainSim() {
         	super("Sumo Bot Simulator 2013");
