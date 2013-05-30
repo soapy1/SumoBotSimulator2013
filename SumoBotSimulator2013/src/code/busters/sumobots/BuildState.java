@@ -4,7 +4,8 @@ package code.busters.sumobots;
  * Class that defines the build state for the application
  */
 
-import java.io.File;
+//http://stackoverflow.com/questions/403256/how-do-i-read-a-resource-file-from-a-java-jar-file
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -45,13 +46,10 @@ public class BuildState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
-		
 		System.out.println("Build state");
     }	
 
-	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException {
-		
-		//game = sg;
+	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException, NullPointerException {
 		
 		initFlag = false;
 		simFlag = false;
@@ -67,9 +65,8 @@ public class BuildState extends BasicGameState {
 		
     	GUI.InitGUI(gc, sg);
     
-    	File robot = new File("res/robot.xml");
     	try {
-			XMLReadWrite.read(robot);
+			XMLReadWrite.readIS(ResourceLoader.is);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (DOMException e) {
@@ -79,6 +76,8 @@ public class BuildState extends BasicGameState {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 	

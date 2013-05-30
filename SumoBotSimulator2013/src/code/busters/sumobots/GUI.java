@@ -130,15 +130,15 @@ public class GUI {
 		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
 		mainButtons.add(helpButton);
 		
-		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New     ");
+		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New ");
 		subFileButtons.add(btnSelNew);
-		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open    ");
+		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open");
 		subFileButtons.add(btnSelOpen);
-		btnSelSave = new Button(gc, sg, fileButton.getX(), btnSelOpen.getY()+btnSelOpen.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Save    ");
+		btnSelSave = new Button(gc, sg, fileButton.getX(), btnSelOpen.getY()+btnSelOpen.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Save");
 		subFileButtons.add(btnSelSave);
-		btnSelSettings = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Settings");
-		subFileButtons.add(btnSelSettings);
-		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSettings.getY()+btnSelSettings.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit    ");
+		//btnSelSettings = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Settings");
+		//subFileButtons.add(btnSelSettings);
+		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit");
 		subFileButtons.add(btnSelQuit);
 		
 		btnSelElec = new Button(gc, sg, editButton.getX(), editButton.getY()+editButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Electrical");
@@ -433,22 +433,28 @@ public class GUI {
 			// Allows user to start from scratch
 			if (btnSelNew.isActive() == true){
 				CloseMenu();
-				setTextBox();
+				File robot;
 				try {
-					File robot = new File("res/robot.xml");
-					XMLReadWrite.read(robot);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (DOMException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
+					robot = new File(new File (".").getCanonicalPath() + "/files/robot.xml");
+					try {
+						XMLReadWrite.readFile(robot);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (DOMException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SAXException e) {
+						e.printStackTrace();
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
+				setTextBox();
 				btnSelNew.setActivity(false);
+				
 			}
 			
 			// Allows user to save a file
@@ -491,7 +497,7 @@ public class GUI {
 				if (open == JFileChooser.APPROVE_OPTION){			// Makes sure the file is good
 				  File file = fileDialog.getSelectedFile();
 				    try {
-						XMLReadWrite.read(file);					// Reads the file contents
+						XMLReadWrite.readFile(file);					// Reads the file contents
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (DOMException e) {
@@ -508,10 +514,12 @@ public class GUI {
 				btnSelOpen.setActivity(false);
 			}
 			
+			/*
 			if (btnSelSettings.isActive() == true){
 				CloseMenu();
 				changeState(sg, GameStates.Settings.ordinal());
 			}
+			*/
 			
 			// Exits the program
 			if (btnSelQuit.isActive() == true){
@@ -530,42 +538,56 @@ public class GUI {
 			// Displays the about file using the default text editor
 			if (btnSelAbout.isActive() == true){
 				CloseMenu();
-				File about = new File("res/about.txt");
+				File about;
 				try {
-					Desktop.getDesktop().open(about);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}catch (IllegalArgumentException e){
-					e.printStackTrace();
+					about = new File(new File (".").getCanonicalPath() + "/files/about.txt");
+					try {
+						Desktop.getDesktop().open(about);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}catch (IllegalArgumentException e){
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
 				btnSelAbout.setActivity(false);
 			}
 			
+			
 			// Displays the help file using the default text editor
 			if (btnSelHelp.isActive() == true){
 				CloseMenu();
-				File help = new File("res/help.txt");
-				try {
-					Desktop.getDesktop().open(help);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}catch (IllegalArgumentException e){
-					e.printStackTrace();
+			    File help;
+			    try {
+					help = new File(new File (".").getCanonicalPath() + "/files/help.txt");
+					try {
+						Desktop.getDesktop().open(help);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}catch (IllegalArgumentException e){
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
+				btnSelHelp.setActivity(false);
 			}
-			btnSelHelp.setActivity(false);
 		}
 		
 		if (btnSelMech.isActive() == true || fancyMech.isActive() == true){
 			try{
 				// Make sure the text is not null
+				if (txtWheelMu.getText() != ""){
+					if (BuildState.roboWheel.validMu() == true){
+						BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+					}else{
+						txtWheelMu.setText("");
+						BuildState.roboWheel.setMu(0.5);
+					}
+				}
 				if (txtWheelDiam.getText() != ""){
 					BuildState.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
-				}
-				if (txtWheelMu.getText() != ""){
-					BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
 				}
 				if (txtWeight.getText() != ""){
 					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));
@@ -729,7 +751,7 @@ public class GUI {
 				 btnSelNew.render(gc, g);
 				 btnSelOpen.render(gc, g);
 				 btnSelSave.render(gc, g);
-				 btnSelSettings.render(gc, g);
+				//btnSelSettings.render(gc, g);
 				 btnSelQuit.render(gc, g);
 			 }
 			// Draws the options in edit if edit is active

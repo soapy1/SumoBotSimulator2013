@@ -29,6 +29,14 @@ public class Wheel {
 		mu = m;
 	}
 	
+	public boolean validMu(){
+		if (mu <= 1){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
 	public double getDiam(){
 		return diam;
 	}

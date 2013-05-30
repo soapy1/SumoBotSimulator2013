@@ -1,5 +1,15 @@
 package code.busters.sumobots;
 
+//https://forums.oracle.com/forums/thread.jspa?threadID=2098894
+/*
+ * TODO:
+ * 	Make a new file reader class that reads files from inside of the jar
+ * 		- get the file using input stream then,
+ * 		- use buffer reader to make a new (temporary) file
+ * 		- open the new file 
+ */
+import java.io.InputStream;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -11,11 +21,14 @@ public class ResourceLoader extends BasicGameState{
 
 	public static boolean loaded = false;
 	Image splash;
+	static public InputStream is;
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
 		gc.setShowFPS(false);
 		splash = new Image("res/sumobotsimsplash.png");		// Loads image for splash screen
+		
+		is = getClass().getClassLoader().getResourceAsStream("code/busters/sumobots/resources/robot.xml");
 		
 	}
 
@@ -25,7 +38,6 @@ public class ResourceLoader extends BasicGameState{
 				(MainSim.WinY/2)-(splash.getHeight()/2));		// Draws the splash screen image
 		g.drawString("LOADING...", 14, 16);						
 		g.drawString("VERSION: " + MainSim.version, 0, 0);
-		
 	}
 
 	@Override

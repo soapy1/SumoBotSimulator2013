@@ -39,7 +39,7 @@ public class PowerSupply {
 	
 	// Makes sure the user inputs a valid voltage
 	public boolean validVoltage(){
-		if (voltage <= 12){
+		if (voltage <= 24){
 			return true;
 		}else{
 			return false;

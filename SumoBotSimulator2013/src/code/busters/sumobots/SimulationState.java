@@ -21,6 +21,9 @@ public class SimulationState extends BasicGameState {
 	public static boolean WinF = false;
 	public static Image robot;				// Image for animation
 	public static Image wood;
+	public static Image ice;
+	public static Image concrete;
+	
 	public static Button go;				// Button to start animation
 	public static Button goTrans;			// 	Transparent button over the go buttons
 	
@@ -52,6 +55,9 @@ public class SimulationState extends BasicGameState {
 		
 		robot = new Image("res/robotImg.png");
 		wood = new Image("res/woodFloor.png");
+		ice = new Image("res/iceFloor.png");
+		concrete = new Image("res/concreteFloor.png");
+		
 		go = new Button(gc, sg, 720, 540, 40, 18, Color.darkGray, Color.white, "SIMULATION");
 		goTrans = new Button(gc, sg, 720, 540, 40, 18, Color.transparent, Color.transparent, "          ");
 		
@@ -68,7 +74,15 @@ public class SimulationState extends BasicGameState {
 		g.setColor(Background);						
     	g.fillRect(0, 0, 1366, 768);				
     
-    	wood.draw(200, 425);					// Draws wood background	
+    	// Draws a background based on the coefficient of friction	
+    	if (BuildState.roboWheel.getMu() < 0.2){
+    		ice.draw(200, 425);
+    	}else if (BuildState.roboWheel.getMu() > 0.8){
+    		concrete.draw(200, 425);
+    	}else{
+    		wood.draw(200, 425);
+    	}
+    	
     	robot.draw(x, y, (float)0.55);			// Draws robot at specified x and y position	
     	
     	GUI.RenderGUI(gc, sg, g, "InfoPane");		//|

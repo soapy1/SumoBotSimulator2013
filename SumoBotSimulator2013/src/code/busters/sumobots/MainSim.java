@@ -2,8 +2,6 @@ package code.busters.sumobots;
 
 /*
  * The main driver class for the program.  Anything that goes happens in the program happens here. 
- * 
- * DUE: June 3
  */
 
 import org.newdawn.slick.AppGameContainer;
@@ -15,7 +13,7 @@ public class MainSim extends StateBasedGame {
 		
 		public static int WinX = 800;
 		public static int WinY = 600;
-		public static String version = "0.0.3.2";
+		public static String version = "1.0";
 		
         public MainSim() {
         	super("Sumo Bot Simulator 2013");
@@ -23,7 +21,6 @@ public class MainSim extends StateBasedGame {
         
         public static void main(String args[]) {
         	 try {
-        		
         		 AppGameContainer container = new AppGameContainer(new MainSim());
     			 container.setDisplayMode(WinX,WinY,false);
         		 container.start();

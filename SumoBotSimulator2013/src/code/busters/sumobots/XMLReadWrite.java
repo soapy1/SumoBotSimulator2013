@@ -9,6 +9,7 @@ package code.busters.sumobots;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -140,7 +141,37 @@ public class XMLReadWrite {
 	  * Postcondition:  The specified xml file has been parsed and the values have been stored in the appropriate 
 	  * 				variables as specified above.
 	  */
-	 public static void read(File doc) throws IOException, SAXException, ParserConfigurationException, FileNotFoundException, DOMException{
+	 public static void readIS(InputStream doc) throws IOException, SAXException, ParserConfigurationException, FileNotFoundException, DOMException{
+		 
+		 //File file = new File(doc);																// Determines which file to parse
+		 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	// Creates the parser object
+		 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		 //Document document = documentBuilder.parse(doc);										// Parses the file
+		 Document document = documentBuilder.parse(doc);
+		 
+		 // Gets the info and makes it an double
+		 BuildState.roboPS.setVoltage(Double.parseDouble(document.getElementsByTagName("PSvoltage").item(0).getTextContent()));	
+		 BuildState.roboPS.setCurrent(Double.parseDouble(document.getElementsByTagName("PScurrent").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setVoltage(Double.parseDouble(document.getElementsByTagName("Mvoltage").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setCurrent(Double.parseDouble(document.getElementsByTagName("Mcurrent").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setSpeed(Double.parseDouble(document.getElementsByTagName("Mspeed").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setTorque(Double.parseDouble(document.getElementsByTagName("Mtorque").item(0).getTextContent()));
+		 BuildState.roboMotorOne.setShaft(Double.parseDouble(document.getElementsByTagName("Mdrive_shaft").item(0).getTextContent()));
+		 BuildState.roboWheel.setDiam(Double.parseDouble(document.getElementsByTagName("Wediameter").item(0).getTextContent()));
+		 BuildState.roboWheel.setMu(Double.parseDouble(document.getElementsByTagName("Wecoefficient").item(0).getTextContent()));
+		 BuildState.RWeight = Double.parseDouble(document.getElementsByTagName("weight").item(0).getTextContent());	 
+		 BuildState.roboWire.setLen(Double.parseDouble(document.getElementsByTagName("Wilength").item(0).getTextContent()));
+		 BuildState.roboWire.setOhm(Double.parseDouble(document.getElementsByTagName("Wiresistance").item(0).getTextContent()));
+		 BuildState.roboWire.setArea(Double.parseDouble(document.getElementsByTagName("Wiarea").item(0).getTextContent()));
+		 BuildState.roboWire.setResistivity(Double.parseDouble(document.getElementsByTagName("Wiresistivity").item(0).getTextContent()));
+		 BuildState.roboWire.setCircuitType(document.getElementsByTagName("Wicicuit_type").item(0).getTextContent());
+		 
+		 // To test
+		 System.out.println("loaded");
+		
+	 }
+	 
+ public static void readFile(File doc) throws IOException, SAXException, ParserConfigurationException, FileNotFoundException, DOMException{
 		 
 		 //File file = new File(doc);																// Determines which file to parse
 		 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();	// Creates the parser object
