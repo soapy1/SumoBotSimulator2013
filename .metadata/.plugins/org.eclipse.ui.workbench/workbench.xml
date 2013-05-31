@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="20" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
-<window height="744" maximized="true" width="1020" x="49" y="24">
+<window height="745" maximized="true" width="685" x="0" y="24">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -19,6 +19,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditorNoSource" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
@@ -34,30 +35,25 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimulationState.java" partName="SimulationState.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java" title="SimulationState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3141" selectionTopPixel="1230"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimulationPhysics.java" partName="SimulationPhysics.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java" title="SimulationPhysics.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="603" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildState.java" partName="BuildState.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java" title="BuildState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1792" selectionTopPixel="518"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainSim.java" partName="MainSim.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java" title="MainSim.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="912" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="144" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildState.java" partName="BuildState.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java" title="BuildState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1050" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GUI.java" partName="GUI.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java" title="GUI.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GUI.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GUI.java" partName="GUI.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java" title="GUI.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GUI.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="2037"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="19280" selectionTopPixel="4567"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Wheel.java" partName="Wheel.java" path="/home/sophia/Desktop/SumoBotSimulator2013/SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java" title="Wheel.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="667" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -67,7 +63,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (4 items)"/>
+<category IMemento.internal.id="Warnings (1 item)"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="318" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -261,16 +258,18 @@
 </fastViewBars>
 <layout>
 <mainWindow>
-<info folder="true" part="left">
-<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
-<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@14071ce">
+<folder appearance="2" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="left" ratio="0.25" ratioLeft="331" ratioRight="993" relationship="2" relative="org.eclipse.ui.internal.ViewStack@14071ce">
+<folder appearance="2" expanded="2">
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.ui.navigator.ProjectExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@17fa85b" ratio="0.75" ratioLeft="993" ratioRight="331" relationship="2" relative="left">
@@ -286,8 +285,15 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="331" ratioRight="993" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.7492212" ratioLeft="481" ratioRight="161" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@5e85a0" ratio="0.25" ratioLeft="331" ratioRight="993" relationship="2" relative="left">
+<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="bottom" ratio="0.7492212" ratioLeft="481" ratioRight="161" relationship="4" relative="org.eclipse.ui.internal.ViewStack@5e85a0">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
@@ -298,7 +304,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="right" ratio="0.7492447" ratioLeft="744" ratioRight="249" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="right" ratio="0.7492447" ratioLeft="744" ratioRight="249" relationship="2" relative="org.eclipse.ui.internal.ViewStack@5e85a0">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
@@ -306,6 +312,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
+<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="331" ratioRight="993" relationship="2" relative="org.eclipse.ui.internal.ViewStack@5e85a0"/>
 </mainWindow>
 </layout>
 </perspective>
@@ -313,169 +320,169 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SumoBotSimulator2013/manifest.mf"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/ResourceLoader.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SumoBotSimulator2013/manifest.mf"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/XMLReadWrite.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/XMLReadWrite.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/GraphSpace.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/Motor.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SumoBotSimulator2013/src/code/busters/sumobots/PowerSupply.java"/>
 </editors>
-<item historyLabel="SimulationPhysics.java" index="1">
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="22677" y="0"/>
+</item>
+<item historyLabel="ResourceLoader.java" index="1">
+<position info="not_deleted" x="312" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="22688" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23111" y="0"/>
+</item>
+<item historyLabel="BuildState.java" index="2">
+<position info="not_deleted" x="1792" y="0"/>
+</item>
+<item historyLabel="MainSim.java" index="3">
+<position info="not_deleted" x="389" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23111" y="0"/>
+</item>
+<item historyLabel="ResourceLoader.java" index="1">
+<position info="not_deleted" x="340" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position/>
+</item>
+<item historyLabel="XMLReadWrite.java" index="4">
 <position info="not_deleted" x="3" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="865" y="0"/>
+<item historyLabel="ResourceLoader.java" index="1">
+<position info="not_deleted" x="340" y="0"/>
 </item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="2743" y="0"/>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="19358" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="865" y="0"/>
-</item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="957" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3468" y="0"/>
-</item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="957" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3468" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3374" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3405" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3396" y="0"/>
-</item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="957" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="0">
-<position info="not_deleted" x="3210" y="0"/>
-</item>
-<item historyLabel="SimulationPhysics.java" index="1">
-<position info="not_deleted" x="957" y="0"/>
-</item>
-<item historyLabel="GUI.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="manifest.mf" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SimulationState.java" index="4">
-<position info="not_deleted" x="3244" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="5">
-<position info="not_deleted" x="1552" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="5">
-<position info="not_deleted" x="1538" y="0"/>
-</item>
-<item historyLabel="GUI.java" index="6">
-<position info="not_deleted" x="13627" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="5">
-<position info="not_deleted" x="1133" y="0"/>
-</item>
-<item historyLabel="SimulationPhysics.java" index="7">
+<item historyLabel="XMLReadWrite.java" index="4">
 <position info="not_deleted" x="3" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="7">
-<position info="not_deleted" x="1050" y="0"/>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23877" y="0"/>
 </item>
-<item historyLabel="SimulationState.java" index="8">
-<position info="not_deleted" x="3254" y="0"/>
+<item historyLabel="XMLReadWrite.java" index="4">
+<position info="not_deleted" x="3" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="7">
-<position info="not_deleted" x="1050" y="0"/>
+<item historyLabel="MainSim.java" index="3">
+<position info="not_deleted" x="591" y="0"/>
 </item>
-<item historyLabel="SimulationState.java" index="8">
-<position info="not_deleted" x="3324" y="0"/>
+<item historyLabel="XMLReadWrite.java" index="4">
+<position info="not_deleted" x="3" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="7">
-<position info="not_deleted" x="1050" y="0"/>
+<item historyLabel="ResourceLoader.java" index="1">
+<position info="not_deleted" x="340" y="0"/>
 </item>
-<item historyLabel="SimulationState.java" index="8">
-<position info="not_deleted" x="3324" y="0"/>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23877" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="7">
-<position info="not_deleted" x="1050" y="0"/>
+<item historyLabel="MainSim.java" index="5">
+<position/>
 </item>
-<item historyLabel="SimulationState.java" index="8">
-<position info="not_deleted" x="3141" y="0"/>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="24325" y="0"/>
 </item>
-<item historyLabel="SimulationPhysics.java" index="7">
-<position info="not_deleted" x="1050" y="0"/>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23424" y="0"/>
 </item>
-<item historyLabel="MainSim.java" index="9">
-<position info="not_deleted" x="593" y="0"/>
+<item historyLabel="MainSim.java" index="5">
+<position/>
 </item>
-<item historyLabel="BuildState.java" index="10">
+<item historyLabel="XMLReadWrite.java" index="6">
+<position info="not_deleted" x="3" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="19775" y="0"/>
+</item>
+<item historyLabel="GraphSpace.java" index="7">
+<position info="not_deleted" x="1889" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="5733" y="0"/>
+</item>
+<item historyLabel="MainSim.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="BuildState.java" index="10">
-<position/>
-</item>
-<item historyLabel="MainSim.java" index="9">
-<position/>
-</item>
-<item historyLabel="BuildState.java" index="10">
-<position/>
-</item>
-<item historyLabel="MainSim.java" index="9">
-<position info="not_deleted" x="1383" y="0"/>
-</item>
-<item historyLabel="BuildState.java" index="10">
-<position/>
-</item>
-<item historyLabel="BuildState.java" index="10">
-<position/>
-</item>
-<item historyLabel="MainSim.java" index="9">
-<position info="not_deleted" x="1383" y="0"/>
-</item>
-<item historyLabel="BuildState.java" index="10">
-<position info="not_deleted" x="669" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="9">
-<position info="not_deleted" x="1383" y="0"/>
-</item>
-<item historyLabel="manifest.mf" index="11">
-<position info="not_deleted" x="105" y="0"/>
-</item>
-<item historyLabel="MainSim.java" index="9">
-<position info="not_deleted" x="912" y="0"/>
-</item>
-<item historyLabel="BuildState.java" index="10">
-<position info="not_deleted" x="667" y="0"/>
-</item>
-<item historyLabel="GUI.java" index="12">
+<item historyLabel="SimulationState.java" index="8">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="BuildState.java" index="10">
+<item historyLabel="SimulationState.java" index="8">
+<position info="not_deleted" x="1910" y="0"/>
+</item>
+<item historyLabel="SimulationState.java" index="8">
+<position/>
+</item>
+<item historyLabel="SimulationPhysics.java" index="9">
+<position info="not_deleted" x="478" y="28"/>
+</item>
+<item historyLabel="SimulationState.java" index="8">
+<position/>
+</item>
+<item historyLabel="SimulationState.java" index="8">
+<position info="not_deleted" x="2859" y="0"/>
+</item>
+<item historyLabel="SimulationState.java" index="8">
+<position info="not_deleted" x="2861" y="0"/>
+</item>
+<item historyLabel="SimulationState.java" index="8">
+<position info="not_deleted" x="3216" y="0"/>
+</item>
+<item historyLabel="Wheel.java" index="10">
+<position info="not_deleted" x="3" y="0"/>
+</item>
+<item historyLabel="Motor.java" index="11">
+<position info="not_deleted" x="812" y="99"/>
+</item>
+<item historyLabel="Wheel.java" index="10">
 <position info="not_deleted" x="667" y="0"/>
 </item>
-<item historyLabel="GUI.java" index="12">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="Motor.java" index="11">
+<position info="not_deleted" x="859" y="0"/>
 </item>
-<item active="true" historyLabel="BuildState.java" index="10">
+<item historyLabel="PowerSupply.java" index="12">
+<position info="not_deleted" x="1010" y="0"/>
+</item>
+<item historyLabel="Wheel.java" index="10">
 <position info="not_deleted" x="667" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="5733" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23847" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="23962" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="24141" y="0"/>
+</item>
+<item historyLabel="PowerSupply.java" index="12">
+<position info="not_deleted" x="1010" y="0"/>
+</item>
+<item historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="16973" y="0"/>
+</item>
+<item historyLabel="MainSim.java" index="5">
+<position info="not_deleted" x="144" y="0"/>
+</item>
+<item active="true" historyLabel="GUI.java" index="0">
+<position info="not_deleted" x="16973" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -499,44 +506,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GUI.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GUI.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainSim.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="manifest.mf" tooltip="SumoBotSimulator2013/manifest.mf">
-<persistable path="/SumoBotSimulator2013/manifest.mf"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="splashManifest.mf" tooltip="SplashScreen/splashManifest.mf">
-<persistable path="/SplashScreen/splashManifest.mf"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Splash.java" tooltip="SplashScreen/src/code/busters/splash/Splash.java">
-<persistable path="/SplashScreen/src/code/busters/splash/Splash.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="libjinput-linux.so" tooltip="SumoBotSimulator2013/lwjgl/native/linux/libjinput-linux.so">
-<persistable path="/SumoBotSimulator2013/lwjgl/native/linux/libjinput-linux.so"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameStates.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GameStates.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/GameStates.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Wire.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/Wire.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/Wire.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PowerSupply.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/PowerSupply.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/PowerSupply.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Motor.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/Motor.java">
 <persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/Motor.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Splash.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/Splash.java">
-<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/Splash.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Wheel.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/Wheel.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimulationPhysics.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java">
 <persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationPhysics.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimulationState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java">
 <persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/SimulationState.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GraphSpace.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GraphSpace.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/GraphSpace.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="XMLReadWrite.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/XMLReadWrite.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/XMLReadWrite.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FileReader.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/FileReader.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/FileReader.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditorNoSource" name="Class.class" tooltip="java.lang.Class">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=SumoBotSimulator2013/\/usr\/lib\/jvm\/java-7-openjdk-i386\/jre\/lib\/rt.jar&lt;java.lang(Class.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="about.txt" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/resources/about.txt">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/resources/about.txt"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="help.txt" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/resources/help.txt">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/resources/help.txt"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GUI.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/GUI.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/GUI.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainSim.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/MainSim.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ResourceLoader.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/ResourceLoader.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/ResourceLoader.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildState.java" tooltip="SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java">
+<persistable path="/SumoBotSimulator2013/src/code/busters/sumobots/BuildState.java"/>
 </file>
 </mruList>
 </workbench>

@@ -1,0 +1,67 @@
+package code.busters.sumobots;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Formatter;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+/*
+ * A class for reading files that are inside the jar.
+ * The algorithm is: 1. get the resource as an input stream,
+ * 					 2. write it to a external temporary file
+ * 					 3. read the file.
+ */
+
+/*
+ * Helpful links:
+ * 
+ * 		https://forums.oracle.com/forums/thread.jspa?threadID=2098894
+ * 		http://www.mkyong.com/java/how-to-read-file-from-java-bufferedinputstream-example/
+ * 		http://docs.oracle.com/javase/tutorial/essential/io/buffers.html
+ * 		http://www.quepublishing.com/articles/article.aspx?p=26067
+ * 		http://www.journaldev.com/867/how-to-read-file-in-java-using-bufferedreader-scanner-files-with-encoding-support-and-filereader
+ */
+
+public class FileReader {
+	
+	private InputStream ISfile;
+	private String path;
+	
+	private Formatter write;
+	
+	public FileReader(String p){
+		path = p;
+		ISfile = getClass().getClassLoader().getResourceAsStream(path);
+	}
+	
+	public void openFile() throws FileNotFoundException{
+		Scanner reader = new Scanner(ISfile);
+		
+		write = new Formatter(new File("newfile.txt"));
+		
+		try{
+			while (reader.hasNext()){
+				String l = reader.nextLine();
+				write.format(l + "%n");
+			}
+		}catch (NoSuchElementException e){
+			e.printStackTrace();
+		}
+		
+		write.close();
+		reader.close();
+		
+		try {
+			Desktop.getDesktop().open(new File("newfile.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (IllegalArgumentException e){
+			e.printStackTrace();
+		}
+	}
+
+}

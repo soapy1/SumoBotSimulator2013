@@ -1,0 +1,13 @@
+Sumo Bot Simulator 2013
+
+Programmed By:  Jessa Mae Alcantara, Sophia Castellarin, Mike Morelli, Joey Ventrella, Dan Yeomans and James Zhu.
+
+Programmed For:  Bishop Allen Academy
+
+Version: 1.0
+
+Project home:  https://www.github.com/soapy1/SumoBotSimulator2013
+
+Email:  codexbusters@gmail.com
+
+Program Description:  An application that allows the user to virtually build a sumo bot!
