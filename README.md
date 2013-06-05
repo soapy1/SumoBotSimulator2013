@@ -16,7 +16,7 @@ Programmed By:        Jessa Mae Alcantara, Sophia Castellarin, Mike Morelli, Joe
 
 Programmed For:       Bishop Allen Academy
 
-Due:                  TBA
+Due:                  June 7, 2013
 
 Program Description:  An application that allows the user to virtually build a Sumo Bot.  The application is designed to
                       help grade 12 students design and build a sumo bot for their end of semester project.  However, it

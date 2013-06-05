@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: code.busters.sumobots.MainSim
-Class-Path: jinput.jar lwjgl_util.jar lwjgl.jar slick.jar
-Bundle-NativeCode: lwjgl/linux/libjinput-linux.so lwjgl/linux/libjinput-linux64.so lwjgl/linux/liblwjgl.so lwjgl/linux/liblwjgl64.so lwjgl/linux/libopenal.so lwjgl/linux/libopenal64.so
-SplashScreen-Image: sumobotsimsplash.png

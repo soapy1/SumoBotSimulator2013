@@ -1,5 +1,0 @@
-Mainfest-Vesrsion: 1.0
-Main-Class: code.busters.sumobots.MainSim
-Class-Path: lib/jinput.jar, lib/lwjgl_util.jar, lib/lwjgl.jar, lib/slick.jar
-Bundle-NativeCode: 
-SplashScreen-Image: res/sumobotsimsplash.png
