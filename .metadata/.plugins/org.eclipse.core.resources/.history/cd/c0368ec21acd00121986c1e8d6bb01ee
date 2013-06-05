@@ -1,0 +1,802 @@
+package code.busters.sumobots;
+/*
+ * A class that makes the GUI and handles user interaction with the application
+ * It's name is George U. Inhaussulvhat and he is beautiful! 
+ */
+
+import java.awt.Desktop;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.StateBasedGame;
+import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
+
+// Watch the tree of life
+public class GUI {
+	
+	static DecimalFormat df = new DecimalFormat("0.########");
+	
+	Graphics gr;
+	public static int MenuBarFileX = 4;
+	public static int MenuBarFileY = 2;
+	
+	public static float AspectRatio = (MainSim.WinX / MainSim.WinY);
+	public static double InfoPaneScale = 0.25;
+	public static int InfoPaneWidth;
+	
+	// Assorted colours
+	public static Color LightBlue = new Color(0xffaaccff);
+	public static Color DarkBlue = new Color(0xff252830);
+	public static Color White = new Color(0xffffffff);
+	public static Color HighlightGray = new Color(0x40000000);
+	public static Color HighlightBlue = new Color(0xff768DB0);
+	private static Color Shadow = new Color(0x50000000);
+	
+	// Assorted buttons
+	public static Button fileButton, btnSelNew, btnSelOpen, btnSelSave, btnSelSettings, btnSelQuit;
+	public static Button editButton, btnSelElec, btnSelMech, btnSelSim;
+	public static Button helpButton, btnSelHelp, btnSelAbout;
+	public static Button fancyMech, fancyElec, fancySim;
+	public static Button toggCircuit;
+	
+	// Pretty font
+	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
+	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
+	
+	// Assorted text fields
+	// For mechanical info
+	static TextFieldNew txtWheelDiam;
+	static TextFieldNew txtWheelMu;
+	static TextFieldNew txtWeight;
+	// For electrical info
+	static TextFieldNew txtPSVolt;
+	static TextFieldNew txtPSCurrent;
+	static TextFieldNew txtMotorVolt;
+	static TextFieldNew txtMotorCurrent;
+	static TextFieldNew txtMotorSpeed;
+	static TextFieldNew txtMotorShaft;
+	static TextFieldNew txtWireLen;
+	static TextFieldNew txtWireResistivity;
+	static TextFieldNew txtWireArea;
+	
+	// for something?  
+	static TextFieldNew txtWinW;
+	static TextFieldNew txtWinH;
+	
+	// Assorted images 
+	public static Image menu;
+	public static Image menuscaled;
+	
+	public static Image mech;		// 
+	public static Image elecPar;	// The images that will be displayed on each thingy 
+	public static Image elecSer;	//
+	public static Image sim;		//
+	
+	public static Image tabElec;	//
+	public static Image tabMech;	// The tab images that will be shown at the bottom of the page
+	public static Image tabSim;		//
+	
+	public static Color MenuBarColorMain = Color.transparent;
+	public static Color MenuBarColorSecond = LightBlue;
+	
+	// Keeps track of buttons in Array Lists... organization ftw
+	static ArrayList<Button> buttons = new ArrayList<Button>();
+	static ArrayList<Button> mainButtons = new ArrayList<Button>();
+	static ArrayList<Button> subFileButtons = new ArrayList<Button>();
+	static ArrayList<Button> subEditButtons = new ArrayList<Button>();
+	static ArrayList<Button> subHelpButtons = new ArrayList<Button>();
+	static ArrayList<Button> fancyButtons = new ArrayList<Button>();
+	
+	// Nice method that closes the file menu
+	public static void CloseMenu() throws SlickException {
+		fileButton.setActivity(false);
+		editButton.setActivity(false);
+		helpButton.setActivity(false);
+	}
+	
+	// Initiates the GUI for Simulation
+	public static void InitGUISim(GameContainer gc, StateBasedGame sg) throws SlickException{
+		// There is no menu bar thing
+		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
+		
+		if (AspectRatio > 1.34) {
+			InfoPaneScale = 0.15;
+		} else {
+			InfoPaneScale = 0.25;
+		}
+		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);	// Draws info pane
+		
+		// Images for the tabs at the bottom of the screen
+		tabElec = new Image("res/TabElectric.png");
+		tabMech = new Image("res/TabMech.png");
+		tabSim = new Image("res/TabSim.png");
+		// Actual tabs
+		fancyMech = new Button(gc, sg, 200,572, tabMech.getWidth(),tabMech.getHeight(), tabMech);
+		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
+		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
+	}
+
+	// Initiates the GUI for everything
+	public static void InitGUI(GameContainer gc, StateBasedGame sg) throws SlickException {
+
+		// Buttons for the menu bar
+		// Main buttons
+		fileButton = new Button(gc, sg, 0, 1, 40, 18, MenuBarColorMain, Color.black, "File");
+		mainButtons.add(fileButton);
+		editButton = new Button(gc, sg, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Edit");
+		mainButtons.add(editButton);
+		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
+		mainButtons.add(helpButton);
+		// Buttons under the File option
+		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New ");
+		subFileButtons.add(btnSelNew);
+		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open");
+		subFileButtons.add(btnSelOpen);
+		btnSelSave = new Button(gc, sg, fileButton.getX(), btnSelOpen.getY()+btnSelOpen.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Save");
+		subFileButtons.add(btnSelSave);
+		//btnSelSettings = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Settings");
+		//subFileButtons.add(btnSelSettings);
+		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit");
+		subFileButtons.add(btnSelQuit);
+		// Buttons under the Edit option
+		btnSelElec = new Button(gc, sg, editButton.getX(), editButton.getY()+editButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Electrical");
+		subEditButtons.add(btnSelElec);
+		btnSelMech = new Button(gc, sg, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Mechanical");
+		subEditButtons.add(btnSelMech);
+		btnSelSim = new Button(gc, sg, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Simulation");
+		subEditButtons.add(btnSelSim);
+		// Buttons under the Help option
+		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
+		subHelpButtons.add(btnSelHelp);
+		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
+		subHelpButtons.add(btnSelAbout);
+		
+		// Button for the electrical circuit - to toggle between series and parallel circuits
+		toggCircuit = new Button(gc, sg, 740, 40, 40, 18, Color.darkGray, Color.white, "CIRCUIT");
+		buttons.add(toggCircuit);
+		
+		// Images that are displayed for each window
+		mech = new Image("res/mech.png");
+		elecPar = new Image("res/parallel.png");
+		elecSer = new Image("res/series.png");
+		menu = new Image("res/menu.png");
+		
+		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
+		 
+		// Text fields for mechanical components
+		// Text field for wheel diameter
+		txtWheelDiam = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 617, 391, 55, 20, 
+				"Wheel Diameter//Used to determine//the distance that//the robot travels//over time.//Measured in m");
+		txtWheelDiam.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWheelDiam.setBorderColor(Color.black);
+		txtWheelDiam.setTextColor(Color.black);
+		txtWheelDiam.setMaxLength(6);
+		txtWheelDiam.setAcceptingInput(false);
+		// Text field for coefficient of friction
+		txtWheelMu = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 640, 236, 55, 20, 
+				"Wheel Coefficient of Friction//This value is dependent on//the two surfaces the wheel //and the surface. The higher//the coefficient of friction//the less slippage and the//greater the force of friction.");
+		txtWheelMu.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWheelMu.setBorderColor(Color.black);
+		txtWheelMu.setTextColor(Color.black);
+		txtWheelMu.setMaxLength(6);
+		txtWheelMu.setAcceptingInput(false);
+		// Text field for the weight of the robot
+		txtWeight = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 360, 303, 55, 20, 
+				"Mass//The amount of//stuff that makes//up the robot.//This is in kg units.");
+		txtWeight.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWeight.setBorderColor(Color.black);
+		txtWeight.setTextColor(Color.black);
+		txtWeight.setMaxLength(6);
+		txtWeight.setAcceptingInput(false);
+		
+		// Text fields for electrical components
+		// For the powers supply voltage
+		txtPSVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 327, 125, 55, 20, 
+				"Power Supply Voltage//This is the input value//for the total voltage//or energy supplied by//the power supply.//Measured in V");
+		txtPSVolt.setBackgroundColor(new Color(0xfff4f4f4));
+		txtPSVolt.setBorderColor(Color.black);
+		txtPSVolt.setTextColor(Color.black);
+		txtPSVolt.setMaxLength(6);
+		txtPSVolt.setAcceptingInput(false);
+		// For the power supply current
+		txtPSCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 513, 125, 55, 20, 
+				"Power Supply Current//The current supplied by//the power supply.//Measured in Amps");
+		txtPSCurrent.setBackgroundColor(new Color(0xfff4f4f4));
+		txtPSCurrent.setBorderColor(Color.black);
+		txtPSCurrent.setTextColor(Color.black);
+		txtPSCurrent.setMaxLength(6);
+		txtPSCurrent.setAcceptingInput(false);
+		// For the motor voltage
+		txtMotorVolt = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 221, 55, 20, 
+				"Motor Voltage//The voltage or //energy needed//by the motor//so that it can//work properly.//Measured in V");
+		txtMotorVolt.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorVolt.setBorderColor(Color.black);
+		txtMotorVolt.setTextColor(Color.black);
+		txtMotorVolt.setMaxLength(6);
+		txtMotorVolt.setAcceptingInput(false);
+		// For the motor current
+		txtMotorCurrent = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 280, 55, 20, 
+				"Motor Current//The current that//the motor will//draw from your//power supply.//Measured in Amps");
+		txtMotorCurrent.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorCurrent.setBorderColor(Color.black);
+		txtMotorCurrent.setTextColor(Color.black);
+		txtMotorCurrent.setMaxLength(6);
+		txtMotorCurrent.setAcceptingInput(false);
+		// For the motor speed
+		txtMotorSpeed = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 338, 55, 20, 
+				"Motor Speed//The number of//times the//motor turns in//one minute.//Measured in rpm");
+		txtMotorSpeed.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorSpeed.setBorderColor(Color.black);
+		txtMotorSpeed.setTextColor(Color.black);
+		txtMotorSpeed.setMaxLength(6);
+		txtMotorSpeed.setAcceptingInput(false);
+		// For the motor shaft
+		txtMotorShaft = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 286, 410, 55, 20, 
+				"Motor Shaft//Diameter of the//shaft of the//motor.  That//is, the spoke on//the motor//that turns.//Measured in cm");
+		txtMotorShaft.setBackgroundColor(new Color(0xfff4f4f4));
+		txtMotorShaft.setBorderColor(Color.black);
+		txtMotorShaft.setTextColor(Color.black);
+		txtMotorShaft.setMaxLength(6);
+		txtMotorShaft.setAcceptingInput(false);
+		// For the wire length
+		txtWireLen = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 175, 55, 20, 
+				"Wire Length//The length of//wire you will be//using for your//bot.  Measured//in m");
+		txtWireLen.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireLen.setBorderColor(Color.black);
+		txtWireLen.setTextColor(Color.black);
+		txtWireLen.setMaxLength(6);
+		txtWireLen.setAcceptingInput(false);
+		// For the wire resistivity
+		txtWireResistivity = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 231, 55, 20, 
+				"Wire Resistivity//This is the degree//of resistiveness//of the wire//material in Fs (Farads)");
+		txtWireResistivity.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireResistivity.setBorderColor(Color.black);
+		txtWireResistivity.setTextColor(Color.black);
+		txtWireResistivity.setMaxLength(6);
+		txtWireResistivity.setAcceptingInput(false);
+		// For the wire cross sectional area
+		txtWireArea = new TextFieldNew(gc, defaultTTF, InfoPaneWidth + 637, 290, 55, 20, 
+				"Wire Area//The area of//the cross//section//of the wire.//Measured in//m^2");
+		txtWireArea.setBackgroundColor(new Color(0xfff4f4f4));
+		txtWireArea.setBorderColor(Color.black);
+		txtWireArea.setTextColor(Color.black);
+		txtWireArea.setMaxLength(6);
+		txtWireArea.setAcceptingInput(false);
+		
+		if (AspectRatio > 1.34) {
+			InfoPaneScale = 0.15;
+		} else {
+			InfoPaneScale = 0.25;
+		}
+		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);
+		
+		// Images for the tabs at the bottom of the screen
+		tabElec = new Image("res/TabElectric.png");
+		tabMech = new Image("res/TabMech.png");
+		tabSim = new Image("res/TabSim.png");
+		// Actual tabs
+		fancyMech = new Button(gc, sg, 200,572, tabMech.getWidth(),tabMech.getHeight(), tabMech);
+		fancyButtons.add(fancyMech);
+		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
+		fancyButtons.add(fancyElec);
+		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
+		fancyButtons.add(fancySim);
+		
+		buttons.addAll(mainButtons);
+		buttons.addAll(subFileButtons);
+		buttons.addAll(subEditButtons);
+		buttons.addAll(subHelpButtons);
+		buttons.addAll(fancyButtons);
+		
+	}
+	
+	// Shows stuff to the user about the robot
+	public static void RenderInfo(Graphics g) throws SlickException {
+		g.setFont(defaultTTF);		// pretty font
+		g.setColor(White);			// pretty colour
+		
+		//Motor
+		g.setColor(Color.black);
+		g.drawString("Motor:", 5, 49);
+		g.setColor(White);
+		g.drawString("- Motor:", 3, 47);
+		g.drawString("- Voltage: " + df.format(BuildState.roboMotorOne.getVoltage()), 12, 59);
+		g.drawString("- Current: " + df.format(BuildState.roboMotorOne.getCurrent()), 12, 71);
+		g.drawString("- Speed: " + df.format(BuildState.roboMotorOne.getSpeed()), 12, 83);
+		g.drawString("- Torque: " + df.format(BuildState.roboMotorOne.getTorque()), 12, 95);
+		g.drawString("- Shaft: " + df.format(BuildState.roboMotorOne.getShaft()), 12, 107);
+				
+		//Power Supply
+		g.setColor(Color.black);
+		g.drawString("Power Supply:", 5, 133);
+		g.setColor(White);
+		g.drawString("Power Supply:", 3, 131);
+		g.drawString("- Voltage: " + df.format(BuildState.roboPS.getVoltage()), 12, 143);
+		g.drawString("- Current: " + df.format(BuildState.roboPS.getCurrent()), 12, 155);
+		//Wheel
+		g.setColor(Color.black);
+		g.drawString("Wheel:", 5, 181);
+		g.setColor(White);
+		g.drawString("Wheel:", 3, 179);
+		g.drawString("- Diameter: " + df.format(BuildState.roboWheel.getDiam()), 12, 191);
+		g.drawString("- Friction", 12, 203);
+		g.drawString(" Coefficient: " + df.format(BuildState.roboWheel.getMu()), 12, 215);
+		//Wire
+		g.setColor(Color.black);
+		g.drawString("Wire:", 5, 241);
+		g.setColor(White);
+		g.drawString("Wire:", 3, 239);
+		g.drawString("- Length: " + df.format(BuildState.roboWire.getLen()), 12, 251);
+		g.drawString("- Ohm: " + df.format(BuildState.roboWire.getOhm()), 12, 263);
+		g.drawString("- Resistivity: " + df.format(BuildState.roboWire.getResistivity()), 12, 275);
+     	g.drawString("- Area: " + df.format(BuildState.roboWire.getArea()), 12, 287);
+		g.drawString("- Circuit Type: " + BuildState.roboWire.getCircuitType(), 12, 299);
+			
+		g.setColor(Color.black);
+		g.drawString("Robot:", 5, 325);
+		g.setColor(White);
+		g.drawString("Robot:", 3, 323);
+		g.drawString("- Mass: " + df.format(BuildState.RWeight), 12, 335);
+		g.drawString("- Force Applied: " + df.format(SimulationPhysics.getForceApp()), 12, 347);
+		g.drawString("- Force of Static Friction: " + df.format(SimulationPhysics.getForceStaticFriction()), 12, 359);
+		g.drawString("- Max Acceleration: " + df.format(SimulationPhysics.getMaxAccel()), 12, 371);
+		g.drawString("- Max Speed: " + df.format(SimulationPhysics.getMaxSpeed()), 12, 383);
+	}
+	
+	// Method to change states
+	public static void changeState(StateBasedGame sg, int ordinal) {
+		sg.enterState(ordinal); 		// enters the state specified
+	}
+
+	// Method to show default data in text boxes 
+	public static void setTextBox(){
+
+		txtWheelMu.setText(Double.toString(BuildState.roboWheel.getMu()));
+		txtWheelDiam.setText(Double.toString(BuildState.roboWheel.getDiam()));
+		txtWeight.setText(Double.toString(BuildState.RWeight));
+		txtPSVolt.setText(Double.toString(BuildState.roboPS.getVoltage()));
+		txtPSCurrent.setText(Double.toString(BuildState.roboPS.getCurrent()));
+		txtMotorVolt.setText(Double.toString(BuildState.roboMotorOne.getVoltage()));
+		txtMotorCurrent.setText(Double.toString(BuildState.roboMotorOne.getCurrent()));
+		txtMotorShaft.setText(Double.toString(BuildState.roboMotorOne.getShaft()));
+		txtMotorSpeed.setText(Double.toString(BuildState.roboMotorOne.getSpeed()));
+		txtWireLen.setText(Double.toString(BuildState.roboWire.getLen()));
+		txtWireResistivity.setText(Double.toString(BuildState.roboWire.getResistivity()));
+		txtWireArea.setText(Double.toString(BuildState.roboWire.getArea()));
+	}
+	
+	public static void setTxtElecInput(boolean state){
+		// Sets the state as either true or false so that if the user is editing mechanical stuff they can not
+		//	edit the electrical stuff
+		txtPSVolt.setAcceptingInput(state);
+		txtPSCurrent.setAcceptingInput(state);
+		txtMotorVolt.setAcceptingInput(state);
+		txtMotorCurrent.setAcceptingInput(state);
+		txtMotorShaft.setAcceptingInput(state);
+		txtMotorSpeed.setAcceptingInput(state);
+		txtWireLen.setAcceptingInput(state);
+		txtWireResistivity.setAcceptingInput(state);
+		txtWireArea.setAcceptingInput(state);
+	}
+	
+	public static void setTxtMechInput(boolean state){
+		// Sets the state as either true or false so that if the user is editing electrical stuff they can not
+		//	edit the mechanical stuff
+		txtWheelDiam.setAcceptingInput(state);
+		txtWheelMu.setAcceptingInput(state);
+		txtWeight.setAcceptingInput(state);
+	}
+	
+	// Checks the buttons in a button array list
+	public static void checkBtnGrp(ArrayList<Button> b, GameContainer gc) throws SlickException{
+		for (Button bt : b){							// Goes through the array list
+			if (bt.mouseOverArea(gc) == true){		
+				bt.changeColour(HighlightBlue);			// Change colour if mouse is over the button
+				if (bt.buttonClicked(gc) == true){		// Checks if the button is clicked
+					CloseMenu();
+					for (Button c : b){		
+						c.setActivity(false);			// Sets the activity of all the "main" buttons to false 
+					}
+					bt.setActivity(true);				// Sets the activity of the clicked button to true
+				}
+			}
+			else{
+				bt.changeColour(bt.getOldColor());
+			}
+		}
+	}
+	
+	// Another method for checking just the tab buttons because it was not working with the checkBtnGrp button
+	public static void checkFancyButtons(GameContainer gc) throws SlickException{
+		if (fancyMech.buttonClicked(gc) == true){
+			fancyMech.setActivity(true);
+			fancyElec.setActivity(false);
+			fancySim.setActivity(false);
+		}
+		if (fancyElec.buttonClicked(gc) == true){
+			fancyElec.setActivity(true);
+			fancyMech.setActivity(false);
+			fancySim.setActivity(false);
+		}
+		if (fancySim.buttonClicked(gc) == true){
+			fancySim.setActivity(true);
+			fancyElec.setActivity(false);
+			fancyMech.setActivity(false);
+		}
+	}
+	
+	//	Basically handles all the events in the program by polling the keyboard/mouse.  We should use event 
+	//		handlers in the next version because it will make the program a lot more cool
+	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
+		Input input = gc.getInput();		// Gets the input
+
+		checkBtnGrp(mainButtons, gc);		// Checks if any of the main buttons (File, Edit, Help) are clicked
+		checkFancyButtons(gc);				// Checks the tab buttons
+		
+		// When the File button is active
+		if (fileButton.isActive() == true){
+			checkBtnGrp(subFileButtons, gc);	// Checks all the important buttons
+			
+			// Allows user to start from scratch
+			if (btnSelNew.isActive() == true){
+				CloseMenu();
+				File robot;
+				try {
+					robot = new File(new File (".").getCanonicalPath() + "/files/robot.xml");	// Finds the robot.xml file
+					try {																		// All the exceptions
+						XMLReadWrite.readFile(robot);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (DOMException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SAXException e) {
+						e.printStackTrace();
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				setTextBox();
+				btnSelNew.setActivity(false);
+				
+			}
+			
+			// Allows user to save a file
+			if (btnSelSave.isActive() == true){
+				CloseMenu();
+				JFrame guiFrame = new JFrame();						// Uses swing's fileChooser class to make
+				JFileChooser fileDialog = new JFileChooser();		//    a very pretty dialogue that allows the user 
+				FileNameExtensionFilter xmlfilter = new 
+						FileNameExtensionFilter("xml files (*.xml)", "xml");
+				fileDialog.setFileFilter(xmlfilter);
+				int save = fileDialog.showSaveDialog(guiFrame);		//    to save their progress in style
+				if (save == JFileChooser.APPROVE_OPTION){			// Makes sure the input is good
+					File saveAs = fileDialog.getSelectedFile();
+					try {
+						XMLReadWrite.write(saveAs);					// Writes the XML file with the inputed file name and 
+					} catch (FileNotFoundException e) {				//  in the chosen directory
+						e.printStackTrace();
+					} catch (DOMException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SAXException e) {
+						e.printStackTrace();
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+				} 
+				btnSelSave.setActivity(false);
+			}
+			
+			// Allows user to open a file
+			if (btnSelOpen.isActive() == true){
+				CloseMenu();
+				JFrame guiFrame = new JFrame();						// Uses the fileChooser class to open up projects
+				JFileChooser fileDialog = new JFileChooser();		//    in style ;)
+				FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
+			                "xml files (*.xml)", "xml");
+				fileDialog.setFileFilter(xmlfilter);
+				int open = fileDialog.showOpenDialog(guiFrame);		
+				if (open == JFileChooser.APPROVE_OPTION){			// Makes sure the file is good
+				  File file = fileDialog.getSelectedFile();
+				    try {
+						XMLReadWrite.readFile(file);					// Reads the file contents
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (DOMException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SAXException e) {
+						e.printStackTrace();
+					} catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+				}
+				setTextBox();
+				btnSelOpen.setActivity(false);
+			}
+			
+			/*
+			if (btnSelSettings.isActive() == true){
+				CloseMenu();
+				changeState(sg, GameStates.Settings.ordinal());
+			}
+			*/
+			
+			// Exits the program
+			if (btnSelQuit.isActive() == true){
+				CloseMenu();
+				System.exit(0);
+			}
+			
+		}else if (editButton.isActive() == true){
+			checkBtnGrp(subEditButtons, gc);
+			
+			
+		}else if (helpButton.isActive() == true){
+			checkBtnGrp(subHelpButtons, gc);		// Checks all the important buttons
+
+			// Adds functionality to the buttons
+			// Displays the about file using the default text editor
+			if (btnSelAbout.isActive() == true){
+				CloseMenu();
+				File about;
+				try {
+					about = new File(new File (".").getCanonicalPath() + "/files/about.txt");
+					try {
+						Desktop.getDesktop().open(about);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}catch (IllegalArgumentException e){
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				btnSelAbout.setActivity(false);
+			}
+			
+			
+			// Displays the help file using the default text editor
+			if (btnSelHelp.isActive() == true){
+				CloseMenu();
+			    File help;
+			    try {
+					help = new File(new File (".").getCanonicalPath() + "/files/help.txt");
+					try {
+						Desktop.getDesktop().open(help);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}catch (IllegalArgumentException e){
+						e.printStackTrace();
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				btnSelHelp.setActivity(false);
+			}
+		}
+		
+		if (btnSelMech.isActive() == true || fancyMech.isActive() == true){
+			try{
+				// Make sure the text is not null
+				if (txtWheelMu.getText() != ""){
+					if (BuildState.roboWheel.validMu() == true){
+						BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+					}else{
+						txtWheelMu.setText("");
+						BuildState.roboWheel.setMu(0.5);
+					}
+				}
+				if (txtWheelDiam.getText() != ""){
+					BuildState.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
+				}
+				if (txtWeight.getText() != ""){
+					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));
+				}
+			}catch(NumberFormatException e){
+				e.printStackTrace();
+			}
+						
+		}
+		
+		// Gets the info from the electrical text boxes
+		if (btnSelElec.isActive() == true || fancyElec.isActive() == true){
+			try{
+				// Make sure the text is not null
+				if (txtPSVolt.getText() != ""){
+					if (BuildState.roboPS.validVoltage() == true){
+						BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText()));
+					}else{
+						txtPSVolt.setText("");
+						BuildState.roboPS.setVoltage(12);
+					}
+				}
+				if (txtPSCurrent.getText() != ""){
+					BuildState.roboPS.setCurrent(Double.parseDouble(txtPSCurrent.getText()));
+				}
+				if (txtMotorVolt.getText() != ""){
+					if (BuildState.roboMotorOne.validVoltage() == true){
+						BuildState.roboMotorOne.setVoltage(Double.parseDouble(txtMotorVolt.getText()));
+					}else{
+						txtMotorVolt.setText("");
+						BuildState.roboMotorOne.setVoltage(12);
+					}
+				}
+				if (txtMotorCurrent.getText() != ""){
+					BuildState.roboMotorOne.setCurrent(Double.parseDouble(txtMotorCurrent.getText()));
+				}
+				if (txtMotorShaft.getText() != ""){
+					BuildState.roboMotorOne.setShaft(Double.parseDouble(txtMotorShaft.getText()));
+				}
+				if (txtMotorSpeed.getText() != ""){
+					BuildState.roboMotorOne.setSpeed(Double.parseDouble(txtMotorSpeed.getText()));
+				}
+				if (txtWireLen.getText() != ""){
+					BuildState.roboWire.setLen(Double.parseDouble(txtWireLen.getText()));
+				}
+				if (txtWireResistivity.getText() != ""){
+					BuildState.roboWire.setResistivity(Double.parseDouble(txtWireResistivity.getText()));
+				}
+				if (txtWireArea.getText() != ""){
+					BuildState.roboWire.setArea(Double.parseDouble(txtWireArea.getText()));
+				}
+				
+				if (txtMotorVolt.getText() != "" && txtMotorCurrent.getText() != "" && txtMotorSpeed.getText() != ""){
+					BuildState.roboMotorOne.setTorque();
+				}
+				// Sets the wire resistance based on inputed info
+				if (txtWireArea.getText() != "" && txtWireResistivity.getText() != "" && txtWireLen.getText() != ""){
+					BuildState.roboWire.setOhm();
+				}
+			}catch(NumberFormatException e){
+				e.printStackTrace();	
+			}
+						
+		}
+		
+		if (btnSelSim.isActive() == true || fancySim.isActive() == true){
+			sg.enterState(GameStates.Simulation.ordinal());
+			fancySim.setActivity(false);
+		}
+		
+		// Changes the activity of the button toggCircuit when it is pressed 
+		if (toggCircuit.buttonClicked(gc) == true){
+			toggCircuit.setActivity(!toggCircuit.isActive());
+		}
+		
+		// Closes the menu bar if something other than a button is clicked
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)){
+			fileButton.setActivity(false);
+			editButton.setActivity(false);
+			helpButton.setActivity(false);
+		}
+	}
+	
+	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
+				
+		if (element == "MainWindow"){ 
+			if (btnSelElec.isActive() == true || fancyElec.isActive() == true) {
+				txtPSVolt.render(gc, g);
+				txtPSCurrent.render(gc, g);
+				txtMotorVolt.render(gc, g);
+				txtMotorCurrent.render(gc, g);
+				txtMotorShaft.render(gc, g);
+				txtMotorSpeed.render(gc, g);
+				txtWireLen.render(gc, g);
+				txtWireResistivity.render(gc, g);
+				txtWireArea.render(gc, g);
+				setTxtElecInput(true);
+				setTxtMechInput(false);
+				toggCircuit.render(gc, g);
+				if (toggCircuit.isActive() == true){
+					BuildState.roboWire.setCircuitType("series");
+					g.drawImage(elecSer, InfoPaneWidth + 10, 100);
+				}else{
+					BuildState.roboWire.setCircuitType("parallel");
+					g.drawImage(elecPar, InfoPaneWidth + 10, 100);
+				}
+				
+			} else if (btnSelMech.isActive() == true || fancyMech.isActive() == true) {
+				txtWheelDiam.render(gc, g);
+				txtWheelMu.render(gc, g);
+				txtWeight.render(gc, g);
+				setTxtElecInput(false);
+				setTxtMechInput(true);
+				g.drawImage(mech, InfoPaneWidth - 15, 100);
+			}
+			
+			txtWheelDiam.ToolTipRender(g);
+			txtWheelMu.ToolTipRender(g);
+			txtWeight.ToolTipRender(g);
+			txtPSVolt.ToolTipRender(g);
+			txtPSCurrent.ToolTipRender(g);
+			txtMotorVolt.ToolTipRender(g);
+			txtMotorCurrent.ToolTipRender(g);
+			txtMotorSpeed.ToolTipRender(g);
+			txtMotorShaft.ToolTipRender(g);
+			txtWireLen.ToolTipRender(g);
+			txtWireResistivity.ToolTipRender(g);
+			txtWireArea.ToolTipRender(g);
+			
+		}
+		
+		if (element == "Tabs"){
+			g.setFont(defaultTTF);
+			fancyMech.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Mechanical", (float) (fancyMech.getX() + (0.60*fancyMech.getWidth())) + 2, fancyMech.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Mechanical", (float) (fancyMech.getX() + (0.60*fancyMech.getWidth())), fancyMech.getY() + 10);
+			fancyElec.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Electrical", (float) (fancyElec.getX() + (0.60*fancyElec.getWidth())) + 2, fancyElec.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Electrical", (float) (fancyElec.getX() + (0.60*fancyElec.getWidth())), fancyElec.getY() + 10);
+			fancySim.renderImg();
+			g.setColor(Shadow);
+			g.drawString("Simulation", (float) (fancySim.getX() + (0.60*fancySim.getWidth())) + 2, fancySim.getY() + 10 + 2);
+			g.setColor(Color.black);
+			g.drawString("Simulation", (float) (fancySim.getX() + (0.60*fancySim.getWidth())), fancySim.getY() + 10);
+		}
+		
+		// Draws the menu bar
+		if (element == "MenuBar") {
+			 g.setColor(MenuBarColorSecond);
+			 g.fillRect(0, 0, MainSim.WinX, 20);
+			 menuscaled.draw(0,0);
+			 fileButton.render(gc, g);
+			 editButton.render(gc, g);
+			 helpButton.render(gc, g);
+			 // Draws the options in file if file is active
+			 if (fileButton.isActive() == true){
+				 btnSelNew.render(gc, g);
+				 btnSelOpen.render(gc, g);
+				 btnSelSave.render(gc, g);
+				//btnSelSettings.render(gc, g);
+				 btnSelQuit.render(gc, g);
+			 }
+			// Draws the options in edit if edit is active
+			 if (editButton.isActive() == true){
+				 btnSelElec.render(gc, g);
+				 btnSelMech.render(gc, g);
+				 btnSelSim.render(gc, g);
+			 }
+			// Draws the options in help if help is active
+			 if (helpButton.isActive() == true){
+				 btnSelHelp.render(gc, g);
+				 btnSelAbout.render(gc, g);
+			 }
+			 
+		} else if (element == "InfoPane") {
+			g.setColor(DarkBlue);
+			g.fillRect(0, 0, InfoPaneWidth, MainSim.WinY);
+			g.setFont(defaultTTF);
+			g.setColor(Color.black);
+			g.drawString("Information", 5, 25);
+			g.drawString("Information", 6, 26);
+			g.setColor(Color.lightGray);
+			g.drawString("Information", 4, 23);
+			g.setColor(White);
+			g.drawString("Information", 3, 23);
+		}
+	
+	}
+
+}

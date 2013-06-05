@@ -1,5 +1,10 @@
 package code.busters.sumobots;
 
+/*
+ * A method that defines a modified TextField that can display tool tips.  Otherwise it is pretty much the
+ * same as the TextField class defined by Slick2d 
+ */
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -10,13 +15,15 @@ public class TextFieldNew extends TextField {
 	
 	Graphics g;
 	GUIContext gc;
-	private String tooltip;
-	static Color tip = new Color(0x88000000);
-	float tx, ty, tw, th;
-	String[] body;
+	
+	private String tooltip;						// Holds the value for the tool tip
+	static Color tip = new Color(0x88000000);	// Pretty colour
+	float tx, ty, tw, th;						// Keeps track of the position
+	String[] body;								// More strings for holding info (<- very descriptive, yes?)
 	int tipw, tiph;
 	int ltipw = 0;
 	
+	// Constructor
 	public TextFieldNew(GUIContext cn, Font font, int x, int y,
 			int width, int height, String tool) {
 		super(cn, font, x, y, width, height);
@@ -28,24 +35,30 @@ public class TextFieldNew extends TextField {
 		gc = cn;
 	}
 		
+	// Mouse X position, mostly to figure out if the mouse is over the text field so that we can print out
+	// lovely tool tips
 	public float MouseX() {
 		return container.getInput().getMouseX(); 
 	}
 	
+	// The Y position of the mouse because we also need this coordinate to figure out where the mouse is 
 	public float MouseY() {
 		return container.getInput().getMouseY(); 
 	}
 	
+	// Checks if the tooltip will be drawn outside of window space, and if so 
+	//offsets the x value so it is positioned within the window
 	public float XOffset() {
 		float xoffset = 0;
-		if (MouseX() + 12 + (tipw * 7 + 4) > MainSim.WinX) {
-			xoffset = (MouseX() + 12 + (tipw * 7 + 4)) - MainSim.WinX;
+		if (MouseX() + 12 + (tipw * 7 + 4) > MainSim.WinX) {			 	// If the tooltip will be outside the window (based on mousex):
+			xoffset = (MouseX() + 12 + (tipw * 7 + 4)) - MainSim.WinX; 		// Find how much the tip will be drawn outside
 		} else {
 			xoffset = 0;
 		}
 		return xoffset;
 	}
 	
+	//Ditto for y
 	public float YOffset() {
 		float yoffset = 0;
 		if (MouseY() + 12 + (tiph * 10 + 6) > MainSim.WinY) {
@@ -55,15 +68,17 @@ public class TextFieldNew extends TextField {
 		}
 		return yoffset;
 	}
-			
+	
+	// Renders the tool tip
 	public void ToolTipRender(Graphics g) {
-		if ((MouseX() > tx) & (MouseX() < tx + tw) & (MouseY() > ty) & (MouseY() < ty + th)) {
+		if ((MouseX() > tx) & (MouseX() < tx + tw) & (MouseY() > ty) & (MouseY() < ty + th)) {		// Checks if the mouse is on the text field
 			if (this.isAcceptingInput() == true) {
-				String source = tooltip;
-				String delims = "[//]+";
-				String[] tokens = source.split(delims);
+				String source = tooltip;					// Gets the tool tip string
+				String delims = "[//]+";					//| Locates all the "//" and removes 
+				String[] tokens = source.split(delims);		//| them, replacing them with a return	
 				ltipw = tokens[0].length();
 				
+				// Makes sure the words are inside the tool tip
 				for (int i = 0; i < tokens.length; i++) {
 					if (tokens[i].length() > ltipw) {
 						tipw = tokens[i].length();
@@ -73,15 +88,19 @@ public class TextFieldNew extends TextField {
 					}
 				}
 				
+				// Determines the number of lines in a tooltip
 				tiph = tokens.length;
 				
+				// Renders an auto-sized tool tip based on tipw and tiph
 				g.setColor(tip);
 				g.fillRect(MouseX() + 12 - XOffset(), MouseY() + 12 - YOffset(), tipw * 7 + 4, tiph * 10 + 6);
 				
+				// Draws the lines of the tooltip
 				g.setColor(Color.white);
 				g.setFont(GUI.defaultTTF);
-				for (int i = 0; i < tokens.length; i++) {
+				for (int i = 0; i < tokens.length; i++) {		// Draws the tool tip
 				
+					// Separates the header line from the body lines
 					if (i==0) {
 						g.drawString(tokens[0], MouseX() + 8 + 6 - XOffset(), MouseY() + 12 + 2 - YOffset());
 						g.drawString(tokens[0], MouseX() + 8 + 6 + 1 - XOffset(), MouseY() + 12 + 2 - YOffset());

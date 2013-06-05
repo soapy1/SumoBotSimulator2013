@@ -129,7 +129,7 @@ public class XMLReadWrite {
 			 e.printStackTrace();
 		 }
 		 
-		// To test
+		// To make sure it works
 		System.out.println("saved");
 	 }
 	 
@@ -166,7 +166,7 @@ public class XMLReadWrite {
 		 BuildState.roboWire.setResistivity(Double.parseDouble(document.getElementsByTagName("Wiresistivity").item(0).getTextContent()));
 		 BuildState.roboWire.setCircuitType(document.getElementsByTagName("Wicicuit_type").item(0).getTextContent());
 		 
-		 // To test
+		 // To make sure it works
 		 System.out.println("loaded");
 		
 	 }
@@ -179,7 +179,6 @@ public class XMLReadWrite {
 		 Document document = documentBuilder.parse(doc);										// Parses the file
 		
 		 // Gets the info and makes it an double
-
 		 BuildState.roboPS.setVoltage(Double.parseDouble(document.getElementsByTagName("PSvoltage").item(0).getTextContent()));	
 		 BuildState.roboPS.setCurrent(Double.parseDouble(document.getElementsByTagName("PScurrent").item(0).getTextContent()));
 		 BuildState.roboMotorOne.setVoltage(Double.parseDouble(document.getElementsByTagName("Mvoltage").item(0).getTextContent()));
@@ -196,7 +195,7 @@ public class XMLReadWrite {
 		 BuildState.roboWire.setResistivity(Double.parseDouble(document.getElementsByTagName("Wiresistivity").item(0).getTextContent()));
 		 BuildState.roboWire.setCircuitType(document.getElementsByTagName("Wicicuit_type").item(0).getTextContent());
 		 
-		 // To test
+		 // To make sure it works
 		 System.out.println("loaded");
 		
 	 }

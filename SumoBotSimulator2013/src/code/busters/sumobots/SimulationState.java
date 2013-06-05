@@ -12,8 +12,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class SimulationState extends BasicGameState {
 	
-	//private StateBasedGame game;
-	
 	Color Background = new Color(0xfff4f4f4);
 	
 	public static int WinX = 800;			// Size of window
@@ -42,35 +40,43 @@ public class SimulationState extends BasicGameState {
 	}
 	
 	@Override
+	// Dummy init so that we can have a splash screen thing
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
 		System.out.println("Simulation state");
 	}
 	
+	// Real init
 	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException{
+		// Sets the display
 		gc.setShowFPS(false);
 		gc.setVSync(true);
+		// Initiates the proper stuffs
 		BuildState.simFlag = true;
 		BuildState.buildFlag = false;
-		gc.setMinimumLogicUpdateInterval(50);
+		// Makess sure it updates so that we can have a nice animation
+		gc.setMinimumLogicUpdateInterval(10);
 		
-		robot = new Image("res/robotImg.png");
-		wood = new Image("res/woodFloor.png");
-		ice = new Image("res/iceFloor.png");
-		concrete = new Image("res/concreteFloor.png");
+		// Images for the simulation
+		robot = new Image("res/robotImg.png");				// A robot image				
+		wood = new Image("res/woodFloor.png");				// A wood surface
+		ice = new Image("res/iceFloor.png");				// An ice surface
+		concrete = new Image("res/concreteFloor.png");		// A concrete surface
 		
-		go = new Button(gc, sg, 720, 540, 40, 18, Color.darkGray, Color.white, "SIMULATION");
+		// A button with transparent button because the bottom button was not really working properly ;) 
+		go = new Button(gc, sg, 720, 540, 40, 18, Color.darkGray, Color.white, "SIMULATION");		
 		goTrans = new Button(gc, sg, 720, 540, 40, 18, Color.transparent, Color.transparent, "          ");
 		
-		gc.setMinimumLogicUpdateInterval(10);
-		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
+		// Creates the graphs
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 1);		// displacement time graph
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 6);	// velocity time graph
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 30);	// acceleration time graph
 		
-		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 1);
-		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 6);
-		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 30);
+		GUI.InitGUISim(gc, sg);		// Initializes the GUI for simulation
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sg, Graphics g) throws SlickException {
+		// Sets the background colour of the GUI
 		g.setColor(Background);						
     	g.fillRect(0, 0, 1366, 768);				
     
@@ -94,8 +100,6 @@ public class SimulationState extends BasicGameState {
     	
     	g.setColor(Color.black);
     	
-    	// TODO: make an ruler image to allow user to see the displacement of the robot	
-    	
     	dtGraph.render(gc, g);		//|
     	vtGraph.render(gc, g);		//| Renders the graphs
     	atGraph.render(gc, g);		//|
@@ -104,52 +108,60 @@ public class SimulationState extends BasicGameState {
 	
 	// Resets the simulation state to the default values
 	public void reset(GameContainer gc){
-		x = 200;
-		y = 400;
-		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 4);
-		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 4);
-		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 10);
+		x = 200;		//| Default position for the robot
+		y = 400;		//|
+		
+		dtGraph = new GraphSpace(gc, MainSim.WinX - 150-48, 16, 150+40, 150+40, true, 1, "dt", 4);		//|
+		vtGraph = new GraphSpace(gc, dtGraph.getX() - 150-48, 16, 150+40, 150+40, false, 2, "vt", 4);	//| Default graphs (null)
+		atGraph = new GraphSpace(gc, vtGraph.getX() - 150-48, 16, 150+40, 150+40, true, 3, "at", 10);	//|
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {							
-		timeElapsed += dt;	
+		timeElapsed += dt;		// keeps track of time	
 
-		if (GUI.fancyMech.buttonClicked(gc) == true){
+		// Controls for the tab buttons 
+		if (GUI.fancyMech.buttonClicked(gc) == true){			// Mechanical tab clicked
+			reset(gc);											// Sets default values
+			sg.enterState(GameStates.Build.ordinal());			// Changes to build state
+		}else if (GUI.fancyElec.buttonClicked(gc) == true){		// Electrical tab clicked
 			reset(gc);
 			sg.enterState(GameStates.Build.ordinal());
-		}else if (GUI.fancyElec.buttonClicked(gc) == true){
+		}else if (GUI.fancySim.buttonClicked(gc) == true){		// Simulation tab clicked
 			reset(gc);
 			sg.enterState(GameStates.Build.ordinal());
-		}else if (GUI.fancySim.buttonClicked(gc) == true){
-			reset(gc);
-			sg.enterState(GameStates.Build.ordinal());
-		}else if (goTrans.buttonClicked(gc) == true){
+		}else if (goTrans.buttonClicked(gc) == true){			// run dat simulation button
 			goTrans.setActivity(!goTrans.isActive());
 			t = 0;
 		}
 		
+		// Updates the position of the robot if the run dat simulation button is active
 		if (goTrans.isActive() == true){
-			dtGraph.update();
-			vtGraph.update();
-			atGraph.update();
-			t += 1;
+			dtGraph.update();	//|
+			vtGraph.update();	//| Updates the graphs
+			atGraph.update();	//|
+			
+			t += 1;				// Updates the time
+			
+			// Updates occur at the end of every cycle (marked by the variable t) otherwise the animation would 
+			// 		really bad and stuff
 			if (timeElapsed >= DELAY){
 				timeElapsed = 0;
-				goSim(dt, t);	
+				goSim(dt, t);			// Actually updates the position of the robot 
 			}
 		}
 	}
 
 	// Calculates the position of the robot when the simulation is running
 	public void goSim(int dt, int t){ 
-		if (x < WinX){
-			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed(t)){
+		if (x < WinX){			// For as long as the robot is in the window
+																						// It's a physics
+			if (SimulationPhysics.getAccelSpeed(t) < SimulationPhysics.getSpeed(t)){	// As long as the robot is still accelerating
 				x += (SimulationPhysics.getAccelSpeed(t)*6);
 			}else {
-				x += (SimulationPhysics.getSpeed(t)*6);
+				x += (SimulationPhysics.getSpeed(t)*6);									// When it reached a constant speed
 			}
 		}else{
-			x = 200-robot.getWidth();
+			x = 200-robot.getWidth();	// Puts the robot back in the window
 		}
 	}
 }

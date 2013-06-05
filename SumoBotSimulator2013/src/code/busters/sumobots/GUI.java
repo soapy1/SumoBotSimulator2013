@@ -50,6 +50,7 @@ public class GUI {
 	public static Button fancyMech, fancyElec, fancySim;
 	public static Button toggCircuit;
 	
+	// Pretty font
 	private static Font defaultFont = new Font("Lucida Console", Font.PLAIN, 12);
 	static TrueTypeFont defaultTTF = new TrueTypeFont(defaultFont, true);
 	
@@ -68,10 +69,12 @@ public class GUI {
 	static TextFieldNew txtWireLen;
 	static TextFieldNew txtWireResistivity;
 	static TextFieldNew txtWireArea;
-		
+	
+	// for something?  
 	static TextFieldNew txtWinW;
 	static TextFieldNew txtWinH;
 	
+	// Assorted images 
 	public static Image menu;
 	public static Image menuscaled;
 	
@@ -87,6 +90,7 @@ public class GUI {
 	public static Color MenuBarColorMain = Color.transparent;
 	public static Color MenuBarColorSecond = LightBlue;
 	
+	// Keeps track of buttons in Array Lists... organization ftw
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Button> mainButtons = new ArrayList<Button>();
 	static ArrayList<Button> subFileButtons = new ArrayList<Button>();
@@ -94,13 +98,16 @@ public class GUI {
 	static ArrayList<Button> subHelpButtons = new ArrayList<Button>();
 	static ArrayList<Button> fancyButtons = new ArrayList<Button>();
 	
+	// Nice method that closes the file menu
 	public static void CloseMenu() throws SlickException {
 		fileButton.setActivity(false);
 		editButton.setActivity(false);
 		helpButton.setActivity(false);
 	}
 	
+	// Initiates the GUI for Simulation
 	public static void InitGUISim(GameContainer gc, StateBasedGame sg) throws SlickException{
+		// There is no menu bar thing
 		menuscaled = menu.getScaledCopy(MainSim.WinX, 20);
 		
 		if (AspectRatio > 1.34) {
@@ -108,7 +115,7 @@ public class GUI {
 		} else {
 			InfoPaneScale = 0.25;
 		}
-		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);
+		InfoPaneWidth = (int)(MainSim.WinX * InfoPaneScale);	// Draws info pane
 		
 		// Images for the tabs at the bottom of the screen
 		tabElec = new Image("res/TabElectric.png");
@@ -119,17 +126,19 @@ public class GUI {
 		fancyElec = new Button(gc, sg, 400, 572, tabElec.getWidth(), tabElec.getHeight(), tabElec);
 		fancySim = new Button(gc, sg, 600, 572, tabSim.getWidth(), tabSim.getHeight(), tabSim);
 	}
-	
+
+	// Initiates the GUI for everything
 	public static void InitGUI(GameContainer gc, StateBasedGame sg) throws SlickException {
 
 		// Buttons for the menu bar
+		// Main buttons
 		fileButton = new Button(gc, sg, 0, 1, 40, 18, MenuBarColorMain, Color.black, "File");
 		mainButtons.add(fileButton);
 		editButton = new Button(gc, sg, fileButton.getX() + fileButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Edit");
 		mainButtons.add(editButton);
 		helpButton = new Button(gc, sg, editButton.getX() + editButton.getWidth() + 2, 1, 40, 18, MenuBarColorMain, Color.black, "Help");
 		mainButtons.add(helpButton);
-		
+		// Buttons under the File option
 		btnSelNew = new Button(gc, sg, fileButton.getX(), fileButton.getY()+fileButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "New ");
 		subFileButtons.add(btnSelNew);
 		btnSelOpen = new Button(gc, sg, fileButton.getX(), btnSelNew.getY()+btnSelNew.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Open");
@@ -140,19 +149,20 @@ public class GUI {
 		//subFileButtons.add(btnSelSettings);
 		btnSelQuit = new Button(gc, sg, fileButton.getX(), btnSelSave.getY()+btnSelSave.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Quit");
 		subFileButtons.add(btnSelQuit);
-		
+		// Buttons under the Edit option
 		btnSelElec = new Button(gc, sg, editButton.getX(), editButton.getY()+editButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Electrical");
 		subEditButtons.add(btnSelElec);
 		btnSelMech = new Button(gc, sg, editButton.getX(), btnSelElec.getY()+btnSelElec.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Mechanical");
 		subEditButtons.add(btnSelMech);
 		btnSelSim = new Button(gc, sg, editButton.getX(), btnSelMech.getY()+btnSelMech.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "Simulation");
 		subEditButtons.add(btnSelSim);
-		
+		// Buttons under the Help option
 		btnSelHelp = new Button(gc, sg, helpButton.getX(), helpButton.getY()+helpButton.getHeight()+1, 40, 18, MenuBarColorSecond, Color.black, "Help ");
 		subHelpButtons.add(btnSelHelp);
 		btnSelAbout = new Button(gc, sg, helpButton.getX(), btnSelHelp.getY()+btnSelHelp.getHeight(), 40, 18, MenuBarColorSecond, Color.black, "About");
 		subHelpButtons.add(btnSelAbout);
 		
+		// Button for the electrical circuit - to toggle between series and parallel circuits
 		toggCircuit = new Button(gc, sg, 740, 40, 40, 18, Color.darkGray, Color.white, "CIRCUIT");
 		buttons.add(toggCircuit);
 		
@@ -291,9 +301,10 @@ public class GUI {
 		
 	}
 	
+	// Shows stuff to the user about the robot
 	public static void RenderInfo(Graphics g) throws SlickException {
-		g.setFont(defaultTTF);
-		g.setColor(White);
+		g.setFont(defaultTTF);		// pretty font
+		g.setColor(White);			// pretty colour
 		
 		//Motor
 		g.setColor(Color.black);
@@ -345,7 +356,7 @@ public class GUI {
 	
 	// Method to change states
 	public static void changeState(StateBasedGame sg, int ordinal) {
-		sg.enterState(ordinal);
+		sg.enterState(ordinal); 		// enters the state specified
 	}
 
 	// Method to show default data in text boxes 
@@ -366,6 +377,8 @@ public class GUI {
 	}
 	
 	public static void setTxtElecInput(boolean state){
+		// Sets the state as either true or false so that if the user is editing mechanical stuff they can not
+		//	edit the electrical stuff
 		txtPSVolt.setAcceptingInput(state);
 		txtPSCurrent.setAcceptingInput(state);
 		txtMotorVolt.setAcceptingInput(state);
@@ -378,13 +391,16 @@ public class GUI {
 	}
 	
 	public static void setTxtMechInput(boolean state){
+		// Sets the state as either true or false so that if the user is editing electrical stuff they can not
+		//	edit the mechanical stuff
 		txtWheelDiam.setAcceptingInput(state);
 		txtWheelMu.setAcceptingInput(state);
 		txtWeight.setAcceptingInput(state);
 	}
 	
+	// Checks the buttons in a button array list
 	public static void checkBtnGrp(ArrayList<Button> b, GameContainer gc) throws SlickException{
-		for (Button bt : b){								// Goes through the array list
+		for (Button bt : b){							// Goes through the array list
 			if (bt.mouseOverArea(gc) == true){		
 				bt.changeColour(HighlightBlue);			// Change colour if mouse is over the button
 				if (bt.buttonClicked(gc) == true){		// Checks if the button is clicked
@@ -401,6 +417,7 @@ public class GUI {
 		}
 	}
 	
+	// Another method for checking just the tab buttons because it was not working with the checkBtnGrp button
 	public static void checkFancyButtons(GameContainer gc) throws SlickException{
 		if (fancyMech.buttonClicked(gc) == true){
 			fancyMech.setActivity(true);
@@ -419,14 +436,15 @@ public class GUI {
 		}
 	}
 	
-	// A very long method which use to be longer until we decided to use ArrayLists to group buttons
-	//		Basically handles all the events in the program
+	//	Basically handles all the events in the program by polling the keyboard/mouse.  We should use event 
+	//		handlers in the next version because it will make the program a lot more cool
 	public static void UpdateGUI(GameContainer gc, StateBasedGame sg, int delta) throws SlickException {
-		Input input = gc.getInput();
+		Input input = gc.getInput();		// Gets the input
 
-		checkBtnGrp(mainButtons, gc);
-		checkFancyButtons(gc);
+		checkBtnGrp(mainButtons, gc);		// Checks if any of the main buttons (File, Edit, Help) are clicked
+		checkFancyButtons(gc);				// Checks the tab buttons
 		
+		// When the File button is active
 		if (fileButton.isActive() == true){
 			checkBtnGrp(subFileButtons, gc);	// Checks all the important buttons
 			
@@ -435,8 +453,8 @@ public class GUI {
 				CloseMenu();
 				File robot;
 				try {
-					robot = new File(new File (".").getCanonicalPath() + "/files/robot.xml");
-					try {
+					robot = new File(new File (".").getCanonicalPath() + "/files/robot.xml");	// Finds the robot.xml file
+					try {																		// All the exceptions
 						XMLReadWrite.readFile(robot);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
@@ -452,9 +470,9 @@ public class GUI {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				setTextBox();
-				btnSelNew.setActivity(false);
-				
+				setTextBox();							// Resets the text box
+				btnSelNew.setActivity(false);			// Resets the activity of the button or else this will happen again
+														//		and again forever and ever.
 			}
 			
 			// Allows user to save a file
@@ -482,7 +500,7 @@ public class GUI {
 						e.printStackTrace();
 					}
 				} 
-				btnSelSave.setActivity(false);
+				btnSelSave.setActivity(false);					// So that there is no infinite loop of death
 			}
 			
 			// Allows user to open a file
@@ -497,7 +515,7 @@ public class GUI {
 				if (open == JFileChooser.APPROVE_OPTION){			// Makes sure the file is good
 				  File file = fileDialog.getSelectedFile();
 				    try {
-						XMLReadWrite.readFile(file);					// Reads the file contents
+						XMLReadWrite.readFile(file);				// Reads the file contents
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (DOMException e) {
@@ -510,8 +528,8 @@ public class GUI {
 						e.printStackTrace();
 					}
 				}
-				setTextBox();
-				btnSelOpen.setActivity(false);
+				setTextBox();									// Resets the text boxes
+				btnSelOpen.setActivity(false);					// So that there is no infinite loop of death
 			}
 			
 			/*
@@ -526,12 +544,15 @@ public class GUI {
 				CloseMenu();
 				System.exit(0);
 			}
-			
-		}else if (editButton.isActive() == true){
+		}
+		// When the edit button is pressed Little George likes to display buttons that allow the user to change
+		//		between states or editing modes
+		else if (editButton.isActive() == true){
 			checkBtnGrp(subEditButtons, gc);
-			
-			
-		}else if (helpButton.isActive() == true){
+		}
+		// On the other hand when George sees that the help button is pressed, George will show more options to
+		//		the user, like the ability to see the help or about file
+		else if (helpButton.isActive() == true){
 			checkBtnGrp(subHelpButtons, gc);		// Checks all the important buttons
 
 			// Adds functionality to the buttons
@@ -541,9 +562,9 @@ public class GUI {
 				File about;
 				try {
 					about = new File(new File (".").getCanonicalPath() + "/files/about.txt");
-					try {
+					try {				
 						Desktop.getDesktop().open(about);
-					} catch (IOException e) {
+					} catch (IOException e) {					// So George does not goof up
 						e.printStackTrace();
 					}catch (IllegalArgumentException e){
 						e.printStackTrace();
@@ -551,7 +572,7 @@ public class GUI {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				btnSelAbout.setActivity(false);
+				btnSelAbout.setActivity(false); 	// So that there is no infinite loop of death
 			}
 			
 			
@@ -563,7 +584,7 @@ public class GUI {
 					help = new File(new File (".").getCanonicalPath() + "/files/help.txt");
 					try {
 						Desktop.getDesktop().open(help);
-					} catch (IOException e) {
+					} catch (IOException e) {				// So that George does not goof up
 						e.printStackTrace();
 					}catch (IllegalArgumentException e){
 						e.printStackTrace();
@@ -571,26 +592,27 @@ public class GUI {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				btnSelHelp.setActivity(false);
+				btnSelHelp.setActivity(false);		// So that there is no infinite loop of death
 			}
 		}
 		
+		// when either of the mechanical buttons are clicked the window will show the text boxes for the mechanical stuff
 		if (btnSelMech.isActive() == true || fancyMech.isActive() == true){
 			try{
 				// Make sure the text is not null
 				if (txtWheelMu.getText() != ""){
 					if (BuildState.roboWheel.validMu() == true){
-						BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));
+						BuildState.roboWheel.setMu(Double.parseDouble(txtWheelMu.getText()));		// Gets the info
 					}else{
 						txtWheelMu.setText("");
 						BuildState.roboWheel.setMu(0.5);
 					}
 				}
 				if (txtWheelDiam.getText() != ""){
-					BuildState.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));
+					BuildState.roboWheel.setDiam(Double.parseDouble(txtWheelDiam.getText()));		// Gets the info
 				}
 				if (txtWeight.getText() != ""){
-					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));
+					BuildState.RWeight = (Double.parseDouble(txtWeight.getText()));					// Gets the info
 				}
 			}catch(NumberFormatException e){
 				e.printStackTrace();
@@ -604,48 +626,48 @@ public class GUI {
 				// Make sure the text is not null
 				if (txtPSVolt.getText() != ""){
 					if (BuildState.roboPS.validVoltage() == true){
-						BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText()));
+						BuildState.roboPS.setVoltage(Double.parseDouble(txtPSVolt.getText())); 		// Gets the info
 					}else{
 						txtPSVolt.setText("");
 						BuildState.roboPS.setVoltage(12);
 					}
 				}
 				if (txtPSCurrent.getText() != ""){
-					BuildState.roboPS.setCurrent(Double.parseDouble(txtPSCurrent.getText()));
+					BuildState.roboPS.setCurrent(Double.parseDouble(txtPSCurrent.getText()));		// Gets the info
 				}
 				if (txtMotorVolt.getText() != ""){
 					if (BuildState.roboMotorOne.validVoltage() == true){
-						BuildState.roboMotorOne.setVoltage(Double.parseDouble(txtMotorVolt.getText()));
+						BuildState.roboMotorOne.setVoltage(Double.parseDouble(txtMotorVolt.getText()));		// Gets the info
 					}else{
 						txtMotorVolt.setText("");
 						BuildState.roboMotorOne.setVoltage(12);
 					}
 				}
 				if (txtMotorCurrent.getText() != ""){
-					BuildState.roboMotorOne.setCurrent(Double.parseDouble(txtMotorCurrent.getText()));
+					BuildState.roboMotorOne.setCurrent(Double.parseDouble(txtMotorCurrent.getText()));		// Gets the info
 				}
 				if (txtMotorShaft.getText() != ""){
-					BuildState.roboMotorOne.setShaft(Double.parseDouble(txtMotorShaft.getText()));
+					BuildState.roboMotorOne.setShaft(Double.parseDouble(txtMotorShaft.getText()));			// Gets the info
 				}
 				if (txtMotorSpeed.getText() != ""){
-					BuildState.roboMotorOne.setSpeed(Double.parseDouble(txtMotorSpeed.getText()));
+					BuildState.roboMotorOne.setSpeed(Double.parseDouble(txtMotorSpeed.getText()));			// Gets the info
 				}
 				if (txtWireLen.getText() != ""){
-					BuildState.roboWire.setLen(Double.parseDouble(txtWireLen.getText()));
+					BuildState.roboWire.setLen(Double.parseDouble(txtWireLen.getText()));					// Gets the info
 				}
 				if (txtWireResistivity.getText() != ""){
-					BuildState.roboWire.setResistivity(Double.parseDouble(txtWireResistivity.getText()));
+					BuildState.roboWire.setResistivity(Double.parseDouble(txtWireResistivity.getText()));	// Gets the info
 				}
 				if (txtWireArea.getText() != ""){
-					BuildState.roboWire.setArea(Double.parseDouble(txtWireArea.getText()));
+					BuildState.roboWire.setArea(Double.parseDouble(txtWireArea.getText()));					// Gets the info
 				}
 				
 				if (txtMotorVolt.getText() != "" && txtMotorCurrent.getText() != "" && txtMotorSpeed.getText() != ""){
-					BuildState.roboMotorOne.setTorque();
+					BuildState.roboMotorOne.setTorque();													// Sets the torque based on the inputed values
 				}
 				// Sets the wire resistance based on inputed info
 				if (txtWireArea.getText() != "" && txtWireResistivity.getText() != "" && txtWireLen.getText() != ""){
-					BuildState.roboWire.setOhm();
+					BuildState.roboWire.setOhm();															// Sets the resistance based on the inputed values
 				}
 			}catch(NumberFormatException e){
 				e.printStackTrace();	
@@ -653,9 +675,10 @@ public class GUI {
 						
 		}
 		
+		// Changes to the simulation state when the simulation buttons are pressed
 		if (btnSelSim.isActive() == true || fancySim.isActive() == true){
 			sg.enterState(GameStates.Simulation.ordinal());
-			fancySim.setActivity(false);
+			fancySim.setActivity(false);					
 		}
 		
 		// Changes the activity of the button toggCircuit when it is pressed 
@@ -672,7 +695,8 @@ public class GUI {
 	}
 	
 	public static void RenderGUI(GameContainer gc, StateBasedGame sg, Graphics g, String element) throws SlickException {
-				
+		
+		// Draws the main elements of the window including images and tool tips
 		if (element == "MainWindow"){ 
 			if (btnSelElec.isActive() == true || fancyElec.isActive() == true) {
 				txtPSVolt.render(gc, g);
@@ -719,6 +743,8 @@ public class GUI {
 			
 		}
 		
+		
+		// Draws the tabs
 		if (element == "Tabs"){
 			g.setFont(defaultTTF);
 			fancyMech.renderImg();
@@ -766,7 +792,9 @@ public class GUI {
 				 btnSelAbout.render(gc, g);
 			 }
 			 
-		} else if (element == "InfoPane") {
+		}
+		// Draws the info pane
+		else if (element == "InfoPane") {
 			g.setColor(DarkBlue);
 			g.fillRect(0, 0, InfoPaneWidth, MainSim.WinY);
 			g.setFont(defaultTTF);

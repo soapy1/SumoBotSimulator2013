@@ -58,6 +58,7 @@ public class Button extends AbstractComponent {
 		
 	}
 	
+	// Gets the previous color of the button if there is one
 	public Color getOldColor(){
 		return buttonColourOld;
 	}
@@ -84,16 +85,18 @@ public class Button extends AbstractComponent {
 	
 	// Draws the button 
 	public void render(GUIContext gc, Graphics g) throws SlickException {
-		g.setColor(buttonColour);
-		g.fillRect(buttonX, buttonY, buttonW, buttonH);
-		g.setColor(buttonTextColour);
-		g.setFont(defaultTTF);
-		g.drawString(buttonTextOld, buttonX + 3, buttonY + 3);
-		g.setColor(Color.transparent);
-		g.fillRect(buttonX, buttonY, buttonW, buttonH);
+		g.setColor(buttonColour);									// Sets the colour
+		g.fillRect(buttonX, buttonY, buttonW, buttonH);				// Fills the button with the colour
+		g.setColor(buttonTextColour);								// Sets the colour again
+		g.setFont(defaultTTF);										// Sets the font	
+		g.drawString(buttonTextOld, buttonX + 3, buttonY + 3);		// Draw words on the button given the new colour and font
+		g.setColor(Color.transparent);								// Sets the colour AGAIN
+		g.fillRect(buttonX, buttonY, buttonW, buttonH);				// fills the button with a transparent layer... why, ask your grandma
 	}
 	
-	// Draws the button if it was constructed with an image
+	/* Draws the button if it was constructed with an image.
+	 * that means don't use this method unless your button is an image.
+	 */
 	public void renderImg() throws SlickException, NullPointerException{
 		image.draw(buttonX, buttonY);
 	}

@@ -26,7 +26,8 @@ public class BuildState extends BasicGameState {
 	
 	Color Background = new Color(0xfff4f4f4);
 	
-	public static int WinX = 800;
+	// Window dimensions
+	public static int WinX = 800;				
 	public static int WinY = 600;
 	public static boolean WinF = false;
 	
@@ -34,7 +35,8 @@ public class BuildState extends BasicGameState {
 	public static boolean simFlag;
 	public static boolean buildFlag;
 		
-	static double RWeight =  0;											// General variables for the robot
+	// General variables for the robot
+	static double RWeight =  0;											
 	static Wheel roboWheel;
 	static Motor roboMotorOne;
 	static PowerSupply roboPS;
@@ -45,26 +47,32 @@ public class BuildState extends BasicGameState {
 	}
 	
 	@Override
+	// Dummy init so that we can have a splash screen
 	public void init(GameContainer gc, StateBasedGame sg) throws SlickException {
 		System.out.println("Build state");
     }	
 
+	// Real init
 	public static void initState(GameContainer gc, StateBasedGame sg) throws SlickException, NullPointerException {
 		
 		initFlag = false;
 		simFlag = false;
 		buildFlag = true;
 		
+		// Creates the general variables for the robot
 		roboWheel = new Wheel();
     	roboMotorOne = new Motor();
     	roboPS = new PowerSupply();
     	roboWire = new Wire();
 		
+    	// Sets display mode so that it looks nice
 		gc.setShowFPS(false);
 		gc.setVSync(true);
 		
+		// Initiates the GUI class so that we can show stuff on the screen (all the stuff is in the GUI class)
     	GUI.InitGUI(gc, sg);
     
+    	// Open the robot.xml file for the first time using an input file stream
     	try {
 			XMLReadWrite.readIS(ResourceLoader.is);
 		} catch (FileNotFoundException e) {
@@ -81,13 +89,17 @@ public class BuildState extends BasicGameState {
 			e.printStackTrace();
 		}
 	
+    	// Initializes the text boxes for the GUI
     	GUI.setTextBox();
     }	
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sg, Graphics g) throws SlickException {
-    	g.setColor(Background);
+    	// Create/fill the background
+		g.setColor(Background);
     	g.fillRect(0, 0, 1366, 768);
+    	
+    	// Draws the appropriate stuffs for the GUI
     	GUI.RenderGUI(gc, sg, g, "MainWindow");
     	GUI.RenderGUI(gc, sg, g, "InfoPane");
     	GUI.RenderGUI(gc, sg, g, "Tabs");
@@ -97,11 +109,11 @@ public class BuildState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sg, int dt) throws SlickException {
+		// Updates the GUI using the GUI class and UpdateGUI method
 		GUI.UpdateGUI(gc, sg, dt);
 		if (initFlag == true) {
     		init(gc, sg);
     		initFlag = false;
     	}
-		
 	}
 }

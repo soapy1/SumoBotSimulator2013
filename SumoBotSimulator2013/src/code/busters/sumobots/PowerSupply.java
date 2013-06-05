@@ -5,8 +5,6 @@
  * voltage and current of their power supply.
  */
 
-//TODO: set the restrictions
-
 package code.busters.sumobots;
 public class PowerSupply {
 	
@@ -46,6 +44,7 @@ public class PowerSupply {
 		}	
 	}
 	
+	// Sets the current of the power supply
 	public void setCurrent(double c){
 		current = c;
 	}
